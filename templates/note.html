@@ -1,0 +1,18 @@
+<div class="page-title-header-container">
+    <h1 class="page-title-header">$title$</h1>
+    $if(date)$
+    <div class="page-info-container">
+        $if(note_status)$
+            $note_status$
+        $endif$
+        <div class="page-info-date-container">
+            <p class="page-info-date">Published: $date$</p>
+            <p class="page-info-date">Last Edited: $last_edit$</p>
+        </div>
+    </div>
+    $endif$
+</div>
+<div class="note-divider"></div>
+<div class="note-body">
+$body$
+</div>

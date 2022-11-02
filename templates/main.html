@@ -1,0 +1,47 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>$title$</title>
+$for(author-meta)$
+    <meta name="author" content="$author-meta$" />
+$endfor$
+$if(date-meta)$
+    <meta name="dcterms.date" content="$date-meta$" />
+$endif$
+$if(keywords)$
+    <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
+$endif$
+$if(description-meta)$
+    <meta name="description" content="$description-meta$" />
+$endif$
+
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.svg">
+</head>
+
+<body>
+    <div class="header-bar">
+        <a href="/index.html">
+            <img src="/assets/favicon.svg" alt="frycon logo">
+        </a>
+        <div class="header-links">
+            $if(show-notes-link)$
+            <a href="/notes.html" class="header-link">Notes</a>
+            $endif$
+            <a href="/now.html" class="header-link">Now</a>
+            <a href="/about.html" class="header-link">About</a>
+        </div>
+    </div>
+    <main>
+$if(front_page)$
+${front_page()}
+$else$
+${note()}
+$endif$
+    </main>
+</body>
+</html>
