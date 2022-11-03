@@ -33,7 +33,6 @@ $(HTML_DIR)/%.html: $(PAGE_DIR)/%.md
 
 $(HTML_DIR)/index.html: $(HTML_DOCS) $(PAGE_FILES)
 	touch $(HTML_DIR)/.nojekyll
-	ln -sf ../assets -t $(HTML_DIR)
 	pandoc -s --lua-filter=./tools/front_page.lua --template=./templates/main.html main.md \
 		--metadata=note_list:"$(SOURCE_FILES)" \
 		-o $@
@@ -44,4 +43,4 @@ all: $(HTML_DIR)/index.html
 
 clean:
 	rm -r build
-	rm -r html
+	find html -name "*.html" -type f -delete
