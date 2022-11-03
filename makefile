@@ -41,6 +41,9 @@ $(HTML_DIR)/index.html: $(HTML_DOCS) $(PAGE_FILES)
 
 all: $(HTML_DIR)/index.html
 
+deploy: all
+	git subtree push --prefix html origin gh-pages
+
 clean:
 	rm -r build
 	find html -name "*.html" -type f -delete
