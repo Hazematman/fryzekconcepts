@@ -4,6 +4,7 @@ local status_map = {"seadling", "budding", "evergreen"}
 
 function Pandoc(doc)
     doc.meta["main_class"] = "html-note-page"
+    doc.meta["main_container"] = "main-container"
     doc.meta["front_page"] = false
 
     local status = stringify(doc.meta["status"])

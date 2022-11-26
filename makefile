@@ -29,6 +29,8 @@ $(HTML_DIR)/%.html: $(PAGE_DIR)/%.md
 	pandoc -s --template=./templates/main.html \
 		$< \
 		--highlight-style=pygments \
+		-M main_class="html-main-page" \
+		-M main_container="main-container-page" \
 		-o $@
 
 $(HTML_DIR)/index.html: $(HTML_DOCS) $(PAGE_FILES)
