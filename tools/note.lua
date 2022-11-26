@@ -10,7 +10,9 @@ function Pandoc(doc)
     local text = pandoc.Para(status_name)
     local image = pandoc.RawBlock("html", string.format("<img src=\"/assets/%s.svg\">", status_name))
 
-    local div = pandoc.Div({image, text})
+    local status_div = pandoc.Div({text})
+    status_div.classes = {"plant-status-text"}
+    local div = pandoc.Div({image, status_div})
     div.classes = {"plant-status"}
 
     local status_info = pandoc.MetaBlocks(div)
