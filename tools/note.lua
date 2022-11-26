@@ -3,6 +3,7 @@ local stringify = (require 'pandoc.utils').stringify
 local status_map = {"seadling", "budding", "evergreen"}
 
 function Pandoc(doc)
+    doc.meta["main_class"] = "html-note-page"
     doc.meta["front_page"] = false
 
     local status = stringify(doc.meta["status"])

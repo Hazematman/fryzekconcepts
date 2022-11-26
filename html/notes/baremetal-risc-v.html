@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="en">
+<html class="html-note-page" lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,7 +39,8 @@
     </div>
     </div>
 <div class="note-divider"></div>
-<div class="note-body">
+<div class="main-container">
+    <div class="note-body">
 <p>After re-watching suckerpinch’s <a href="https://www.youtube.com/watch?v=ar9WRwCiSr0">“Reverse Emulation”</a> video I got inspired to try and replicate what he did, but instead do it on an N64. Now my idea here is not to preform reverse emulation on the N64 itself but instead to use the SBC as a cheap way to make a dev focused flash cart. Seeing that sukerpinch was able to meet the timings of the NES bus made me think it might be possible to meet the N64 bus timings taking an approach similar to his.</p>
 <h2 id="why-risc-v-baremetal">Why RISC-V Baremetal?</h2>
 <p>The answer here is more utilitarian then idealistic, I originally wanted to use a Raspberry Pi since I thought that board may be more accessible if other people want to try and replicate this project. Instead what I found is that it is impossible to procure a Raspberry Pi. Not to be deterred I purchased a <a href="https://linux-sunxi.org/Allwinner_Nezha">“Allwinner Nezha”</a> a while back and its just been collecting dust in my storage. I figured this would be a good project to test the board out on since it has a large amount of RAM (1GB on my board), a fast processor (1 GHz), and accessible GPIO. As for why baremetal? Well one of the big problems suckerpinch ran into was being interrupted by the Linux kernel while his software was running. The board was fast enough to respond to the bus timings but Linux would throw off those timings with preemption. This is why I’m taking the approach to do everything baremetal. Giving 100% of the CPU time to my program emulating the CPU bus.</p>
@@ -149,6 +150,7 @@ riscv64-unknown-elf-objcopy -O binary app.elf app.bin</code></pre>
 <p><img src="/assets/2022-06-09-baremetal-risc-v/riscv-terminal.png" /></p>
 <h2 id="whats-next">What’s Next?</h2>
 <p>Well the sky is the limit! We have a method to load and run a program that can do anything on the Nezha board now. Looking through the datasheet we can see how to access the GPIO on the board to blink an LED. If you’re really ambitious you could try getting ethernet or USB working in a baremetal environment. I am going to continue on my goal of emulating the N64 cartridge bus which will require me to get GPIO working as well as interrupts on the GPIO lines. If you want to see the current progress of my work you can check it out on github <a href="https://github.com/Hazematman/N64-Cart-Emulator">here</a>.</p>
+    </div>
 </div>    </main>
 </body>
 </html>

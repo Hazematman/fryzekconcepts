@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html lang="en">
+<html class="html-note-page" lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -39,7 +39,8 @@
     </div>
     </div>
 <div class="note-divider"></div>
-<div class="note-body">
+<div class="main-container">
+    <div class="note-body">
 <p>Lately I’ve been trying to implement a software renderer <a href="https://www.cs.drexel.edu/~david/Classes/Papers/comp175-06-pineda.pdf">following the algorithm described by Juan Pineda in “A Parallel Algorithm for Polygon Rasterization”</a>. For those unfamiliar with the paper, it describes an algorithm to rasterize triangles that has an extremely nice quality, that you simply need to preform a few additions per pixel to see if the next pixel is inside the triangle. It achieves this quality by defining an edge function that has the following property:</p>
 <pre><code>E(x+1,y) = E(x,y) + dY
 E(x,y+1) = E(x,y) - dX</code></pre>
@@ -121,6 +122,7 @@ func draw_triangle(x0, y0, x1, y1, x2, y2, v0, v1, v2):
     starting_e2 = e2
     starting_v = v</code></pre>
 <p>Now this pseudo code is not the most efficient as it will iterate over the entire screen to draw one triangle, but it provides a starting basis to show how to use these Pineda properties to calculate per vertex values. One thing to note if you do implement this is, if you use fixed point arithmetic, be careful to insure you have enough precision to calculate all of these values with overflow or underflow. This was an issue I ran into running out of precision when I did the divide by the area.</p>
+    </div>
 </div>    </main>
 </body>
 </html>

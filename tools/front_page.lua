@@ -30,6 +30,7 @@ local function compare_note_dates(a, b)
 end
 
 function Pandoc(doc)
+    doc.meta["main_class"] = "html-main-page"
     doc.meta["front_page"] = true
 
     local notes = {}
