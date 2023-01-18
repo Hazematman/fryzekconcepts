@@ -1,6 +1,16 @@
 local stringify = (require 'pandoc.utils').stringify
+local meta_tools = require("tools/meta_tools")
 
-local status_map = {"seadling", "budding", "evergreen"}
+local status_map = {"seedling", "budding", "evergreen"}
+
+function Link(link)
+    if not string.find(link.target, "://") then
+        local note = meta_tools.get_note(link.target)
+        return {pandoc.Link(note["title"], "/notes/"..link.target..".html")}
+    else
+        return link  
+    end
+end
 
 function Pandoc(doc)
     doc.meta["main_class"] = "html-note-page"

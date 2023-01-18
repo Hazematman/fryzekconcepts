@@ -1,5 +1,6 @@
 local pipe = pandoc.pipe
 local stringify = (require 'pandoc.utils').stringify
+local meta_tools = require("tools/meta_tools")
 
 local meta = PANDOC_DOCUMENT.meta
 local preview = ""
@@ -12,38 +13,6 @@ local function append_str(buf, s)
     end
 
     return buf
-end
-
-local function file_exists(name)
-  local f = io.open(name, 'r')
-  if f ~= nil then
-    io.close(f)
-    return true
-  else
-    return false
-  end
-end
-
-local function read_link_file(name)
-    local f = io.open(name, 'r')
-    if f ~= nil then
-        local output = {}
-        for line in f:lines() do
-            table.insert(output, line)
-        end
-        f:close()
-        return output
-    else
-        return {}
-    end
-end
-
-local function write_link_file(name, links)
-    local f = io.open(name, 'w')
-    for i,v in ipairs(links) do
-        f:write(string.format("%s\n", v))
-    end
-    f:close()
 end
 
 local function item_in_table(table, item)
@@ -78,13 +47,13 @@ function Doc(body, metadata, variables)
         local link_file = "./build/" .. v .. ".links"
 
         -- check if markdown version of the file exists
-        if file_exists(markdown_file) then
-            links = read_link_file(link_file) 
+        if meta_tools.file_exists(markdown_file) then
+            links = meta_tools.read_link_file(link_file) 
             if not item_in_table(links, input_file) then
                 table.insert(links, input_file)
             end
 
-            write_link_file(link_file, links)
+            meta_tools.write_link_file(link_file, links)
         else
             io.stderr:write(string.format("Linking to non-existant file '%s'\n", v))
         end
