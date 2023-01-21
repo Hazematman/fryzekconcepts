@@ -4,11 +4,13 @@ local meta_tools = require("tools/meta_tools")
 
 local meta = PANDOC_DOCUMENT.meta
 local preview = ""
+local long_preview = ""
 local internal_links = {}
 local max_string_length = 100
+local max_long_string_length = 500
 
-local function append_str(buf, s)
-    if (#buf + #s) < max_string_length then
+local function append_str(buf, s, max_length)
+    if (#buf + #s) < max_length then
         buf = buf .. s
     end
 
@@ -66,6 +68,7 @@ function Doc(body, metadata, variables)
     end
 
     values["preview"] = preview
+    values["long_preview"] = long_preview
     for k,v in pairs(values) do
         output = output .. string.format("%s,%s\n", k, v)
     end
@@ -73,13 +76,21 @@ function Doc(body, metadata, variables)
     return output
 end
 
+function Header(s)
+    preview = append_str(preview, " - ", max_string_length)
+    long_preview = append_str(long_preview, " - ", max_long_string_length)
+    return ""
+end
+
 function Str(s)
-    preview = append_str(preview, s)
+    preview = append_str(preview, s, max_string_length)
+    long_preview = append_str(long_preview, s, max_long_string_length)
     return ""
 end
 
 function Space()
-    preview = append_str(preview, " ")
+    preview = append_str(preview, " ", max_long_string_length)
+    long_preview = append_str(long_preview, " ", max_long_string_length)
     return ""
 end
 

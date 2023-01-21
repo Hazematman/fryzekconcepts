@@ -36,7 +36,11 @@ function Pandoc(doc)
         local header = pandoc.Header(2, note.title)
         table.insert(out_list, header)
 
-        table.insert(out_list, pandoc.Para(string.format("%s...", note.preview)))
+        if note["cover_image"] == nil then
+            table.insert(out_list, pandoc.Para(string.format("%s...", note.long_preview)))
+        else
+            table.insert(out_list, pandoc.Para(string.format("%s...", note.preview)))
+        end
 
         local out = pandoc.MetaBlocks(out_list)
         output:insert(pandoc.MetaMap({link=string.format("/notes/%s.html", note.note_name), note=out}))

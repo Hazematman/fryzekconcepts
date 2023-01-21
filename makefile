@@ -33,7 +33,10 @@ $(HTML_DIR)/%.html: $(PAGE_DIR)/%.md
 		-M main_container="main-container-page" \
 		-o $@
 
-$(HTML_DIR)/index.html: $(HTML_DOCS) $(PAGE_FILES)
+html/feed.xml: $(META_DOCS)
+	./tools/rss_gen.py
+
+$(HTML_DIR)/index.html: $(HTML_DOCS) $(PAGE_FILES) html/feed.xml
 	touch $(HTML_DIR)/.nojekyll
 	pandoc -s --lua-filter=./tools/front_page.lua --template=./templates/main.html main.md \
 		--metadata=note_list:"$(SOURCE_FILES)" \
