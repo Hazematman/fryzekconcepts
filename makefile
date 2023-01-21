@@ -33,16 +33,17 @@ $(HTML_DIR)/%.html: $(PAGE_DIR)/%.md
 		-M main_container="main-container-page" \
 		-o $@
 
-html/feed.xml: $(META_DOCS)
+$(HTML_DIR)/feed.xml: $(META_DOCS)
 	./tools/rss_gen.py
 
-$(HTML_DIR)/index.html: $(HTML_DOCS) $(PAGE_FILES) html/feed.xml
+$(HTML_DIR)/index.html: $(HTML_DOCS) $(PAGE_FILES) $(HTML_DIR)/feed.xml
 	touch $(HTML_DIR)/.nojekyll
 	pandoc -s --lua-filter=./tools/front_page.lua --template=./templates/main.html main.md \
 		--metadata=note_list:"$(SOURCE_FILES)" \
 		-o $@
 
 .PHONY: all clean
+.DEFAULT_GOAL := all
 
 all: $(HTML_DIR)/index.html
 
@@ -50,5 +51,6 @@ deploy: all
 	git subtree push --prefix html origin gh-pages
 
 clean:
-	rm -r build
+	rm -rf build
 	find html -name "*.html" -type f -delete
+	find html -name "*.xml" -type f -delete
