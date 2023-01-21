@@ -8,6 +8,39 @@
     background-color: #e9e9e7;
 }
 
+div.gallery p {
+  margin: 5px;
+  width: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+div.gallery img {
+  width: 300px;
+  height: auto;
+  margin-bottom: 2px;
+  margin-left: 2px;
+  margin-right: 0;
+  margin-top: 0;
+}
+
+table 
+{
+    border-collapse: collapse;
+}
+
+td
+{
+    padding: 2px;
+}
+
+table, th, td 
+{
+    border: 1px solid;
+}
+
 body
 {
     background-color: #e9e9e7;
