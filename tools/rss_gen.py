@@ -36,8 +36,11 @@ for file in os.listdir(build_dir):
 
         notes.append(note)
 
+
+notes.sort(key=lambda note: datetime.datetime.strptime(note["date"], "%Y-%m-%d"))
+
 for note in notes:
-    post_time = datetime.datetime.strptime("2022-10-30", "%Y-%m-%d")
+    post_time = datetime.datetime.strptime(note["date"], "%Y-%m-%d")
     post_rfc_time = email.utils.formatdate(timeval=time.mktime(post_time.timetuple()))
     post_url = "{}/notes/{}.html".format(url, note["name"])
     item = ET.SubElement(channel, "item")
