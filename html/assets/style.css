@@ -278,11 +278,12 @@ main
 .note-box 
 {
    max-width: 300px;
-   max-height: 500px;
+   max-height: 400px;
    background-color: #FCFBF7;
    margin-right: 20px;
    height: fit-content;
    width: 300px;
+   height: 400px;
    margin-bottom: 20px;
    border-radius: 5px;
    border: 2px solid #E6E3E1;
