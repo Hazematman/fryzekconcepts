@@ -39,7 +39,7 @@ for file in os.listdir(build_dir):
 for note in notes:
     post_time = datetime.datetime.strptime("2022-10-30", "%Y-%m-%d")
     post_rfc_time = email.utils.formatdate(timeval=time.mktime(post_time.timetuple()))
-    post_url = "{}/notes/{}".format(url, note["name"])
+    post_url = "{}/notes/{}.html".format(url, note["name"])
     item = ET.SubElement(channel, "item")
     ET.SubElement(item, "title").text = note["title"]
     ET.SubElement(item, "link").text = post_url
