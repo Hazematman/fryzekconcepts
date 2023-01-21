@@ -89,6 +89,19 @@ blockquote
     overflow-wrap: anywhere;
 }
 
+img.rss:hover
+{
+    transform: scale(120%);
+}
+
+img.rss
+{
+    height: 1em;
+    width: 1em;
+    display: inline;
+    margin-left: 10px;
+}
+
 .main-container
 {
     margin: 0;
@@ -259,7 +272,7 @@ main
 {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: start;
 }
 
 .note-box 
@@ -293,6 +306,7 @@ main
     margin-top: 10px;
     margin-left: 10px;
     margin-bottom: 10px;
+    margin-right: 10px
 }
 
 .note-box img 
@@ -328,6 +342,12 @@ main
     .page-info-date-container
     {
         display: initial;
+    }
+
+    .note-link
+    {
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 
