@@ -1,4 +1,5 @@
-local stringify = (require 'pandoc.utils').stringify
+local stringify = require('pandoc.utils').stringify
+local text = require('text')
 local meta_tools = require("tools/meta_tools")
 
 local status_map = {"seedling", "budding", "evergreen"}
@@ -9,6 +10,19 @@ function Link(link)
         return {pandoc.Link(note["title"], "/notes/"..link.target..".html")}
     else
         return link  
+    end
+end
+
+function Image(image)
+    if not string.find(image.src, "://") then
+        local s_begin, s_end = string.find(image.src, "youtube:")
+        if s_begin ~= nil then
+            local url = "https://www.youtube.com/embed/" .. string.sub(image.src, s_end+1, -1)
+            local video = pandoc.RawInline("html", string.format("<div class=\"youtube-video\"><iframe width=\"728px\" height=\"410px\" src=\"%s\"></iframe></div>", url))
+            return {video}
+        end
+    else
+        return image 
     end
 end
 
