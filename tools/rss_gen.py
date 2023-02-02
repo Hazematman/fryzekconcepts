@@ -5,6 +5,7 @@ import datetime
 import time
 import email.utils
 import os
+import sys
 
 today = email.utils.formatdate()
 url = "https://fryzekconcepts.com"
@@ -39,7 +40,23 @@ for file in os.listdir(build_dir):
 
 notes.sort(key=lambda note: datetime.datetime.strptime(note["date"], "%Y-%m-%d"))
 
+limit_cat = False
+categories = []
+if len(sys.argv) >= 3:
+    limit_cat = True
+    categories = sys.argv[2:]
+
 for note in notes:
+    if limit_cat:
+        if not "categories" in note: continue
+        note_categories = note["categories"].split(",")
+        found = False
+        for cat in note_categories:
+            if cat in categories:
+                found = True
+                break
+                
+        if not found: continue
     post_time = datetime.datetime.strptime(note["date"], "%Y-%m-%d")
     post_rfc_time = email.utils.formatdate(timeval=time.mktime(post_time.timetuple()))
     post_url = "{}/notes/{}.html".format(url, note["name"])
@@ -54,4 +71,4 @@ for note in notes:
     ET.SubElement(item, "guid").text = post_url
 
 tree = ET.ElementTree(rss)
-tree.write("html/feed.xml", encoding='utf-8', xml_declaration=True)
+tree.write(sys.argv[1], encoding='utf-8', xml_declaration=True)
