@@ -274,7 +274,7 @@ a.header-link
 {
     display: flex;
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content: center;
 }
 
 .note-box 
