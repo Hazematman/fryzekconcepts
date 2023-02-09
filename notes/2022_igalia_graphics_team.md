@@ -104,7 +104,7 @@ André & Melissa also mentored two ["Igalia Coding Experience" (CE)](https://www
 
 Ella Stanforth was also part of the Igalia Coding Experience, being mentored by Iago & Alejandro. They worked on the `VK_KHR_sampler_ycbcr_conversion` extension for the v3dv driver. Alejandro talks about their work in his [blog post here](https://blogs.igalia.com/apinheiro/2023/01/v3dv-status-update-2023-01/).
 
-# Whats Next?
+# What's Next?
 The graphics team is looking forward to having a jam-packed 2023 with just as many if not more contributions to the Open-Source graphics stack! I'm super excited to be part of the team, and hope to see my name in our 2023 recap post!
 
 Also, you might have heard that [Igalia will be hosting XDC 2023](https://www.igalia.com/2022/xdc-2023) in the beautiful city of A Coruña! We hope to see you there where there will be many presentations from all the great people working on the Open-Source graphics stack, and most importantly where you can [dream in the Atlantic!](https://www.youtube.com/watch?v=7hWcu8O9BjM)
