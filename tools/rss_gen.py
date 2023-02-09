@@ -63,7 +63,7 @@ for note in notes:
     item = ET.SubElement(channel, "item")
     ET.SubElement(item, "title").text = note["title"]
     ET.SubElement(item, "link").text = post_url
-    ET.SubElement(item, "description").text = note["long_preview"]
+    ET.SubElement(item, "description").text = "{}...".format(note["long_preview"])
     #if "categories" in note:
     #    ET.SubElement(item, "category").text = note["categories"]
 
