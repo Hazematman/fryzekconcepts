@@ -36,10 +36,10 @@ $(HTML_DIR)/%.html: $(PAGE_DIR)/%.md
 $(HTML_DIR)/feed.xml: $(META_DOCS)
 	./tools/rss_gen.py $@
 
-$(HTML_DIR)/igalia_feed.xml: $(META_DOCS)
-	./tools/rss_gen.py $@ igalia
+$(HTML_DIR)/graphics_feed.xml: $(META_DOCS)
+	./tools/rss_gen.py $@ igalia graphics
 
-$(HTML_DIR)/index.html: $(HTML_DOCS) $(PAGE_FILES) $(HTML_DIR)/feed.xml $(HTML_DIR)/igalia_feed.xml
+$(HTML_DIR)/index.html: $(HTML_DOCS) $(PAGE_FILES) $(HTML_DIR)/feed.xml $(HTML_DIR)/graphics_feed.xml
 	touch $(HTML_DIR)/.nojekyll
 	pandoc -s --lua-filter=./tools/front_page.lua --template=./templates/main.html main.md \
 		--metadata=note_list:"$(SOURCE_FILES)" \

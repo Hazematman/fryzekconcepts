@@ -4,7 +4,7 @@ date: "2023-02-02"
 last_edit: "2023-02-02"
 status: 3
 cover_image: "/assets/igalia_logo.png"
-categories: igalia
+categories: igalia graphics
 ---
 
 This year I started a new job working with [Igalia's Graphics Team](https://www.igalia.com/technology/graphics). For those of you who don't know [Igalia](https://www.igalia.com/) they are a ["worker-owned, employee-run cooperative model consultancy focused on open source software"](https://en.wikipedia.org/wiki/Igalia).
@@ -12,14 +12,14 @@ This year I started a new job working with [Igalia's Graphics Team](https://www.
 As a new member of the team, I thought it would be a great idea to summarize the incredible amount of work the team completed in 2022. If you're interested keep reading!
 
 ## Vulkan 1.2 Conformance on RPi 4
-One of the big milestones for the team in 2022 was [achieving Vulkan 1.2 conformance on the Raspberry Pi 4](https://www.khronos.org/conformance/adopters/conformant-products#submission_694). The folks over at the Raspberry Pi wrote a nice [article](https://www.raspberrypi.com/news/vulkan-update-version-1-2-conformance-for-raspberry-pi-4/) about the achievement. Below I'll go into detail on some of the work the team had to do to achieve conformance.
+One of the big milestones for the team in 2022 was [achieving Vulkan 1.2 conformance on the Raspberry Pi 4](https://www.khronos.org/conformance/adopters/conformant-products#submission_694). The folks over at the Raspberry Pi company wrote a nice [article](https://www.raspberrypi.com/news/vulkan-update-version-1-2-conformance-for-raspberry-pi-4/) about the achievement. Igalia has been partnering with the Raspberry Pi company to bring build and improve the graphics driver on all versions of the Raspberry Pi.
 
 The Vulkan 1.2 spec ratification came with a few [extensions](https://registry.khronos.org/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.2) that were promoted to Core. This means a conformant Vulkan 1.2 driver needs to implement those extensions. Alejandro Piñeiro wrote this interesting [blog post](https://blogs.igalia.com/apinheiro/2022/05/v3dv-status-update-2022-05-16/) that talks about some of those extensions.
 
 Vulkan 1.2 also came with a number of optional extensions such as `VK_KHR_pipeline_executable_properties`. My colleague Iago Toral wrote an excellent [blog post](https://blogs.igalia.com/itoral/2022/05/09/vk_khr_pipeline_executables/) on how we implemented that extension on the Raspberry Pi 4 and what benefits it provides for debugging.
 
 ## Vulkan 1.3 support on Turnip
-Igalia has been heavily supporting the Open-Source Turnip Vulkan driver for Qualcomm Adreno GPUs, and in 2022 we helped it achieve Vulkan 1.3 conformance. My colleague Danylo Piliaiev wrote a great [blog post](https://blogs.igalia.com/dpiliaiev/turnip-vulkan-1-3/) on this achievement! One of the biggest challenges for the Turnip driver is that it is a completely reverse-engineered driver that has been built without access to any hardware documentation or reference driver code.
+Igalia has been heavily supporting the Open-Source Turnip Vulkan driver for Qualcomm Adreno GPUs, and in 2022 we helped it achieve Vulkan 1.3 conformance. Danylo Piliaiev on the hraphics team here at Igalia, wrote a great [blog post](https://blogs.igalia.com/dpiliaiev/turnip-vulkan-1-3/) on this achievement! One of the biggest challenges for the Turnip driver is that it is a completely reverse-engineered driver that has been built without access to any hardware documentation or reference driver code.
 
 With Vulkan 1.3 conformance has also come the ability to run more commercial games on Adreno GPUs through the use of the DirectX translation layers. If you would like to see more of this check out this [post](https://blogs.igalia.com/dpiliaiev/turnip-july-2022-update/) from Danylo where he talks about getting "The Witcher 3", "The Talos Principle", and "OMD2" running on the A660 GPU. Outside of Vulkan 1.3 support he also talks about some of the extensions that were implemented to allow "Zink" (the OpenGL over Vulkan driver) to run Turnip, and bring OpenGL 4.6 support to Adreno GPUs.
 
@@ -49,7 +49,7 @@ André Almeida also completed and submitted work on [enabled logging features fo
 ## Modesetting without Glamor on RPi
 Christopher Michael joined the Graphics Team in 2022 and along with Chema Casanova made some key contributions to enabling hardware acceleration and mode setting on the Raspberry Pi without the use of [Glamor](https://www.freedesktop.org/wiki/Software/Glamor/) which allows making more video memory available to graphics applications running on a Raspberry Pi. 
 
-The older generation Raspberry Pis (1-3) only have a maximum of 256MB of memory available for video memory, and using Glamor will consume part of that video memory. Christopher wrote an excellent [blog post](https://blogs.igalia.com/cmichael/2022/05/30/modesetting-a-glamor-less-rpi-adventure/) on his work here, and also had a presentation at XDC 2022 on this work (which I will go into more detail on in the XDC section of this post).
+The older generation Raspberry Pis (1-3) only have a maximum of 256MB of memory available for video memory, and using Glamor will consume part of that video memory. Christopher wrote an excellent [blog post](https://blogs.igalia.com/cmichael/2022/05/30/modesetting-a-glamor-less-rpi-adventure/) on this work. Both him and Chema also had a joint presentation at XDC 2022 going into more detail on this work.
 
 ## Linux Format Magazine Column
 Our very own Samuel Iglesias had a column published in Linux Format Magazine. It's a short column about reaching Vulkan 1.1 conformance for v3dv & Turnip Vulkan drivers, and how Open-Source GPU drivers can go from a "hobby project" to the defacto driver for the platform. Check it out on page 7 of [issue #288](https://linuxformat.com/linux-format-288.html)!
@@ -87,7 +87,7 @@ Another important conference for us is FOSDEM, and last year we presented 3 of t
 
 ### [The status of Turnip driver development](https://archive.fosdem.org/2022/schedule/event/turnip/) (Hyunjun Ko)
 
-Hyunjun presented the current state of the Turnip driver, also talking about the difficulties of developing a driver for a platform without hardware documentation. He talks about how Turnip developers reverse engineer the behaviour of the hardware and then implement that in an open-source driver. He also made a companion [blog post](https://blogs.igalia.com/zzoon/graphics/mesa/2022/02/21/complement-story/) to checkout a long with his presentation.
+Hyunjun presented the current state of the Turnip driver, also talking about the difficulties of developing a driver for a platform without hardware documentation. He talks about how Turnip developers reverse engineer the behaviour of the hardware, and then implement that in an open-source driver. He also made a companion [blog post](https://blogs.igalia.com/zzoon/graphics/mesa/2022/02/21/complement-story/) to checkout along with his presentation.
 
 ### [v3dv: Status Update for Open Source Vulkan Driver for Raspberry Pi 4](https://archive.fosdem.org/2022/schedule/event/v3dv/) (Alejandro Piñeiro)
 
@@ -95,7 +95,7 @@ Igalia has been presenting the status of the v3dv driver since December 2019 and
 
 ### [Fun with border colors in Vulkan](https://archive.fosdem.org/2022/schedule/event/vulkan_borders/) (Ricardo Garcia)
 
-Ricardo talks about the work he did on the `VK_EXT_border_color_swizzle` extension in Vulkan. He talks about the specific contributions he did and how the extension fits in with sampling color operations in Vulkan.
+Ricardo presents about the work he did on the `VK_EXT_border_color_swizzle` extension in Vulkan. He talks about the specific contributions he did and how the extension fits in with sampling color operations in Vulkan.
 
 ## GSoC & Igalia CE
 Last year Melissa & André co-mentored contributors working on introducing KUnit tests to the AMD display driver. This project was hosted as a ["Google Summer of Code" (GSoC)](https://summerofcode.withgoogle.com/) project from the X.Org Foundation. If you're interested in seeing their work Tales da Aparecida, Maíra Canal, Magali Lemes, and Isabella Basso presented their work at the [Linux Plumbers Conference 2022](https://lpc.events/event/16/contributions/1310/) and across two talks at XDC 2022. Here you can see their [first](https://indico.freedesktop.org/event/2/contributions/65/) presentation and here you can see their [second](https://indico.freedesktop.org/event/2/contributions/164/) second presentation.
