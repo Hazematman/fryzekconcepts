@@ -49,7 +49,7 @@ if len(sys.argv) >= 3:
 for note in notes:
     if limit_cat:
         if not "categories" in note: continue
-        note_categories = note["categories"].split(",")
+        note_categories = note["categories"].strip().split()
         found = False
         for cat in note_categories:
             if cat in categories:
@@ -64,8 +64,8 @@ for note in notes:
     ET.SubElement(item, "title").text = note["title"]
     ET.SubElement(item, "link").text = post_url
     ET.SubElement(item, "description").text = note["preview"]
-    if "categories" in note:
-        ET.SubElement(item, "category").text = note["categories"]
+    #if "categories" in note:
+    #    ET.SubElement(item, "category").text = note["categories"]
 
     ET.SubElement(item, "pubDate").text = post_rfc_time
     ET.SubElement(item, "guid").text = post_url
