@@ -18,7 +18,7 @@ function Image(image)
         local s_begin, s_end = string.find(image.src, "youtube:")
         if s_begin ~= nil then
             local url = "https://www.youtube.com/embed/" .. string.sub(image.src, s_end+1, -1)
-            local video = pandoc.RawInline("html", string.format("<div class=\"youtube-video\"><iframe width=\"728px\" height=\"410px\" src=\"%s\"></iframe></div>", url))
+            local video = pandoc.RawInline("html", string.format("<div class=\"youtube-video\"><iframe src=\"%s\"></iframe></div>", url))
             return {video}
         end
     else
