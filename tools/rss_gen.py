@@ -6,6 +6,7 @@ import time
 import email.utils
 import os
 import sys
+from subprocess import Popen, PIPE
 
 today = email.utils.formatdate()
 url = "https://fryzekconcepts.com"
@@ -63,7 +64,14 @@ for note in notes:
     item = ET.SubElement(channel, "item")
     ET.SubElement(item, "title").text = note["title"]
     ET.SubElement(item, "link").text = post_url
-    ET.SubElement(item, "description").text = "{}...".format(note["long_preview"])
+
+
+    # Generate simple text version of post
+    process = Popen(["pandoc", "--lua-filter=./tools/note.lua", "--highlight-style=pygments",
+                     "./notes/{}.md".format(note["name"])], stdout=PIPE)
+    (output, err) = process.communicate()
+    exit_code = process.wait()
+    ET.SubElement(item, "description").text = output.decode()
     #if "categories" in note:
     #    ET.SubElement(item, "category").text = note["categories"]
 
