@@ -7,7 +7,11 @@ local status_map = {"seedling", "budding", "evergreen"}
 function Link(link)
     if not string.find(link.target, "://") then
         local note = meta_tools.get_note(link.target)
-        return {pandoc.Link(note["title"], "/notes/"..link.target..".html")}
+        local text = note["title"]
+        if string.len(stringify(link.content)) ~= 0 then
+            text = link.content
+        end
+        return {pandoc.Link(text, "/notes/"..link.target..".html")}
     else
         return link  
     end
