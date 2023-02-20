@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Fryzek Concepts</title><atom:link href="https://fryzekconcepts.com/feed.xml" rel="self" type="application/rss+xml"/><link>https://fryzekconcepts.com</link><description>Lucas is a developer working on cool things</description><lastBuildDate>Sat, 11 Feb 2023 16:49:59 -0000</lastBuildDate><item><title>Generating Video</title><link>https://fryzekconcepts.com/notes/generating-video.html</link><description>&lt;p&gt;One thing I’m very interested in is computer graphics. This could be complex 3D graphics or simple 2D graphics. The idea of getting a computer to display visual data fascinates me. One fundamental part of showing visual data is interfacing with a computer monitor. This can be accomplished by generating a video signal that the monitor understands. Below I have written instructions on how an FPGA can be used to generate a video signal. I have specifically worked with the iCEBreaker FPGA but the theory contained within this should work with any FPGA or device that you can generate the appropriate timings for.&lt;/p&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Fryzek Concepts</title><atom:link href="https://fryzekconcepts.com/feed.xml" rel="self" type="application/rss+xml"/><link>https://fryzekconcepts.com</link><description>Lucas is a developer working on cool things</description><lastBuildDate>Mon, 20 Feb 2023 19:31:26 -0000</lastBuildDate><item><title>Generating Video</title><link>https://fryzekconcepts.com/notes/generating-video.html</link><description>&lt;p&gt;One thing I’m very interested in is computer graphics. This could be complex 3D graphics or simple 2D graphics. The idea of getting a computer to display visual data fascinates me. One fundamental part of showing visual data is interfacing with a computer monitor. This can be accomplished by generating a video signal that the monitor understands. Below I have written instructions on how an FPGA can be used to generate a video signal. I have specifically worked with the iCEBreaker FPGA but the theory contained within this should work with any FPGA or device that you can generate the appropriate timings for.&lt;/p&gt;
 &lt;h3 id="tools"&gt;Tools&lt;/h3&gt;
 &lt;p&gt;Hardware used (&lt;a href="https://www.crowdsupply.com/1bitsquared/icebreaker-fpga"&gt;link for board&lt;/a&gt;):&lt;/p&gt;
 &lt;ul&gt;
@@ -505,7 +505,7 @@ Value(x, y+1) = Value(x,y) - dXV&lt;/code&gt;&lt;/pre&gt;
 func draw_triangle(x0, y0, x1, y1, x2, y2, v0, v1, v2):
     dX0 = x0 - x2
     dX1 = x1 - x0
-    dX2 = x2 - x2
+    dX2 = x2 - x1
     dY0 = y0 - y2
     dY1 = y1 - y0
     dY2 = y2 - y1
@@ -529,20 +529,20 @@ func draw_triangle(x0, y0, x1, y1, x2, y2, v0, v1, v2):
         for x = 0 to screen_width:
             if(e0 &amp;gt;= 0 &amp;amp;&amp;amp; e1 &amp;gt;= 0 &amp;amp;&amp;amp; e2 &amp;gt;= 0)
                 draw_pixel(x, y, v)
-        e0 = e0 + dY0
-        e1 = e1 + dY1
-        e2 = e2 + dY2
-        v = v + dYV
+            e0 = e0 + dY0
+            e1 = e1 + dY1
+            e2 = e2 + dY2
+            v = v + dYV
 
-    e0 = starting_e0 - dX0
-    e1 = starting_e1 - dX1
-    e2 = starting_e2 - dX2
-    v = starting_v - dXV
+        e0 = starting_e0 - dX0
+        e1 = starting_e1 - dX1
+        e2 = starting_e2 - dX2
+        v = starting_v - dXV
 
-    starting_e0 = e0
-    starting_e1 = e1
-    starting_e2 = e2
-    starting_v = v&lt;/code&gt;&lt;/pre&gt;
+        starting_e0 = e0
+        starting_e1 = e1
+        starting_e2 = e2
+        starting_v = v&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Now this pseudo code is not the most efficient as it will iterate over the entire screen to draw one triangle, but it provides a starting basis to show how to use these Pineda properties to calculate per vertex values. One thing to note if you do implement this is, if you use fixed point arithmetic, be careful to insure you have enough precision to calculate all of these values with overflow or underflow. This was an issue I ran into running out of precision when I did the divide by the area.&lt;/p&gt;
 </description><pubDate>Sun, 03 Apr 2022 04:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/rasterizing-triangles.html</guid></item><item><title>Baremetal RISC-V</title><link>https://fryzekconcepts.com/notes/baremetal-risc-v.html</link><description>&lt;p&gt;After re-watching suckerpinch’s &lt;a href="https://www.youtube.com/watch?v=ar9WRwCiSr0"&gt;“Reverse Emulation”&lt;/a&gt; video I got inspired to try and replicate what he did, but instead do it on an N64. Now my idea here is not to preform reverse emulation on the N64 itself but instead to use the SBC as a cheap way to make a dev focused flash cart. Seeing that sukerpinch was able to meet the timings of the NES bus made me think it might be possible to meet the N64 bus timings taking an approach similar to his.&lt;/p&gt;
 &lt;h2 id="why-risc-v-baremetal"&gt;Why RISC-V Baremetal?&lt;/h2&gt;
