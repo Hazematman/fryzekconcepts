@@ -1,7 +1,7 @@
 ---
 title: "Rasterizing Triangles"
 date: "2022-04-03"
-last_edit: "2022-10-30"
+last_edit: "2023-02-20"
 status: 2
 cover_image: "/assets/2022-04-03-rasterizing-triangles/Screenshot-from-2022-04-03-13-43-13.png"
 ---
@@ -72,7 +72,7 @@ func edge(x, y, xi, yi, dXi, dYi)
 func draw_triangle(x0, y0, x1, y1, x2, y2, v0, v1, v2):
     dX0 = x0 - x2
     dX1 = x1 - x0
-    dX2 = x2 - x2
+    dX2 = x2 - x1
     dY0 = y0 - y2
     dY1 = y1 - y0
     dY2 = y2 - y1
@@ -96,20 +96,20 @@ func draw_triangle(x0, y0, x1, y1, x2, y2, v0, v1, v2):
         for x = 0 to screen_width:
             if(e0 >= 0 && e1 >= 0 && e2 >= 0)
                 draw_pixel(x, y, v)
-        e0 = e0 + dY0
-        e1 = e1 + dY1
-        e2 = e2 + dY2
-        v = v + dYV
+            e0 = e0 + dY0
+            e1 = e1 + dY1
+            e2 = e2 + dY2
+            v = v + dYV
 
-    e0 = starting_e0 - dX0
-    e1 = starting_e1 - dX1
-    e2 = starting_e2 - dX2
-    v = starting_v - dXV
+        e0 = starting_e0 - dX0
+        e1 = starting_e1 - dX1
+        e2 = starting_e2 - dX2
+        v = starting_v - dXV
 
-    starting_e0 = e0
-    starting_e1 = e1
-    starting_e2 = e2
-    starting_v = v
+        starting_e0 = e0
+        starting_e1 = e1
+        starting_e2 = e2
+        starting_v = v
 ```
 
 Now this pseudo code is not the most efficient as it will iterate over the entire screen to draw one triangle, but it provides a starting basis to show how to use these Pineda properties to calculate per vertex values. One thing to note if you do implement this is, if you use fixed point arithmetic, be careful to insure you have enough precision to calculate all of these values with overflow or underflow. This was an issue I ran into running out of precision when I did the divide by the area.

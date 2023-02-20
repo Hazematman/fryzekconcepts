@@ -35,7 +35,7 @@
                     </div>
                 <div class="page-info-date-container">
             <p class="page-info-date">Published: 2022-04-03</p>
-            <p class="page-info-date">Last Edited: 2022-10-30</p>
+            <p class="page-info-date">Last Edited: 2023-02-20</p>
         </div>
     </div>
     </div>
@@ -84,7 +84,7 @@ Value(x, y+1) = Value(x,y) - dXV</code></pre>
 func draw_triangle(x0, y0, x1, y1, x2, y2, v0, v1, v2):
     dX0 = x0 - x2
     dX1 = x1 - x0
-    dX2 = x2 - x2
+    dX2 = x2 - x1
     dY0 = y0 - y2
     dY1 = y1 - y0
     dY2 = y2 - y1
@@ -108,20 +108,20 @@ func draw_triangle(x0, y0, x1, y1, x2, y2, v0, v1, v2):
         for x = 0 to screen_width:
             if(e0 &gt;= 0 &amp;&amp; e1 &gt;= 0 &amp;&amp; e2 &gt;= 0)
                 draw_pixel(x, y, v)
-        e0 = e0 + dY0
-        e1 = e1 + dY1
-        e2 = e2 + dY2
-        v = v + dYV
+            e0 = e0 + dY0
+            e1 = e1 + dY1
+            e2 = e2 + dY2
+            v = v + dYV
 
-    e0 = starting_e0 - dX0
-    e1 = starting_e1 - dX1
-    e2 = starting_e2 - dX2
-    v = starting_v - dXV
+        e0 = starting_e0 - dX0
+        e1 = starting_e1 - dX1
+        e2 = starting_e2 - dX2
+        v = starting_v - dXV
 
-    starting_e0 = e0
-    starting_e1 = e1
-    starting_e2 = e2
-    starting_v = v</code></pre>
+        starting_e0 = e0
+        starting_e1 = e1
+        starting_e2 = e2
+        starting_v = v</code></pre>
 <p>Now this pseudo code is not the most efficient as it will iterate over the entire screen to draw one triangle, but it provides a starting basis to show how to use these Pineda properties to calculate per vertex values. One thing to note if you do implement this is, if you use fixed point arithmetic, be careful to insure you have enough precision to calculate all of these values with overflow or underflow. This was an issue I ran into running out of precision when I did the divide by the area.</p>
     </div>
 </div>    </main>
