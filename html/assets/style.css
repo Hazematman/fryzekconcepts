@@ -56,11 +56,11 @@ figure
     width: fit-content;
 }
 
-img 
+img
 {
     display: block;
     margin: auto;
-    max-width: 800px;
+    max-width: 100%;
     height: auto;
 }
 
