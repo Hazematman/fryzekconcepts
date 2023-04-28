@@ -21,6 +21,7 @@
         <div class="header-links">
                         <a href="/now.html" class="header-link">Now</a>
             <a href="/about.html" class="header-link">About</a>
+            <a rel="me" href="https://mastodon.social/@hazematman">Social</a>
         </div>
     </div>
     <main>
@@ -43,15 +44,66 @@
 <div class="main-container">
     <div class="note-body">
 <figure>
-<img src="/assets/freedreno/glinfo_freedreno.png" alt="Android running Freedreno" /><figcaption aria-hidden="true">Android running Freedreno</figcaption>
+<img src="/assets/freedreno/glinfo_freedreno.png"
+alt="Android running Freedreno" />
+<figcaption aria-hidden="true">Android running Freedreno</figcaption>
 </figure>
-<p>As part of my training at Igalia I’ve been attempting to write a new backend for Freedreno that targets the proprietary “KGSL” kernel mode driver. For those unaware there are two “main” kernel mode drivers on Qualcomm SOCs for the GPU, there is the “MSM”, and “KGSL”. “MSM” is DRM compliant, and Freedreno already able to run on this driver. “KGSL” is the proprietary KMD that Qualcomm’s proprietary userspace driver targets. Now why would you want to run freedreno against KGSL, when MSM exists? Well there are a few ones, first MSM only really works on an up-streamed kernel, so if you have to run a down-streamed kernel you can continue using the version of KGSL that the manufacturer shipped with your device. Second this allows you to run both the proprietary adreno driver and the open source freedreno driver on the same device just by swapping libraries, which can be very nice for quickly testing something against both drivers.</p>
+<p>As part of my training at Igalia I’ve been attempting to write a new
+backend for Freedreno that targets the proprietary “KGSL” kernel mode
+driver. For those unaware there are two “main” kernel mode drivers on
+Qualcomm SOCs for the GPU, there is the “MSM”, and “KGSL”. “MSM” is DRM
+compliant, and Freedreno already able to run on this driver. “KGSL” is
+the proprietary KMD that Qualcomm’s proprietary userspace driver
+targets. Now why would you want to run freedreno against KGSL, when MSM
+exists? Well there are a few ones, first MSM only really works on an
+up-streamed kernel, so if you have to run a down-streamed kernel you can
+continue using the version of KGSL that the manufacturer shipped with
+your device. Second this allows you to run both the proprietary adreno
+driver and the open source freedreno driver on the same device just by
+swapping libraries, which can be very nice for quickly testing something
+against both drivers.</p>
 <h2 id="when-drm-isnt-just-drm">When “DRM” isn’t just “DRM”</h2>
-<p>When working on a new backend, one of the critical things to do is to make use of as much “common code” as possible. This has a number of benefits, least of all reducing the amount of code you have to write. It also allows reduces the number of bugs that will likely exist as you are relying on well tested code, and it ensures that the backend is mostly likely going to continue to work with new driver updates.</p>
-<p>When I started the work for a new backend I looked inside mesa’s <code>src/freedreno/drm</code> folder. This has the current backend code for Freedreno, and its already modularized to support multiple backends. It currently has support for the above mentioned MSM kernel mode driver as well as virtio (a backend that allows Freedreno to be used from within in a virtualized environment). From the name of this path, you would think that the code in this module would only work with kernel mode drivers that implement DRM, but actually there is only a handful of places in this module where DRM support is assumed. This made it a good starting point to introduce the KGSL backend and piggy back off the common code.</p>
-<p>For example the <code>drm</code> module has a lot of code to deal with the management of synchronization primitives, buffer objects, and command submit lists. All managed at a abstraction above “DRM” and to re-implement this code would be a bad idea.</p>
+<p>When working on a new backend, one of the critical things to do is to
+make use of as much “common code” as possible. This has a number of
+benefits, least of all reducing the amount of code you have to write. It
+also allows reduces the number of bugs that will likely exist as you are
+relying on well tested code, and it ensures that the backend is mostly
+likely going to continue to work with new driver updates.</p>
+<p>When I started the work for a new backend I looked inside mesa’s
+<code>src/freedreno/drm</code> folder. This has the current backend code
+for Freedreno, and its already modularized to support multiple backends.
+It currently has support for the above mentioned MSM kernel mode driver
+as well as virtio (a backend that allows Freedreno to be used from
+within in a virtualized environment). From the name of this path, you
+would think that the code in this module would only work with kernel
+mode drivers that implement DRM, but actually there is only a handful of
+places in this module where DRM support is assumed. This made it a good
+starting point to introduce the KGSL backend and piggy back off the
+common code.</p>
+<p>For example the <code>drm</code> module has a lot of code to deal
+with the management of synchronization primitives, buffer objects, and
+command submit lists. All managed at a abstraction above “DRM” and to
+re-implement this code would be a bad idea.</p>
 <h2 id="how-to-get-android-to-behave">How to get Android to behave</h2>
-<p>One of this big struggles with getting the KGSL backend working was figuring out how I could get Android to load mesa instead of Qualcomm blob driver that is shipped with the device image. Thankfully a good chunk of this work has already been figured out when the Turnip developers (Turnip is the open source Vulkan implementation for Adreno GPUs) figured out how to get Turnip running on android with KGSL. Thankfully one of my coworkers <a href="https://blogs.igalia.com/dpiliaiev/">Danylo</a> is one of those Turnip developers, and he gave me a lot of guidance on getting Android setup. One thing to watch out for is the outdated instructions <a href="https://docs.mesa3d.org/android.html">here</a>. These instructions <em>almost</em> work, but require some modifications. First if you’re using a more modern version of the Android NDK, the compiler has been replaced with LLVM/Clang, so you need to change which compiler is being used. Second flags like <code>system</code> in the cross compiler script incorrectly set the system as <code>linux</code> instead of <code>android</code>. I had success using the below cross compiler script. Take note that the compiler paths need to be updated to match where you extracted the android NDK on your system.</p>
+<p>One of this big struggles with getting the KGSL backend working was
+figuring out how I could get Android to load mesa instead of Qualcomm
+blob driver that is shipped with the device image. Thankfully a good
+chunk of this work has already been figured out when the Turnip
+developers (Turnip is the open source Vulkan implementation for Adreno
+GPUs) figured out how to get Turnip running on android with KGSL.
+Thankfully one of my coworkers <a
+href="https://blogs.igalia.com/dpiliaiev/">Danylo</a> is one of those
+Turnip developers, and he gave me a lot of guidance on getting Android
+setup. One thing to watch out for is the outdated instructions <a
+href="https://docs.mesa3d.org/android.html">here</a>. These instructions
+<em>almost</em> work, but require some modifications. First if you’re
+using a more modern version of the Android NDK, the compiler has been
+replaced with LLVM/Clang, so you need to change which compiler is being
+used. Second flags like <code>system</code> in the cross compiler script
+incorrectly set the system as <code>linux</code> instead of
+<code>android</code>. I had success using the below cross compiler
+script. Take note that the compiler paths need to be updated to match
+where you extracted the android NDK on your system.</p>
 <pre class="meson"><code>[binaries]
 ar = &#39;/home/lfryzek/Documents/projects/igalia/freedreno/android-ndk-r25b-linux/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar&#39;
 c = [&#39;ccache&#39;, &#39;/home/lfryzek/Documents/projects/igalia/freedreno/android-ndk-r25b-linux/android-ndk-r25b/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android29-clang&#39;]
@@ -69,24 +121,137 @@ system = &#39;android&#39;
 cpu_family = &#39;arm&#39;
 cpu = &#39;armv8&#39;
 endian = &#39;little&#39;</code></pre>
-<p>Another thing I had to figure out with Android, that was different with these instructions, was how I would get Android to load mesa versions of mesa libraries. That’s when my colleague <a href="https://www.igalia.com/team/mark">Mark</a> pointed out to me that Android is open source and I could just check the source code myself. Sure enough you have find the OpenGL driver loader in <a href="https://android.googlesource.com/platform/frameworks/native/+/master/opengl/libs/EGL/Loader.cpp">Android’s source code</a>. From this code we can that Android will try to load a few different files based on some settings, and in my case it would try to load 3 different shaded libraries in the <code>/vendor/lib64/egl</code> folder, <code>libEGL_adreno.so</code> ,<code>libGLESv1_CM_adreno.so</code>, and <code>libGLESv2.so</code>. I could just replace these libraries with the version built from mesa and voilà, you’re now loading a custom driver! This realization that I could just “read the code” was very powerful in debugging some more android specific issues I ran into, like dealing with gralloc.</p>
-<p>Something cool that the opensource Freedreno &amp; Turnip driver developers figured out was getting android to run test OpenGL applications from the adb shell without building android APKs. If you check out the <a href="https://gitlab.freedesktop.org/freedreno/freedreno">freedreno repo</a>, they have an <code>ndk-build.sh</code> script that can build tests in the <code>tests-*</code> folder. The nice benefit of this is that it provides an easy way to run simple test cases without worrying about the android window system integration. Another nifty feature about this repo is the <code>libwrap</code> tool that lets trace the commands being submitted to the GPU.</p>
+<p>Another thing I had to figure out with Android, that was different
+with these instructions, was how I would get Android to load mesa
+versions of mesa libraries. That’s when my colleague <a
+href="https://www.igalia.com/team/mark">Mark</a> pointed out to me that
+Android is open source and I could just check the source code myself.
+Sure enough you have find the OpenGL driver loader in <a
+href="https://android.googlesource.com/platform/frameworks/native/+/master/opengl/libs/EGL/Loader.cpp">Android’s
+source code</a>. From this code we can that Android will try to load a
+few different files based on some settings, and in my case it would try
+to load 3 different shaded libraries in the
+<code>/vendor/lib64/egl</code> folder, <code>libEGL_adreno.so</code>
+,<code>libGLESv1_CM_adreno.so</code>, and <code>libGLESv2.so</code>. I
+could just replace these libraries with the version built from mesa and
+voilà, you’re now loading a custom driver! This realization that I could
+just “read the code” was very powerful in debugging some more android
+specific issues I ran into, like dealing with gralloc.</p>
+<p>Something cool that the opensource Freedreno &amp; Turnip driver
+developers figured out was getting android to run test OpenGL
+applications from the adb shell without building android APKs. If you
+check out the <a
+href="https://gitlab.freedesktop.org/freedreno/freedreno">freedreno
+repo</a>, they have an <code>ndk-build.sh</code> script that can build
+tests in the <code>tests-*</code> folder. The nice benefit of this is
+that it provides an easy way to run simple test cases without worrying
+about the android window system integration. Another nifty feature about
+this repo is the <code>libwrap</code> tool that lets trace the commands
+being submitted to the GPU.</p>
 <h2 id="what-even-is-gralloc">What even is Gralloc?</h2>
-<p>Gralloc is the graphics memory allocated in Android, and the OS will use it to allocate the surface for “windows”. This means that the memory we want to render the display to is managed by gralloc and not our KGSL backend. This means we have to get all the information about this surface from gralloc, and if you look in <code>src/egl/driver/dri2/platform_android.c</code> you will see existing code for handing gralloc. You would think “Hey there is no work for me here then”, but you would be wrong. The handle gralloc provides is hardware specific, and the code in <code>platform_android.c</code> assumes a DRM gralloc implementation. Thankfully the turnip developers had already gone through this struggle and if you look in <code>src/freedreno/vulkan/tu_android.c</code> you can see they have implemented a separate path when a Qualcomm msm implementation of gralloc is detected. I could copy this detection logic and add a separate path to <code>platform_android.c</code>.</p>
-<h2 id="working-with-the-freedreno-community">Working with the Freedreno community</h2>
-<p>When working on any project (open-source or otherwise), it’s nice to know that you aren’t working alone. Thankfully the <code>#freedreno</code> channel on <code>irc.oftc.net</code> is very active and full of helpful people to answer any questions you may have. While working on the backend, one area I wasn’t really sure how to address was the synchronization code for buffer objects. The backend exposed a function called <code>cpu_prep</code>, This function was just there to call the DRM implementation of <code>cpu_prep</code> on the buffer object. I wasn’t exactly sure how to implement this functionality with KGSL since it doesn’t use DRM buffer objects.</p>
-<p>I ended up reaching out to the IRC channel and Rob Clark on the channel explained to me that he was actually working on moving a lot of the code for <code>cpu_prep</code> into common code so that a non-drm driver (like the KGSL backend I was working on) would just need to implement that operation as NOP (no operation).</p>
-<h2 id="dealing-with-bugs-reverse-engineering-the-blob">Dealing with bugs &amp; reverse engineering the blob</h2>
-<p>I encountered a few different bugs when implementing the KGSL backend, but most of them consisted of me calling KGSL wrong, or handing synchronization incorrectly. Thankfully since Turnip is already running on KGSL, I could just more carefully compare my code to what Turnip is doing and figure out my logical mistake.</p>
-<p>Some of the bugs I encountered required the backend interface in Freedreno to be modified to expose per a new per driver implementation of that backend function, instead of just using a common implementation. For example the existing function to map a buffer object into userspace assumed that the same <code>fd</code> for the device could be used for the buffer object in the <code>mmap</code> call. This worked fine for any buffer objects we created through KGSL but would not work for buffer objects created from gralloc (remember the above section on surface memory for windows comming from gralloc). To resolve this issue I exposed a new per backend implementation of “map” where I could take a different path if the buffer object came from gralloc.</p>
-<p>While testing the KGSL backend I did encounter a new bug that seems to effect both my new KGSL backend and the Turnip KGSL backend. The bug is an <code>iommu fault</code> that occurs when the surface allocated by gralloc does not have a height that is aligned to 4. The blitting engine on a6xx GPUs copies in 16x4 chunks, so if the height is not aligned by 4 the GPU will try to write to pixels that exists outside the allocated memory. This issue only happens with KGSL backends since we import memory from gralloc, and gralloc allocates exactly enough memory for the surface, with no alignment on the height. If running on any other platform, the <code>fdl</code> (Freedreno Layout) code would be called to compute the minimum required size for a surface which would take into account the alignment requirement for the height. The blob driver Qualcomm didn’t seem to have this problem, even though its getting the exact same buffer from gralloc. So it must be doing something different to handle the none aligned height.</p>
-<p>Because this issue relied on gralloc, the application needed to running as an Android APK to get a surface from gralloc. The best way to fix this issue would be to figure out what the blob driver is doing and try to replicate this behavior in Freedreno (assuming it isn’t doing something silly like switch to sysmem rendering). Unfortunately it didn’t look like the libwrap library worked to trace an APK.</p>
-<p>The libwrap library relied on a linux feature known as <code>LD_PRELOAD</code> to load <code>libwrap.so</code> when the application starts and replace the system functions like <code>open</code> and <code>ioctl</code> with their own implementation that traces what is being submitted to the KGSL kernel mode driver. Thankfully android exposes this <code>LD_PRELOAD</code> mechanism through its “wrap” interface where you create a propety called <code>wrap.&lt;app-name&gt;</code> with a value <code>LD_PRELOAD=&lt;path to libwrap.so&gt;</code>. Android will then load your library like would be done in a normal linux shell. If you tried to do this with libwrap though you find very quickly that you would get corrupted traces. When android launches your APK, it doesn’t only launch your application, there are different threads for different android system related functions and some of them can also use OpenGL. The libwrap library is not designed to handle multiple threads using KGSL at the same time. After discovering this issue I created a <a href="https://gitlab.freedesktop.org/freedreno/freedreno/-/merge_requests/22">MR</a> that would store the tracing file handles as TLS (thread local storage) preventing the clobbering of the trace file, and also allowing you to view the traces generated by different threads separately from each other.</p>
-<p>With this is in hand one could begin investing what the blob driver is doing to handle this unaligned surfaces.</p>
+<p>Gralloc is the graphics memory allocated in Android, and the OS will
+use it to allocate the surface for “windows”. This means that the memory
+we want to render the display to is managed by gralloc and not our KGSL
+backend. This means we have to get all the information about this
+surface from gralloc, and if you look in
+<code>src/egl/driver/dri2/platform_android.c</code> you will see
+existing code for handing gralloc. You would think “Hey there is no work
+for me here then”, but you would be wrong. The handle gralloc provides
+is hardware specific, and the code in <code>platform_android.c</code>
+assumes a DRM gralloc implementation. Thankfully the turnip developers
+had already gone through this struggle and if you look in
+<code>src/freedreno/vulkan/tu_android.c</code> you can see they have
+implemented a separate path when a Qualcomm msm implementation of
+gralloc is detected. I could copy this detection logic and add a
+separate path to <code>platform_android.c</code>.</p>
+<h2 id="working-with-the-freedreno-community">Working with the Freedreno
+community</h2>
+<p>When working on any project (open-source or otherwise), it’s nice to
+know that you aren’t working alone. Thankfully the
+<code>#freedreno</code> channel on <code>irc.oftc.net</code> is very
+active and full of helpful people to answer any questions you may have.
+While working on the backend, one area I wasn’t really sure how to
+address was the synchronization code for buffer objects. The backend
+exposed a function called <code>cpu_prep</code>, This function was just
+there to call the DRM implementation of <code>cpu_prep</code> on the
+buffer object. I wasn’t exactly sure how to implement this functionality
+with KGSL since it doesn’t use DRM buffer objects.</p>
+<p>I ended up reaching out to the IRC channel and Rob Clark on the
+channel explained to me that he was actually working on moving a lot of
+the code for <code>cpu_prep</code> into common code so that a non-drm
+driver (like the KGSL backend I was working on) would just need to
+implement that operation as NOP (no operation).</p>
+<h2 id="dealing-with-bugs-reverse-engineering-the-blob">Dealing with
+bugs &amp; reverse engineering the blob</h2>
+<p>I encountered a few different bugs when implementing the KGSL
+backend, but most of them consisted of me calling KGSL wrong, or handing
+synchronization incorrectly. Thankfully since Turnip is already running
+on KGSL, I could just more carefully compare my code to what Turnip is
+doing and figure out my logical mistake.</p>
+<p>Some of the bugs I encountered required the backend interface in
+Freedreno to be modified to expose per a new per driver implementation
+of that backend function, instead of just using a common implementation.
+For example the existing function to map a buffer object into userspace
+assumed that the same <code>fd</code> for the device could be used for
+the buffer object in the <code>mmap</code> call. This worked fine for
+any buffer objects we created through KGSL but would not work for buffer
+objects created from gralloc (remember the above section on surface
+memory for windows comming from gralloc). To resolve this issue I
+exposed a new per backend implementation of “map” where I could take a
+different path if the buffer object came from gralloc.</p>
+<p>While testing the KGSL backend I did encounter a new bug that seems
+to effect both my new KGSL backend and the Turnip KGSL backend. The bug
+is an <code>iommu fault</code> that occurs when the surface allocated by
+gralloc does not have a height that is aligned to 4. The blitting engine
+on a6xx GPUs copies in 16x4 chunks, so if the height is not aligned by 4
+the GPU will try to write to pixels that exists outside the allocated
+memory. This issue only happens with KGSL backends since we import
+memory from gralloc, and gralloc allocates exactly enough memory for the
+surface, with no alignment on the height. If running on any other
+platform, the <code>fdl</code> (Freedreno Layout) code would be called
+to compute the minimum required size for a surface which would take into
+account the alignment requirement for the height. The blob driver
+Qualcomm didn’t seem to have this problem, even though its getting the
+exact same buffer from gralloc. So it must be doing something different
+to handle the none aligned height.</p>
+<p>Because this issue relied on gralloc, the application needed to
+running as an Android APK to get a surface from gralloc. The best way to
+fix this issue would be to figure out what the blob driver is doing and
+try to replicate this behavior in Freedreno (assuming it isn’t doing
+something silly like switch to sysmem rendering). Unfortunately it
+didn’t look like the libwrap library worked to trace an APK.</p>
+<p>The libwrap library relied on a linux feature known as
+<code>LD_PRELOAD</code> to load <code>libwrap.so</code> when the
+application starts and replace the system functions like
+<code>open</code> and <code>ioctl</code> with their own implementation
+that traces what is being submitted to the KGSL kernel mode driver.
+Thankfully android exposes this <code>LD_PRELOAD</code> mechanism
+through its “wrap” interface where you create a propety called
+<code>wrap.&lt;app-name&gt;</code> with a value
+<code>LD_PRELOAD=&lt;path to libwrap.so&gt;</code>. Android will then
+load your library like would be done in a normal linux shell. If you
+tried to do this with libwrap though you find very quickly that you
+would get corrupted traces. When android launches your APK, it doesn’t
+only launch your application, there are different threads for different
+android system related functions and some of them can also use OpenGL.
+The libwrap library is not designed to handle multiple threads using
+KGSL at the same time. After discovering this issue I created a <a
+href="https://gitlab.freedesktop.org/freedreno/freedreno/-/merge_requests/22">MR</a>
+that would store the tracing file handles as TLS (thread local storage)
+preventing the clobbering of the trace file, and also allowing you to
+view the traces generated by different threads separately from each
+other.</p>
+<p>With this is in hand one could begin investing what the blob driver
+is doing to handle this unaligned surfaces.</p>
 <h2 id="whats-next">What’s next?</h2>
-<p>Well the next obvious thing to fix is the aligned height issue which is still open. I’ve also worked on upstreaming my changes with this <a href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/21570">WIP MR</a>.</p>
+<p>Well the next obvious thing to fix is the aligned height issue which
+is still open. I’ve also worked on upstreaming my changes with this <a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/21570">WIP
+MR</a>.</p>
 <figure>
-<img src="/assets/freedreno/3d-mark.png" alt="Freedreno running 3d-mark" /><figcaption aria-hidden="true">Freedreno running 3d-mark</figcaption>
+<img src="/assets/freedreno/3d-mark.png"
+alt="Freedreno running 3d-mark" />
+<figcaption aria-hidden="true">Freedreno running 3d-mark</figcaption>
 </figure>
     </div>
 </div>    </main>

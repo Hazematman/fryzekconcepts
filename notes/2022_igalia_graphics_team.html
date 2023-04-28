@@ -21,11 +21,13 @@
         <div class="header-links">
                         <a href="/now.html" class="header-link">Now</a>
             <a href="/about.html" class="header-link">About</a>
+            <a rel="me" href="https://mastodon.social/@hazematman">Social</a>
         </div>
     </div>
     <main>
 <div class="page-title-header-container">
-    <h1 class="page-title-header">2022 Graphics Team Contributions at Igalia</h1>
+    <h1 class="page-title-header">2022 Graphics Team Contributions at
+Igalia</h1>
         <div class="page-info-container">
                     <div class="plant-status">
                     <img src="/assets/evergreen.svg">
@@ -42,26 +44,76 @@
 <div class="note-divider"></div>
 <div class="main-container">
     <div class="note-body">
-<p>This year I started a new job working with <a href="https://www.igalia.com/technology/graphics">Igalia’s Graphics Team</a>. For those of you who don’t know <a href="https://www.igalia.com/">Igalia</a> they are a <a href="https://en.wikipedia.org/wiki/Igalia">“worker-owned, employee-run cooperative model consultancy focused on open source software”</a>.</p>
-<p>As a new member of the team, I thought it would be a great idea to summarize the incredible amount of work the team completed in 2022. If you’re interested keep reading!</p>
-<h2 id="vulkan-1.2-conformance-on-rpi-4">Vulkan 1.2 Conformance on RPi 4</h2>
-<p>One of the big milestones for the team in 2022 was <a href="https://www.khronos.org/conformance/adopters/conformant-products#submission_694">achieving Vulkan 1.2 conformance on the Raspberry Pi 4</a>. The folks over at the Raspberry Pi company wrote a nice <a href="https://www.raspberrypi.com/news/vulkan-update-version-1-2-conformance-for-raspberry-pi-4/">article</a> about the achievement. Igalia has been partnering with the Raspberry Pi company to bring build and improve the graphics driver on all versions of the Raspberry Pi.</p>
-<p>The Vulkan 1.2 spec ratification came with a few <a href="https://registry.khronos.org/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.2">extensions</a> that were promoted to Core. This means a conformant Vulkan 1.2 driver needs to implement those extensions. Alejandro Piñeiro wrote this interesting <a href="https://blogs.igalia.com/apinheiro/2022/05/v3dv-status-update-2022-05-16/">blog post</a> that talks about some of those extensions.</p>
-<p>Vulkan 1.2 also came with a number of optional extensions such as <code>VK_KHR_pipeline_executable_properties</code>. My colleague Iago Toral wrote an excellent <a href="https://blogs.igalia.com/itoral/2022/05/09/vk_khr_pipeline_executables/">blog post</a> on how we implemented that extension on the Raspberry Pi 4 and what benefits it provides for debugging.</p>
+<p>This year I started a new job working with <a
+href="https://www.igalia.com/technology/graphics">Igalia’s Graphics
+Team</a>. For those of you who don’t know <a
+href="https://www.igalia.com/">Igalia</a> they are a <a
+href="https://en.wikipedia.org/wiki/Igalia">“worker-owned, employee-run
+cooperative model consultancy focused on open source software”</a>.</p>
+<p>As a new member of the team, I thought it would be a great idea to
+summarize the incredible amount of work the team completed in 2022. If
+you’re interested keep reading!</p>
+<h2 id="vulkan-1.2-conformance-on-rpi-4">Vulkan 1.2 Conformance on RPi
+4</h2>
+<p>One of the big milestones for the team in 2022 was <a
+href="https://www.khronos.org/conformance/adopters/conformant-products#submission_694">achieving
+Vulkan 1.2 conformance on the Raspberry Pi 4</a>. The folks over at the
+Raspberry Pi company wrote a nice <a
+href="https://www.raspberrypi.com/news/vulkan-update-version-1-2-conformance-for-raspberry-pi-4/">article</a>
+about the achievement. Igalia has been partnering with the Raspberry Pi
+company to bring build and improve the graphics driver on all versions
+of the Raspberry Pi.</p>
+<p>The Vulkan 1.2 spec ratification came with a few <a
+href="https://registry.khronos.org/vulkan/specs/1.2-extensions/html/vkspec.html#versions-1.2">extensions</a>
+that were promoted to Core. This means a conformant Vulkan 1.2 driver
+needs to implement those extensions. Alejandro Piñeiro wrote this
+interesting <a
+href="https://blogs.igalia.com/apinheiro/2022/05/v3dv-status-update-2022-05-16/">blog
+post</a> that talks about some of those extensions.</p>
+<p>Vulkan 1.2 also came with a number of optional extensions such as
+<code>VK_KHR_pipeline_executable_properties</code>. My colleague Iago
+Toral wrote an excellent <a
+href="https://blogs.igalia.com/itoral/2022/05/09/vk_khr_pipeline_executables/">blog
+post</a> on how we implemented that extension on the Raspberry Pi 4 and
+what benefits it provides for debugging.</p>
 <h2 id="vulkan-1.3-support-on-turnip">Vulkan 1.3 support on Turnip</h2>
-<p>Igalia has been heavily supporting the Open-Source Turnip Vulkan driver for Qualcomm Adreno GPUs, and in 2022 we helped it achieve Vulkan 1.3 conformance. Danylo Piliaiev on the graphics team here at Igalia, wrote a great <a href="https://blogs.igalia.com/dpiliaiev/turnip-vulkan-1-3/">blog post</a> on this achievement! One of the biggest challenges for the Turnip driver is that it is a completely reverse-engineered driver that has been built without access to any hardware documentation or reference driver code.</p>
-<p>With Vulkan 1.3 conformance has also come the ability to run more commercial games on Adreno GPUs through the use of the DirectX translation layers. If you would like to see more of this check out this <a href="https://blogs.igalia.com/dpiliaiev/turnip-july-2022-update/">post</a> from Danylo where he talks about getting “The Witcher 3”, “The Talos Principle”, and “OMD2” running on the A660 GPU. Outside of Vulkan 1.3 support he also talks about some of the extensions that were implemented to allow “Zink” (the OpenGL over Vulkan driver) to run Turnip, and bring OpenGL 4.6 support to Adreno GPUs.</p>
+<p>Igalia has been heavily supporting the Open-Source Turnip Vulkan
+driver for Qualcomm Adreno GPUs, and in 2022 we helped it achieve Vulkan
+1.3 conformance. Danylo Piliaiev on the graphics team here at Igalia,
+wrote a great <a
+href="https://blogs.igalia.com/dpiliaiev/turnip-vulkan-1-3/">blog
+post</a> on this achievement! One of the biggest challenges for the
+Turnip driver is that it is a completely reverse-engineered driver that
+has been built without access to any hardware documentation or reference
+driver code.</p>
+<p>With Vulkan 1.3 conformance has also come the ability to run more
+commercial games on Adreno GPUs through the use of the DirectX
+translation layers. If you would like to see more of this check out this
+<a
+href="https://blogs.igalia.com/dpiliaiev/turnip-july-2022-update/">post</a>
+from Danylo where he talks about getting “The Witcher 3”, “The Talos
+Principle”, and “OMD2” running on the A660 GPU. Outside of Vulkan 1.3
+support he also talks about some of the extensions that were implemented
+to allow “Zink” (the OpenGL over Vulkan driver) to run Turnip, and bring
+OpenGL 4.6 support to Adreno GPUs.</p>
 <p><div class="youtube-video"><iframe src="https://www.youtube.com/embed/oVFWy25uiXA"></iframe></div></p>
 <h2 id="vulkan-extensions">Vulkan Extensions</h2>
-<p>Several developers on the Graphics Team made several key contributions to Vulkan Extensions and the Vulkan conformance test suite (CTS). My colleague Ricardo Garcia made an excellent <a href="https://rg3.name/202212122137.html">blog post</a> about those contributions. Below I’ve listed what Igalia did for each of the extensions:</p>
+<p>Several developers on the Graphics Team made several key
+contributions to Vulkan Extensions and the Vulkan conformance test suite
+(CTS). My colleague Ricardo Garcia made an excellent <a
+href="https://rg3.name/202212122137.html">blog post</a> about those
+contributions. Below I’ve listed what Igalia did for each of the
+extensions:</p>
 <ul>
 <li>VK_EXT_image_2d_view_of_3d
 <ul>
-<li>We reviewed the spec and are listed as contributors to this extension</li>
+<li>We reviewed the spec and are listed as contributors to this
+extension</li>
 </ul></li>
 <li>VK_EXT_shader_module_identifier
 <ul>
-<li>We reviewed the spec, contributed to it, and created tests for this extension</li>
+<li>We reviewed the spec, contributed to it, and created tests for this
+extension</li>
 </ul></li>
 <li>VK_EXT_attachment_feedback_loop_layout
 <ul>
@@ -80,48 +132,177 @@
 <li>We wrote tests and reviewed the spec for this extension</li>
 </ul></li>
 </ul>
-<h2 id="amdgpu-kernel-driver-contributions">AMDGPU kernel driver contributions</h2>
-<p>Our resident “Not an AMD expert” Melissa Wen made several contributions to the AMDGPU driver. Those contributions include connecting parts of the <a href="https://lore.kernel.org/amd-gfx/20220329201835.2393141-1-mwen@igalia.com/">pixel blending and post blending code in AMD’s <code>DC</code> module to <code>DRM</code></a> and <a href="https://lore.kernel.org/amd-gfx/20220804161349.3561177-1-mwen@igalia.com/">fixing a bug related to how panel orientation is set when a display is connected</a>. She also had a <a href="https://indico.freedesktop.org/event/2/contributions/50/">presentation at XDC 2022</a>, where she talks about techniques you can use to understand and debug AMDGPU, even when there aren’t hardware docs available.</p>
-<p>André Almeida also completed and submitted work on <a href="https://lore.kernel.org/dri-devel/20220714191745.45512-1-andrealmeid@igalia.com/">enabled logging features for the new GFXOFF hardware feature in AMD GPUs</a>. He also created a userspace application (which you can find <a href="https://gitlab.freedesktop.org/andrealmeid/gfxoff_tool">here</a>), that lets you interact with this feature through the <code>debugfs</code> interface. Additionally, he submitted a <a href="https://lore.kernel.org/dri-devel/20220929184307.258331-1-contact@emersion.fr/">patch</a> for async page flips (which he also talked about in his <a href="https://indico.freedesktop.org/event/2/contributions/61/">XDC 2022 presentation</a>) which is still yet to be merged.</p>
-<h2 id="modesetting-without-glamor-on-rpi">Modesetting without Glamor on RPi</h2>
-<p>Christopher Michael joined the Graphics Team in 2022 and along with Chema Casanova made some key contributions to enabling hardware acceleration and mode setting on the Raspberry Pi without the use of <a href="https://www.freedesktop.org/wiki/Software/Glamor/">Glamor</a> which allows making more video memory available to graphics applications running on a Raspberry Pi.</p>
-<p>The older generation Raspberry Pis (1-3) only have a maximum of 256MB of memory available for video memory, and using Glamor will consume part of that video memory. Christopher wrote an excellent <a href="https://blogs.igalia.com/cmichael/2022/05/30/modesetting-a-glamor-less-rpi-adventure/">blog post</a> on this work. Both him and Chema also had a joint presentation at XDC 2022 going into more detail on this work.</p>
+<h2 id="amdgpu-kernel-driver-contributions">AMDGPU kernel driver
+contributions</h2>
+<p>Our resident “Not an AMD expert” Melissa Wen made several
+contributions to the AMDGPU driver. Those contributions include
+connecting parts of the <a
+href="https://lore.kernel.org/amd-gfx/20220329201835.2393141-1-mwen@igalia.com/">pixel
+blending and post blending code in AMD’s <code>DC</code> module to
+<code>DRM</code></a> and <a
+href="https://lore.kernel.org/amd-gfx/20220804161349.3561177-1-mwen@igalia.com/">fixing
+a bug related to how panel orientation is set when a display is
+connected</a>. She also had a <a
+href="https://indico.freedesktop.org/event/2/contributions/50/">presentation
+at XDC 2022</a>, where she talks about techniques you can use to
+understand and debug AMDGPU, even when there aren’t hardware docs
+available.</p>
+<p>André Almeida also completed and submitted work on <a
+href="https://lore.kernel.org/dri-devel/20220714191745.45512-1-andrealmeid@igalia.com/">enabled
+logging features for the new GFXOFF hardware feature in AMD GPUs</a>. He
+also created a userspace application (which you can find <a
+href="https://gitlab.freedesktop.org/andrealmeid/gfxoff_tool">here</a>),
+that lets you interact with this feature through the
+<code>debugfs</code> interface. Additionally, he submitted a <a
+href="https://lore.kernel.org/dri-devel/20220929184307.258331-1-contact@emersion.fr/">patch</a>
+for async page flips (which he also talked about in his <a
+href="https://indico.freedesktop.org/event/2/contributions/61/">XDC 2022
+presentation</a>) which is still yet to be merged.</p>
+<h2 id="modesetting-without-glamor-on-rpi">Modesetting without Glamor on
+RPi</h2>
+<p>Christopher Michael joined the Graphics Team in 2022 and along with
+Chema Casanova made some key contributions to enabling hardware
+acceleration and mode setting on the Raspberry Pi without the use of <a
+href="https://www.freedesktop.org/wiki/Software/Glamor/">Glamor</a>
+which allows making more video memory available to graphics applications
+running on a Raspberry Pi.</p>
+<p>The older generation Raspberry Pis (1-3) only have a maximum of 256MB
+of memory available for video memory, and using Glamor will consume part
+of that video memory. Christopher wrote an excellent <a
+href="https://blogs.igalia.com/cmichael/2022/05/30/modesetting-a-glamor-less-rpi-adventure/">blog
+post</a> on this work. Both him and Chema also had a joint presentation
+at XDC 2022 going into more detail on this work.</p>
 <h2 id="linux-format-magazine-column">Linux Format Magazine Column</h2>
-<p>Our very own Samuel Iglesias had a column published in Linux Format Magazine. It’s a short column about reaching Vulkan 1.1 conformance for v3dv &amp; Turnip Vulkan drivers, and how Open-Source GPU drivers can go from a “hobby project” to the defacto driver for the platform. Check it out on page 7 of <a href="https://linuxformat.com/linux-format-288.html">issue #288</a>!</p>
+<p>Our very own Samuel Iglesias had a column published in Linux Format
+Magazine. It’s a short column about reaching Vulkan 1.1 conformance for
+v3dv &amp; Turnip Vulkan drivers, and how Open-Source GPU drivers can go
+from a “hobby project” to the defacto driver for the platform. Check it
+out on page 7 of <a
+href="https://linuxformat.com/linux-format-288.html">issue #288</a>!</p>
 <h2 id="xdc-2022">XDC 2022</h2>
-<p>X.Org Developers Conference is one of the big conferences for us here at the Graphics Team. Last year at XDC 2022 our Team presented 5 talks in Minneapolis, Minnesota. XDC 2022 took place towards the end of the year in October, so it provides some good context on how the team closed out the year. If you didn’t attend or missed their presentation, here’s a breakdown:</p>
-<h3 id="replacing-the-geometry-pipeline-with-mesh-shaders-ricardo-garcía"><a href="https://indico.freedesktop.org/event/2/contributions/48/">“Replacing the geometry pipeline with mesh shaders”</a> (Ricardo García)</h3>
-<p>Ricardo presents what exactly mesh shaders are in Vulkan. He made many contributions to this extension including writing 1000s of CTS tests for this extension with a <a href="https://rg3.name/202210222107.html">blog post</a> on his presentation that should check out!</p>
+<p>X.Org Developers Conference is one of the big conferences for us here
+at the Graphics Team. Last year at XDC 2022 our Team presented 5 talks
+in Minneapolis, Minnesota. XDC 2022 took place towards the end of the
+year in October, so it provides some good context on how the team closed
+out the year. If you didn’t attend or missed their presentation, here’s
+a breakdown:</p>
+<h3
+id="replacing-the-geometry-pipeline-with-mesh-shaders-ricardo-garcía"><a
+href="https://indico.freedesktop.org/event/2/contributions/48/">“Replacing
+the geometry pipeline with mesh shaders”</a> (Ricardo García)</h3>
+<p>Ricardo presents what exactly mesh shaders are in Vulkan. He made
+many contributions to this extension including writing 1000s of CTS
+tests for this extension with a <a
+href="https://rg3.name/202210222107.html">blog post</a> on his
+presentation that should check out!</p>
 <p><div class="youtube-video"><iframe src="https://www.youtube.com/embed/aRNJ4xj_nDs"></iframe></div></p>
-<h3 id="status-of-vulkan-on-raspberry-pi-iago-toral"><a href="https://indico.freedesktop.org/event/2/contributions/68/">“Status of Vulkan on Raspberry Pi”</a> (Iago Toral)</h3>
-<p>Iago goes into detail about the current status of the Raspberry Pi Vulkan driver. He talks about achieving Vulkan 1.2 conformance, as well as some of the challenges the team had to solve due to hardware limitations of the Broadcom GPU.</p>
+<h3 id="status-of-vulkan-on-raspberry-pi-iago-toral"><a
+href="https://indico.freedesktop.org/event/2/contributions/68/">“Status
+of Vulkan on Raspberry Pi”</a> (Iago Toral)</h3>
+<p>Iago goes into detail about the current status of the Raspberry Pi
+Vulkan driver. He talks about achieving Vulkan 1.2 conformance, as well
+as some of the challenges the team had to solve due to hardware
+limitations of the Broadcom GPU.</p>
 <p><div class="youtube-video"><iframe src="https://www.youtube.com/embed/GM9IojyzCVM"></iframe></div></p>
-<h3 id="enable-hardware-acceleration-for-gl-applications-without-glamor-on-xorg-modesetting-driver-jose-maría-casanova-christopher-michael"><a href="https://indico.freedesktop.org/event/2/contributions/60/">“Enable hardware acceleration for GL applications without Glamor on Xorg modesetting driver”</a> (Jose María Casanova, Christopher Michael)</h3>
-<p>Chema and Christopher talk about the challenges they had to solve to enable hardware acceleration on the Raspberry Pi without Glamor.</p>
+<h3
+id="enable-hardware-acceleration-for-gl-applications-without-glamor-on-xorg-modesetting-driver-jose-maría-casanova-christopher-michael"><a
+href="https://indico.freedesktop.org/event/2/contributions/60/">“Enable
+hardware acceleration for GL applications without Glamor on Xorg
+modesetting driver”</a> (Jose María Casanova, Christopher Michael)</h3>
+<p>Chema and Christopher talk about the challenges they had to solve to
+enable hardware acceleration on the Raspberry Pi without Glamor.</p>
 <p><div class="youtube-video"><iframe src="https://www.youtube.com/embed/Bo_MOM7JTeQ"></iframe></div></p>
-<h3 id="im-not-an-amd-expert-but-melissa-wen"><a href="https://indico.freedesktop.org/event/2/contributions/50/">“I’m not an AMD expert, but…”</a> (Melissa Wen)</h3>
-<p>In this non-technical presentation, Melissa talks about techniques developers can use to understand and debug drivers without access to hardware documentation.</p>
+<h3 id="im-not-an-amd-expert-but-melissa-wen"><a
+href="https://indico.freedesktop.org/event/2/contributions/50/">“I’m not
+an AMD expert, but…”</a> (Melissa Wen)</h3>
+<p>In this non-technical presentation, Melissa talks about techniques
+developers can use to understand and debug drivers without access to
+hardware documentation.</p>
 <p><div class="youtube-video"><iframe src="https://www.youtube.com/embed/CMm-yhsMB7U"></iframe></div></p>
-<h3 id="async-page-flip-in-atomic-api-andré-almeida"><a href="https://indico.freedesktop.org/event/2/contributions/61/">“Async page flip in atomic API”</a> (André Almeida)</h3>
-<p>André talks about the work that has been done to enable asynchronous page flipping in DRM’s atomic API with an introduction to the topic by explaining about what exactly is asynchronous page flip, and why you would want it.</p>
+<h3 id="async-page-flip-in-atomic-api-andré-almeida"><a
+href="https://indico.freedesktop.org/event/2/contributions/61/">“Async
+page flip in atomic API”</a> (André Almeida)</h3>
+<p>André talks about the work that has been done to enable asynchronous
+page flipping in DRM’s atomic API with an introduction to the topic by
+explaining about what exactly is asynchronous page flip, and why you
+would want it.</p>
 <p><div class="youtube-video"><iframe src="https://www.youtube.com/embed/qayPPIfrqtE"></iframe></div></p>
 <h2 id="fosdem-2022">FOSDEM 2022</h2>
-<p>Another important conference for us is FOSDEM, and last year we presented 3 of the 5 talks in the graphics dev room. FOSDEM took place in early February 2022, these talks provide some good context of where the team started in 2022.</p>
-<h3 id="the-status-of-turnip-driver-development-hyunjun-ko"><a href="https://archive.fosdem.org/2022/schedule/event/turnip/">The status of Turnip driver development</a> (Hyunjun Ko)</h3>
-<p>Hyunjun presented the current state of the Turnip driver, also talking about the difficulties of developing a driver for a platform without hardware documentation. He talks about how Turnip developers reverse engineer the behaviour of the hardware, and then implement that in an open-source driver. He also made a companion <a href="https://blogs.igalia.com/zzoon/graphics/mesa/2022/02/21/complement-story/">blog post</a> to checkout along with his presentation.</p>
-<h3 id="v3dv-status-update-for-open-source-vulkan-driver-for-raspberry-pi-4-alejandro-piñeiro"><a href="https://archive.fosdem.org/2022/schedule/event/v3dv/">v3dv: Status Update for Open Source Vulkan Driver for Raspberry Pi 4</a> (Alejandro Piñeiro)</h3>
-<p>Igalia has been presenting the status of the v3dv driver since December 2019 and in this presentation, Alejandro talks about the status of the v3dv driver in early 2022. He talks about achieving conformance, the extensions that had to be implemented, and the future plans of the v3dv driver.</p>
-<h3 id="fun-with-border-colors-in-vulkan-ricardo-garcia"><a href="https://archive.fosdem.org/2022/schedule/event/vulkan_borders/">Fun with border colors in Vulkan</a> (Ricardo Garcia)</h3>
-<p>Ricardo presents about the work he did on the <code>VK_EXT_border_color_swizzle</code> extension in Vulkan. He talks about the specific contributions he did and how the extension fits in with sampling color operations in Vulkan.</p>
+<p>Another important conference for us is FOSDEM, and last year we
+presented 3 of the 5 talks in the graphics dev room. FOSDEM took place
+in early February 2022, these talks provide some good context of where
+the team started in 2022.</p>
+<h3 id="the-status-of-turnip-driver-development-hyunjun-ko"><a
+href="https://archive.fosdem.org/2022/schedule/event/turnip/">The status
+of Turnip driver development</a> (Hyunjun Ko)</h3>
+<p>Hyunjun presented the current state of the Turnip driver, also
+talking about the difficulties of developing a driver for a platform
+without hardware documentation. He talks about how Turnip developers
+reverse engineer the behaviour of the hardware, and then implement that
+in an open-source driver. He also made a companion <a
+href="https://blogs.igalia.com/zzoon/graphics/mesa/2022/02/21/complement-story/">blog
+post</a> to checkout along with his presentation.</p>
+<h3
+id="v3dv-status-update-for-open-source-vulkan-driver-for-raspberry-pi-4-alejandro-piñeiro"><a
+href="https://archive.fosdem.org/2022/schedule/event/v3dv/">v3dv: Status
+Update for Open Source Vulkan Driver for Raspberry Pi 4</a> (Alejandro
+Piñeiro)</h3>
+<p>Igalia has been presenting the status of the v3dv driver since
+December 2019 and in this presentation, Alejandro talks about the status
+of the v3dv driver in early 2022. He talks about achieving conformance,
+the extensions that had to be implemented, and the future plans of the
+v3dv driver.</p>
+<h3 id="fun-with-border-colors-in-vulkan-ricardo-garcia"><a
+href="https://archive.fosdem.org/2022/schedule/event/vulkan_borders/">Fun
+with border colors in Vulkan</a> (Ricardo Garcia)</h3>
+<p>Ricardo presents about the work he did on the
+<code>VK_EXT_border_color_swizzle</code> extension in Vulkan. He talks
+about the specific contributions he did and how the extension fits in
+with sampling color operations in Vulkan.</p>
 <h2 id="gsoc-igalia-ce">GSoC &amp; Igalia CE</h2>
-<p>Last year Melissa &amp; André co-mentored contributors working on introducing KUnit tests to the AMD display driver. This project was hosted as a <a href="https://summerofcode.withgoogle.com/">“Google Summer of Code” (GSoC)</a> project from the X.Org Foundation. If you’re interested in seeing their work Tales da Aparecida, Maíra Canal, Magali Lemes, and Isabella Basso presented their work at the <a href="https://lpc.events/event/16/contributions/1310/">Linux Plumbers Conference 2022</a> and across two talks at XDC 2022. Here you can see their <a href="https://indico.freedesktop.org/event/2/contributions/65/">first</a> presentation and here you can see their <a href="https://indico.freedesktop.org/event/2/contributions/164/">second</a> second presentation.</p>
-<p>André &amp; Melissa also mentored two <a href="https://www.igalia.com/coding-experience/">“Igalia Coding Experience” (CE)</a> projects, one related to IGT GPU test tools on the VKMS kernel driver, and the other for IGT GPU test tools on the V3D kernel driver. If you’re interested in reading up on some of that work, Maíra Canal <a href="https://mairacanal.github.io/january-update-finishing-my-igalia-ce/">wrote about her experience</a> being part of the Igalia CE.</p>
-<p>Ella Stanforth was also part of the Igalia Coding Experience, being mentored by Iago &amp; Alejandro. They worked on the <code>VK_KHR_sampler_ycbcr_conversion</code> extension for the v3dv driver. Alejandro talks about their work in his <a href="https://blogs.igalia.com/apinheiro/2023/01/v3dv-status-update-2023-01/">blog post here</a>.</p>
+<p>Last year Melissa &amp; André co-mentored contributors working on
+introducing KUnit tests to the AMD display driver. This project was
+hosted as a <a href="https://summerofcode.withgoogle.com/">“Google
+Summer of Code” (GSoC)</a> project from the X.Org Foundation. If you’re
+interested in seeing their work Tales da Aparecida, Maíra Canal, Magali
+Lemes, and Isabella Basso presented their work at the <a
+href="https://lpc.events/event/16/contributions/1310/">Linux Plumbers
+Conference 2022</a> and across two talks at XDC 2022. Here you can see
+their <a
+href="https://indico.freedesktop.org/event/2/contributions/65/">first</a>
+presentation and here you can see their <a
+href="https://indico.freedesktop.org/event/2/contributions/164/">second</a>
+second presentation.</p>
+<p>André &amp; Melissa also mentored two <a
+href="https://www.igalia.com/coding-experience/">“Igalia Coding
+Experience” (CE)</a> projects, one related to IGT GPU test tools on the
+VKMS kernel driver, and the other for IGT GPU test tools on the V3D
+kernel driver. If you’re interested in reading up on some of that work,
+Maíra Canal <a
+href="https://mairacanal.github.io/january-update-finishing-my-igalia-ce/">wrote
+about her experience</a> being part of the Igalia CE.</p>
+<p>Ella Stanforth was also part of the Igalia Coding Experience, being
+mentored by Iago &amp; Alejandro. They worked on the
+<code>VK_KHR_sampler_ycbcr_conversion</code> extension for the v3dv
+driver. Alejandro talks about their work in his <a
+href="https://blogs.igalia.com/apinheiro/2023/01/v3dv-status-update-2023-01/">blog
+post here</a>.</p>
 <h1 id="whats-next">What’s Next?</h1>
-<p>The graphics team is looking forward to having a jam-packed 2023 with just as many if not more contributions to the Open-Source graphics stack! I’m super excited to be part of the team, and hope to see my name in our 2023 recap post!</p>
-<p>Also, you might have heard that <a href="https://www.igalia.com/2022/xdc-2023">Igalia will be hosting XDC 2023</a> in the beautiful city of A Coruña! We hope to see you there where there will be many presentations from all the great people working on the Open-Source graphics stack, and most importantly where you can <a href="https://www.youtube.com/watch?v=7hWcu8O9BjM">dream in the Atlantic!</a></p>
+<p>The graphics team is looking forward to having a jam-packed 2023 with
+just as many if not more contributions to the Open-Source graphics
+stack! I’m super excited to be part of the team, and hope to see my name
+in our 2023 recap post!</p>
+<p>Also, you might have heard that <a
+href="https://www.igalia.com/2022/xdc-2023">Igalia will be hosting XDC
+2023</a> in the beautiful city of A Coruña! We hope to see you there
+where there will be many presentations from all the great people working
+on the Open-Source graphics stack, and most importantly where you can <a
+href="https://www.youtube.com/watch?v=7hWcu8O9BjM">dream in the
+Atlantic!</a></p>
 <figure>
-<img src="https://www.igalia.com/assets/i/news/XDC-event-banner.jpg" alt="Photo of A Coruña" /><figcaption aria-hidden="true">Photo of A Coruña</figcaption>
+<img src="https://www.igalia.com/assets/i/news/XDC-event-banner.jpg"
+alt="Photo of A Coruña" />
+<figcaption aria-hidden="true">Photo of A Coruña</figcaption>
 </figure>
     </div>
 </div>    </main>

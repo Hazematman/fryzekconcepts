@@ -21,6 +21,7 @@
         <div class="header-links">
                         <a href="/now.html" class="header-link">Now</a>
             <a href="/about.html" class="header-link">About</a>
+            <a rel="me" href="https://mastodon.social/@hazematman">Social</a>
         </div>
     </div>
     <main>
@@ -42,19 +43,35 @@
 <div class="note-divider"></div>
 <div class="main-container">
     <div class="note-body">
-<p>One thing I’m very interested in is computer graphics. This could be complex 3D graphics or simple 2D graphics. The idea of getting a computer to display visual data fascinates me. One fundamental part of showing visual data is interfacing with a computer monitor. This can be accomplished by generating a video signal that the monitor understands. Below I have written instructions on how an FPGA can be used to generate a video signal. I have specifically worked with the iCEBreaker FPGA but the theory contained within this should work with any FPGA or device that you can generate the appropriate timings for.</p>
+<p>One thing I’m very interested in is computer graphics. This could be
+complex 3D graphics or simple 2D graphics. The idea of getting a
+computer to display visual data fascinates me. One fundamental part of
+showing visual data is interfacing with a computer monitor. This can be
+accomplished by generating a video signal that the monitor understands.
+Below I have written instructions on how an FPGA can be used to generate
+a video signal. I have specifically worked with the iCEBreaker FPGA but
+the theory contained within this should work with any FPGA or device
+that you can generate the appropriate timings for.</p>
 <h3 id="tools">Tools</h3>
-<p>Hardware used (<a href="https://www.crowdsupply.com/1bitsquared/icebreaker-fpga">link for board</a>):</p>
+<p>Hardware used (<a
+href="https://www.crowdsupply.com/1bitsquared/icebreaker-fpga">link for
+board</a>):</p>
 <ul>
 <li>iCEBreaker FPGA</li>
 <li>iCEBreaker 12-Bit DVI Pmod</li>
 </ul>
 <p>Software Used:</p>
 <ul>
-<li>IceStorm FPGA toolchain (<a href="https://github.com/esden/summon-fpga-tools">follow install instructions here</a>)</li>
+<li>IceStorm FPGA toolchain (<a
+href="https://github.com/esden/summon-fpga-tools">follow install
+instructions here</a>)</li>
 </ul>
 <h3 id="theory">Theory</h3>
-<p>A video signal is composed of several parts, primarily the colour signals and the sync signals. For this DVI Pmod, there is also a data enable signal for the visible screen area. For the example here we are going to be generating a 640x480 60 Hz video signal. Below is a table describing the important data for our video signal.</p>
+<p>A video signal is composed of several parts, primarily the colour
+signals and the sync signals. For this DVI Pmod, there is also a data
+enable signal for the visible screen area. For the example here we are
+going to be generating a 640x480 60 Hz video signal. Below is a table
+describing the important data for our video signal.</p>
 <table>
 <tbody>
 <tr>
@@ -151,21 +168,65 @@ Vertical Back Porch Length
 <p>The data from this table raises a few questions:</p>
 <ol type="1">
 <li>What is the Pixel Clock?</li>
-<li>What is the difference between “Pixels/Lines” and “Visible Pixels/Lines”?</li>
+<li>What is the difference between “Pixels/Lines” and “Visible
+Pixels/Lines”?</li>
 <li>What is “Front Porch”, “Sync”, and “Back Porch”?</li>
 </ol>
 <h4 id="pixel-clock">Pixel Clock</h4>
-<p>The pixel clock is a fairly straightforward idea; this is the rate at which we generate pixels. For video signal generation, the “pixel” is a fundamental building block and we count things in the number of pixels it takes up. Every time the pixel clock “ticks” we have incremented the number of pixels we have processed. So for a 640x480 video signal, a full line is 800 pixels, or 800 clock ticks. For the full 800x525 frame there is 800 ticks x 525 lines, or 420000 clock ticks. If we are running the display at 60 Hz, 420000 pixels per frame are generated 60 times per second. Therefore, 25200000 pixels or clock ticks will pass in one second. From this we can see the pixel clock frequency of 25.175 MHz is roughly equal to 25200000 clock ticks. There is a small deviance from the “true” values here, but monitors are flexible enough to accept this video signal (my monitor reports it as 640x480@60Hz), and all information I can find online says that 25.175 MHz is the value you want to use. Later on we will see that the pixel clock is not required to be exactly 25.175 Mhz.</p>
-<h4 id="visible-area-vs-invisible-area">Visible Area vs Invisible Area</h4>
-<p><img src="/assets/2020-04-07-generating-video/visible_invisible.png" /></p>
-<p>From the above image we can see that a 640x480 video signal actually generates a resolution larger than 640x480. The true resolution we generate is 800x525, but only a 640x480 portion of that signal is visible. The area that is not visible is where we generate the sync signal. In other words, every part of the above image that is black is where a sync signal is being generated.</p>
-<h4 id="front-porch-back-porch-sync">Front Porch, Back Porch &amp; Sync</h4>
-<p>To better understand the front porch, back porch and sync signal, let’s look at what the horizontal sync signal looks like during the duration of a line:</p>
+<p>The pixel clock is a fairly straightforward idea; this is the rate at
+which we generate pixels. For video signal generation, the “pixel” is a
+fundamental building block and we count things in the number of pixels
+it takes up. Every time the pixel clock “ticks” we have incremented the
+number of pixels we have processed. So for a 640x480 video signal, a
+full line is 800 pixels, or 800 clock ticks. For the full 800x525 frame
+there is 800 ticks x 525 lines, or 420000 clock ticks. If we are running
+the display at 60 Hz, 420000 pixels per frame are generated 60 times per
+second. Therefore, 25200000 pixels or clock ticks will pass in one
+second. From this we can see the pixel clock frequency of 25.175 MHz is
+roughly equal to 25200000 clock ticks. There is a small deviance from
+the “true” values here, but monitors are flexible enough to accept this
+video signal (my monitor reports it as 640x480@60Hz), and all
+information I can find online says that 25.175 MHz is the value you want
+to use. Later on we will see that the pixel clock is not required to be
+exactly 25.175 Mhz.</p>
+<h4 id="visible-area-vs-invisible-area">Visible Area vs Invisible
+Area</h4>
+<p><img
+src="/assets/2020-04-07-generating-video/visible_invisible.png" /></p>
+<p>From the above image we can see that a 640x480 video signal actually
+generates a resolution larger than 640x480. The true resolution we
+generate is 800x525, but only a 640x480 portion of that signal is
+visible. The area that is not visible is where we generate the sync
+signal. In other words, every part of the above image that is black is
+where a sync signal is being generated.</p>
+<h4 id="front-porch-back-porch-sync">Front Porch, Back Porch &amp;
+Sync</h4>
+<p>To better understand the front porch, back porch and sync signal,
+let’s look at what the horizontal sync signal looks like during the
+duration of a line:</p>
 <p><img src="/assets/2020-04-07-generating-video/sync.png" /></p>
-<p>From this we can see that the “Front Porch” is the invisible pixels between the visible pixels and the sync pixels, and is represented by a logical one or high signal. The “Sync” is the invisible pixels between the front porch and back porch, and is represented by a logical zero or low signal. The “Back Porch” is the invisible pixels after the sync signal, and is represented by a logical one. For the case of 640x480 video, the visible pixel section lasts for 640 pixels. The front porch section lasts for 16 pixels, after which the sync signal will become a logical zero. This logical zero sync will last for 96 pixels, after which the sync signal will become a logical one again. The back porch will then last for 48 pixels. If you do a quick calculation right now of 640 + 16 + 96 + 48, we get 800 pixels which represents the full horizontal resolution of the display. The vertical sync signal works almost exactly the same, except the vertical sync signal acts on lines.</p>
+<p>From this we can see that the “Front Porch” is the invisible pixels
+between the visible pixels and the sync pixels, and is represented by a
+logical one or high signal. The “Sync” is the invisible pixels between
+the front porch and back porch, and is represented by a logical zero or
+low signal. The “Back Porch” is the invisible pixels after the sync
+signal, and is represented by a logical one. For the case of 640x480
+video, the visible pixel section lasts for 640 pixels. The front porch
+section lasts for 16 pixels, after which the sync signal will become a
+logical zero. This logical zero sync will last for 96 pixels, after
+which the sync signal will become a logical one again. The back porch
+will then last for 48 pixels. If you do a quick calculation right now of
+640 + 16 + 96 + 48, we get 800 pixels which represents the full
+horizontal resolution of the display. The vertical sync signal works
+almost exactly the same, except the vertical sync signal acts on
+lines.</p>
 <h3 id="implementation">Implementation</h3>
-<p>The first thing we can do that is going to simplify a lot of the following logic is to keep track of which pixel, and which line we are on. The below code block creates two registers to keep track of the current pixel on the line (column) and the current line (line):</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>logic <span class="op">[</span><span class="dv">9</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> line<span class="op">;</span></span>
+<p>The first thing we can do that is going to simplify a lot of the
+following logic is to keep track of which pixel, and which line we are
+on. The below code block creates two registers to keep track of the
+current pixel on the line (column) and the current line (line):</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>logic <span class="op">[</span><span class="dv">9</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> line<span class="op">;</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>logic <span class="op">[</span><span class="dv">9</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> column<span class="op">;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">always</span> <span class="op">@(</span><span class="kw">posedge</span> clk <span class="dt">or</span> <span class="kw">posedge</span> reset<span class="op">)</span> <span class="kw">begin</span></span>
@@ -187,16 +248,52 @@ Vertical Back Porch Length
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        <span class="kw">end</span></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">end</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code></pre></div>
-<p>This block of Verilog works by first initializing the line and column register to zero on a reset. This is important to make sure that we start from known values, otherwise the line and column register could contain any value and our logic would not work. Next, we check if we are at the bottom of the screen by comparing the current column to 799 (the last pixel in the line) and the current line is 524 (the last line in the frame). If these conditions are both true then we reset the line and column back to zero to signify that we are starting a new frame. The next block checks if the current column equals 799. Because the above if statement failed,we know that we are at the end of the line but not the end of the frame. If this is true we increment the current line count and set the column back to zero to signify that we are starting a new line. The final block simply increments the current pixel count. If we reach this block ,we are neither at the end of the line or the end of the frame so we can simply increment to the next pixel.</p>
-<p>Now that we are keeping track of the current column and current line, we can use this information to generate the horizontal and vertical sync signals. From the theory above we know that the sync signal is only low when we are between the front and back porch, at all other times the signal is high. From this we can generate the sync signal with an OR and two compares.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logic horizontal_sync<span class="op">;</span></span>
+<p>This block of Verilog works by first initializing the line and column
+register to zero on a reset. This is important to make sure that we
+start from known values, otherwise the line and column register could
+contain any value and our logic would not work. Next, we check if we are
+at the bottom of the screen by comparing the current column to 799 (the
+last pixel in the line) and the current line is 524 (the last line in
+the frame). If these conditions are both true then we reset the line and
+column back to zero to signify that we are starting a new frame. The
+next block checks if the current column equals 799. Because the above if
+statement failed,we know that we are at the end of the line but not the
+end of the frame. If this is true we increment the current line count
+and set the column back to zero to signify that we are starting a new
+line. The final block simply increments the current pixel count. If we
+reach this block ,we are neither at the end of the line or the end of
+the frame so we can simply increment to the next pixel.</p>
+<p>Now that we are keeping track of the current column and current line,
+we can use this information to generate the horizontal and vertical sync
+signals. From the theory above we know that the sync signal is only low
+when we are between the front and back porch, at all other times the
+signal is high. From this we can generate the sync signal with an OR and
+two compares.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>logic horizontal_sync<span class="op">;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>logic vertical_sync<span class="op">;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">assign</span> horizontal_sync <span class="op">=</span> column <span class="op">&lt;</span> <span class="dv">656</span> <span class="op">||</span> column <span class="op">&gt;=</span> <span class="dv">752</span><span class="op">;</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">assign</span> vertical_sync <span class="op">=</span> line <span class="op">&lt;</span> <span class="dv">490</span> <span class="op">||</span> line <span class="op">&gt;=</span> <span class="dv">492</span><span class="op">;</span></span></code></pre></div>
-<p>Let’s examine the horizontal sync signal more closely. This statement will evaluate to true if the current column is less than 656 or the current column is greater than or equal to 752. This means that the horizontal sync signal will be true except for when the current column is between 656 and 751 inclusively. That is starting on column 656 the horizontal sync signal will become false (low) and will remain that way for the next 96 pixels until we reach pixel 752 where it will return to being true (high). The vertical sync signal will work in the same way except it is turned on based on the current line. Therefore, the signal will remain high when the line is less than 490 and greater than or equal to 492, and will remain low between lines 490 and 491 inclusive.</p>
+<p>Let’s examine the horizontal sync signal more closely. This statement
+will evaluate to true if the current column is less than 656 or the
+current column is greater than or equal to 752. This means that the
+horizontal sync signal will be true except for when the current column
+is between 656 and 751 inclusively. That is starting on column 656 the
+horizontal sync signal will become false (low) and will remain that way
+for the next 96 pixels until we reach pixel 752 where it will return to
+being true (high). The vertical sync signal will work in the same way
+except it is turned on based on the current line. Therefore, the signal
+will remain high when the line is less than 490 and greater than or
+equal to 492, and will remain low between lines 490 and 491
+inclusive.</p>
 <h4 id="putting-it-all-together">Putting It All Together</h4>
-<p>Now that we have generated the video signal, we need to route it towards the video output connectors on the iCEBreaker 12-bit DVI Pmod. We also need to configure the iCEBreaker FPGA to have the appropriate pixel clock frequency. First to get the correct pixel clock we are going to use the following block of code:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>SB_PLL40_PAD #<span class="op">(</span></span>
+<p>Now that we have generated the video signal, we need to route it
+towards the video output connectors on the iCEBreaker 12-bit DVI Pmod.
+We also need to configure the iCEBreaker FPGA to have the appropriate
+pixel clock frequency. First to get the correct pixel clock we are going
+to use the following block of code:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>SB_PLL40_PAD #<span class="op">(</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  .DIVR<span class="op">(</span><span class="bn">4&#39;b0000</span><span class="op">),</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  .DIVF<span class="op">(</span><span class="bn">7&#39;b1000010</span><span class="op">),</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  .DIVQ<span class="op">(</span><span class="bn">3&#39;b101</span><span class="op">),</span></span>
@@ -218,7 +315,13 @@ Vertical Back Porch Length
 <span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  .BYPASS<span class="op">(</span><span class="bn">1&#39;b0</span><span class="op">),</span></span>
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  .LATCHINPUTVALUE<span class="op">(),</span></span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span></code></pre></div>
-<p>This block is mainly a copy paste of the PLL setup code from the iCEBreaker examples, but with a few important changes. The DIVR, DIVF, and DIVQ values are changed to create a 25.125 MHz. This is not exactly 25.175 MHz, but it is close enough that the monitor is happy enough and recognizes it as a 640x480@60 Hz signal. These values were found through the “icepll” utility, below is an example of calling this utility from the command line:</p>
+<p>This block is mainly a copy paste of the PLL setup code from the
+iCEBreaker examples, but with a few important changes. The DIVR, DIVF,
+and DIVQ values are changed to create a 25.125 MHz. This is not exactly
+25.175 MHz, but it is close enough that the monitor is happy enough and
+recognizes it as a 640x480@60 Hz signal. These values were found through
+the “icepll” utility, below is an example of calling this utility from
+the command line:</p>
 <pre><code>$ icepll -i 12 -o 25.175
 
 F_PLLIN:    12.000 MHz (given)
@@ -234,8 +337,14 @@ DIVF: 66 (7&#39;b1000010)
 DIVQ:  5 (3&#39;b101)
 
 FILTER_RANGE: 1 (3&#39;b001)</code></pre>
-<p>From here we can see we had an input clock of 12 MHz (This comes from the FTDI chip on the iCEBreaker board), and we wanted to get a 25.175 MHz output clock. The closest the PLL could generate was a 25.125 MHz clock with the settings provided for the DIVR, DIVF, and DIVQ values.</p>
-<p>Now that we have a pixel clock we can wire up the necessary signals for the DVI video out. The DVI Pmod has the following mapping for all of its connectors:</p>
+<p>From here we can see we had an input clock of 12 MHz (This comes from
+the FTDI chip on the iCEBreaker board), and we wanted to get a 25.175
+MHz output clock. The closest the PLL could generate was a 25.125 MHz
+clock with the settings provided for the DIVR, DIVF, and DIVQ
+values.</p>
+<p>Now that we have a pixel clock we can wire up the necessary signals
+for the DVI video out. The DVI Pmod has the following mapping for all of
+its connectors:</p>
 <table>
 <tbody>
 <tr>
@@ -364,8 +473,16 @@ Vertical Sync
 </tr>
 </tbody>
 </table>
-<p>From this we can see that we need 4 bits for each colour channel, a horizontal sync signal, a vertical sync signal, and additionally a data enable signal. The data enable signal is not part of a standard video signal and is just used by the DVI transmitter chip on the Pmod to signify when we are in visible pixel area or invisible pixel area. Therefore we will set the Date enable line when the current column is less than 640 and the current line is less than 480. Based on this we can connect the outputs like so:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>logic <span class="op">[</span><span class="dv">3</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> r<span class="op">;</span></span>
+<p>From this we can see that we need 4 bits for each colour channel, a
+horizontal sync signal, a vertical sync signal, and additionally a data
+enable signal. The data enable signal is not part of a standard video
+signal and is just used by the DVI transmitter chip on the Pmod to
+signify when we are in visible pixel area or invisible pixel area.
+Therefore we will set the Date enable line when the current column is
+less than 640 and the current line is less than 480. Based on this we
+can connect the outputs like so:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>logic <span class="op">[</span><span class="dv">3</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> r<span class="op">;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>logic <span class="op">[</span><span class="dv">3</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> g<span class="op">;</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>logic <span class="op">[</span><span class="dv">3</span><span class="op">:</span><span class="dv">0</span><span class="op">]</span> b<span class="op">;</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>logic data_enable<span class="op">;</span></span>
@@ -374,12 +491,18 @@ Vertical Sync
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>       <span class="op">{</span>r<span class="op">[</span><span class="dv">3</span><span class="op">],</span>   r<span class="op">[</span><span class="dv">2</span><span class="op">],</span>   g<span class="op">[</span><span class="dv">3</span><span class="op">],</span>   g<span class="op">[</span><span class="dv">2</span><span class="op">],</span>   r<span class="op">[</span><span class="dv">1</span><span class="op">],</span>   r<span class="op">[</span><span class="dv">0</span><span class="op">],</span>   g<span class="op">[</span><span class="dv">1</span><span class="op">],</span>   g<span class="op">[</span><span class="dv">0</span><span class="op">]};</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">assign</span> <span class="op">{</span>P1B1<span class="op">,</span>   P1B2<span class="op">,</span>   P1B3<span class="op">,</span>   P1B4<span class="op">,</span>   P1B7<span class="op">,</span>   P1B8<span class="op">,</span>   P1B9<span class="op">,</span>   P1B10<span class="op">}</span> <span class="op">=</span> </span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>       <span class="op">{</span>b<span class="op">[</span><span class="dv">3</span><span class="op">],</span>   pixel_clock<span class="op">,</span> b<span class="op">[</span><span class="dv">2</span><span class="op">],</span>   horizontal_sync<span class="op">,</span> b<span class="op">[</span><span class="dv">1</span><span class="op">],</span>   b<span class="op">[</span><span class="dv">0</span><span class="op">],</span>   data_enable<span class="op">,</span> vertical_sync<span class="op">};</span></span></code></pre></div>
-<p>Now for testing purposes we are going to set the output colour to be fixed to pure red so additional logic to pick a pixel colour is not required for this example. We can do this as shown below:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">assign</span> r <span class="op">=</span> <span class="bn">4&#39;b1111</span><span class="op">;</span></span>
+<p>Now for testing purposes we are going to set the output colour to be
+fixed to pure red so additional logic to pick a pixel colour is not
+required for this example. We can do this as shown below:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">assign</span> r <span class="op">=</span> <span class="bn">4&#39;b1111</span><span class="op">;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">assign</span> g <span class="op">=</span> <span class="bn">4&#39;b0000</span><span class="op">;</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">assign</span> b <span class="op">=</span> <span class="bn">4&#39;b0000</span><span class="op">;</span></span></code></pre></div>
-<p>Putting all of the above code together with whatever additional inputs are required for the iCEBreaker FPGA gives us the following block of code:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> top</span>
+<p>Putting all of the above code together with whatever additional
+inputs are required for the iCEBreaker FPGA gives us the following block
+of code:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode verilog"><code class="sourceCode verilog"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">module</span> top</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="op">(</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="dt">input</span> CLK<span class="op">,</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="dt">output</span> LEDR_N<span class="op">,</span></span>
@@ -472,16 +595,33 @@ Vertical Sync
 <span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a><span class="op">);</span></span>
 <span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a><span class="kw">endmodule</span></span></code></pre></div>
-<p>To build this, you will require a .pcf file describing the pin mapping of the iCEBreaker board. I grabbed mine from the iCEBreaker examples <a href="https://raw.githubusercontent.com/icebreaker-fpga/icebreaker-examples/master/icebreaker.pcf">here</a>. Grab that file and put it in the same folder as the file for the code provided above. We can the run the following commands to generate a binary to program onto the FPGA:</p>
+<p>To build this, you will require a .pcf file describing the pin
+mapping of the iCEBreaker board. I grabbed mine from the iCEBreaker
+examples <a
+href="https://raw.githubusercontent.com/icebreaker-fpga/icebreaker-examples/master/icebreaker.pcf">here</a>.
+Grab that file and put it in the same folder as the file for the code
+provided above. We can the run the following commands to generate a
+binary to program onto the FPGA:</p>
 <pre><code>yosys -ql out.log  -p &#39;synth_ice40 -top top -json out.json&#39; top.sv
 nextpnr-ice40 --up5k   --json out.json --pcf icebreaker.pcf --asc out.asc
 icetime  -d up5k -mtr out.rpt out.asc
 icepack out.asc out.bin</code></pre>
-<p>This will generate an out.bin file that we will need to flash onto the board. Make sure your iCEBreaker FPGA is connected via USB to your computer and you can program it with the following commands.</p>
+<p>This will generate an out.bin file that we will need to flash onto
+the board. Make sure your iCEBreaker FPGA is connected via USB to your
+computer and you can program it with the following commands.</p>
 <pre><code>iceprog out.bin</code></pre>
-<p>Now connect up a video cable (my DVI Pmod has an HDMI connector, but it only carries the DVI video signal) to the board and monitor and you should get results like this:</p>
-<p><img src="/assets/2020-04-07-generating-video/IMG_20200407_172119-1-1024x768.jpg" /></p>
-<p>You can also see from the monitor settings menu that the video signal was recognized as 640x480@60 Hz. Now the code presented in this post is specific to the iCEBreaker board and the DVI Pmod, but the theory can be applied to any FPGA and any connector that uses a video signal like this. For example you could wire up a DAC with a resistor ladder to generate a VGA signal. The logic for the timings here would be exactly the same if you wanted a 640x480@60 Hz VGA signal.</p>
+<p>Now connect up a video cable (my DVI Pmod has an HDMI connector, but
+it only carries the DVI video signal) to the board and monitor and you
+should get results like this:</p>
+<p><img
+src="/assets/2020-04-07-generating-video/IMG_20200407_172119-1-1024x768.jpg" /></p>
+<p>You can also see from the monitor settings menu that the video signal
+was recognized as 640x480@60 Hz. Now the code presented in this post is
+specific to the iCEBreaker board and the DVI Pmod, but the theory can be
+applied to any FPGA and any connector that uses a video signal like
+this. For example you could wire up a DAC with a resistor ladder to
+generate a VGA signal. The logic for the timings here would be exactly
+the same if you wanted a 640x480@60 Hz VGA signal.</p>
     </div>
 </div>    </main>
 </body>
