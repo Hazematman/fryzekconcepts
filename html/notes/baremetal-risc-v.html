@@ -21,6 +21,7 @@
         <div class="header-links">
                         <a href="/now.html" class="header-link">Now</a>
             <a href="/about.html" class="header-link">About</a>
+            <a rel="me" href="https://mastodon.social/@hazematman">Social</a>
         </div>
     </div>
     <main>
@@ -42,15 +43,53 @@
 <div class="note-divider"></div>
 <div class="main-container">
     <div class="note-body">
-<p>After re-watching suckerpinch’s <a href="https://www.youtube.com/watch?v=ar9WRwCiSr0">“Reverse Emulation”</a> video I got inspired to try and replicate what he did, but instead do it on an N64. Now my idea here is not to preform reverse emulation on the N64 itself but instead to use the SBC as a cheap way to make a dev focused flash cart. Seeing that sukerpinch was able to meet the timings of the NES bus made me think it might be possible to meet the N64 bus timings taking an approach similar to his.</p>
+<p>After re-watching suckerpinch’s <a
+href="https://www.youtube.com/watch?v=ar9WRwCiSr0">“Reverse
+Emulation”</a> video I got inspired to try and replicate what he did,
+but instead do it on an N64. Now my idea here is not to preform reverse
+emulation on the N64 itself but instead to use the SBC as a cheap way to
+make a dev focused flash cart. Seeing that sukerpinch was able to meet
+the timings of the NES bus made me think it might be possible to meet
+the N64 bus timings taking an approach similar to his.</p>
 <h2 id="why-risc-v-baremetal">Why RISC-V Baremetal?</h2>
-<p>The answer here is more utilitarian then idealistic, I originally wanted to use a Raspberry Pi since I thought that board may be more accessible if other people want to try and replicate this project. Instead what I found is that it is impossible to procure a Raspberry Pi. Not to be deterred I purchased a <a href="https://linux-sunxi.org/Allwinner_Nezha">“Allwinner Nezha”</a> a while back and its just been collecting dust in my storage. I figured this would be a good project to test the board out on since it has a large amount of RAM (1GB on my board), a fast processor (1 GHz), and accessible GPIO. As for why baremetal? Well one of the big problems suckerpinch ran into was being interrupted by the Linux kernel while his software was running. The board was fast enough to respond to the bus timings but Linux would throw off those timings with preemption. This is why I’m taking the approach to do everything baremetal. Giving 100% of the CPU time to my program emulating the CPU bus.</p>
+<p>The answer here is more utilitarian then idealistic, I originally
+wanted to use a Raspberry Pi since I thought that board may be more
+accessible if other people want to try and replicate this project.
+Instead what I found is that it is impossible to procure a Raspberry Pi.
+Not to be deterred I purchased a <a
+href="https://linux-sunxi.org/Allwinner_Nezha">“Allwinner Nezha”</a> a
+while back and its just been collecting dust in my storage. I figured
+this would be a good project to test the board out on since it has a
+large amount of RAM (1GB on my board), a fast processor (1 GHz), and
+accessible GPIO. As for why baremetal? Well one of the big problems
+suckerpinch ran into was being interrupted by the Linux kernel while his
+software was running. The board was fast enough to respond to the bus
+timings but Linux would throw off those timings with preemption. This is
+why I’m taking the approach to do everything baremetal. Giving 100% of
+the CPU time to my program emulating the CPU bus.</p>
 <h2 id="risc-v-baremetal-development">RISC-V Baremetal Development</h2>
-<p>Below I’ll document how I got a baremetal program running on the Nezha board, to provide guidance to anyone who wants to try doing something like this themselves.</p>
+<p>Below I’ll document how I got a baremetal program running on the
+Nezha board, to provide guidance to anyone who wants to try doing
+something like this themselves.</p>
 <h3 id="toolchain-setup">Toolchain Setup</h3>
-<p>In order to do any RISC-V development we will need to setup a RISC-V toolchain that isn’t tied to a specific OS like linux. Thankfully the RISC-V org set up a simple to use git repo that has a script to build an entire RISC-V toolchain on your machine. Since you’re building the whole toolchain from source this will take some time on my machine (Ryzen 4500u, 16GB of RAM, 1TB PCIe NVMe storage), it took around ~30 minutes to build the whole tool chain. You can find the repo <a href="https://github.com/riscv-collab/riscv-gnu-toolchain">here</a>, and follow the instructions in the <code>Installation (Newlib)</code> section of the README. That will setup a bare bones OS independent toolchain that can use newlib for the cstdlib (not that I am currently using it in my software).</p>
+<p>In order to do any RISC-V development we will need to setup a RISC-V
+toolchain that isn’t tied to a specific OS like linux. Thankfully the
+RISC-V org set up a simple to use git repo that has a script to build an
+entire RISC-V toolchain on your machine. Since you’re building the whole
+toolchain from source this will take some time on my machine (Ryzen
+4500u, 16GB of RAM, 1TB PCIe NVMe storage), it took around ~30 minutes
+to build the whole tool chain. You can find the repo <a
+href="https://github.com/riscv-collab/riscv-gnu-toolchain">here</a>, and
+follow the instructions in the <code>Installation (Newlib)</code>
+section of the README. That will setup a bare bones OS independent
+toolchain that can use newlib for the cstdlib (not that I am currently
+using it in my software).</p>
 <h3 id="setting-up-a-program">Setting up a Program</h3>
-<p>This is probably one of the more complicated steps in baremetal programming as this will involve setting up a linker script, which can sometimes feel like an act of black magic to get right. I’ll try to walk through some linker script basics to show how I setup mine. The linker script <code>linker.ld</code> I’m using is below</p>
+<p>This is probably one of the more complicated steps in baremetal
+programming as this will involve setting up a linker script, which can
+sometimes feel like an act of black magic to get right. I’ll try to walk
+through some linker script basics to show how I setup mine. The linker
+script <code>linker.ld</code> I’m using is below</p>
 <pre class="ld"><code>SECTIONS
 {
     . = 0x45000000;
@@ -80,29 +119,53 @@
         *(.comment);
     }
 }</code></pre>
-<p>The purpose of a linkscript is to describe how our binary will be organized, the script I wrote will do the follow</p>
+<p>The purpose of a linkscript is to describe how our binary will be
+organized, the script I wrote will do the follow</p>
 <ol type="1">
-<li>Start the starting address offset to <code>0x45000000</code>, This is the address we are going to load the binary into memory, so any pointers in the program will need to be offset from this address</li>
-<li>start the binary off with the <code>.text</code> section which will contain the executable code, in the text section we want the code for <code>.text.start</code> to come first. this is the code that implements the “C runtime”. That is this is the code with the <code>_start</code> function that will setup the stack pointer and call into the C <code>main</code> function. After that we will place the text for all the other functions in our binary. We keep this section aligned to <code>4096</code> bytes, and the <code>PROVIDE</code> functions creates a symbol with a pointer to that location in memory. We won’t use the text start and end pointers in our program but it can be useful if you want to know stuff about your binary at runtime of your program</li>
-<li>Next is the <code>.data</code> section that has all the data for our program. Here you can see I also added the <code>rodata</code> or read only section to the data section. The reason I did this is because I’m not going to bother with properly implementing read only data. We also keep the data aligned to 16 bytes to ensure that every memory access will be aligned for a 64bit RISCV memory access.</li>
-<li>The last “section” is not a real section but some extra padding at the end to reserve the stack. Here I am reserving 4096 (4Kb) for the stack of my program.</li>
-<li>Lastly I’m going to discard a few sections that GCC will compile into the binary that I don’t need at all.</li>
+<li>Start the starting address offset to <code>0x45000000</code>, This
+is the address we are going to load the binary into memory, so any
+pointers in the program will need to be offset from this address</li>
+<li>start the binary off with the <code>.text</code> section which will
+contain the executable code, in the text section we want the code for
+<code>.text.start</code> to come first. this is the code that implements
+the “C runtime”. That is this is the code with the <code>_start</code>
+function that will setup the stack pointer and call into the C
+<code>main</code> function. After that we will place the text for all
+the other functions in our binary. We keep this section aligned to
+<code>4096</code> bytes, and the <code>PROVIDE</code> functions creates
+a symbol with a pointer to that location in memory. We won’t use the
+text start and end pointers in our program but it can be useful if you
+want to know stuff about your binary at runtime of your program</li>
+<li>Next is the <code>.data</code> section that has all the data for our
+program. Here you can see I also added the <code>rodata</code> or read
+only section to the data section. The reason I did this is because I’m
+not going to bother with properly implementing read only data. We also
+keep the data aligned to 16 bytes to ensure that every memory access
+will be aligned for a 64bit RISCV memory access.</li>
+<li>The last “section” is not a real section but some extra padding at
+the end to reserve the stack. Here I am reserving 4096 (4Kb) for the
+stack of my program.</li>
+<li>Lastly I’m going to discard a few sections that GCC will compile
+into the binary that I don’t need at all.</li>
 </ol>
-<p>Now this probably isn’t the best way to write a linker script. For example the stack is just kind of a hack in it, and I don’t implement the <code>.bss</code> section for zero initialized data.</p>
-<p>With this linker script we can now setup a basic program, we can use the code presented below as the <code>main.c</code> file</p>
+<p>Now this probably isn’t the best way to write a linker script. For
+example the stack is just kind of a hack in it, and I don’t implement
+the <code>.bss</code> section for zero initialized data.</p>
+<p>With this linker script we can now setup a basic program, we can use
+the code presented below as the <code>main.c</code> file</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode c"><code class="sourceCode c"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;stdint.h&gt;</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define UART0_BASE 0x02500000</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define UART0_DATA_REG (UART0_BASE + 0x0000)</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define UART0_USR (UART0_BASE + 0x007c)</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="pp">#define UART0_BASE </span><span class="bn">0x02500000</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define UART0_DATA_REG </span><span class="op">(</span>UART0_BASE<span class="pp"> </span><span class="op">+</span><span class="pp"> </span><span class="bn">0x0000</span><span class="op">)</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define UART0_USR </span><span class="op">(</span>UART0_BASE<span class="pp"> </span><span class="op">+</span><span class="pp"> </span><span class="bn">0x007c</span><span class="op">)</span></span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#define write_reg(r, v) write_reg_handler((volatile uint32_t*)(r), (v))</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#define write_reg</span><span class="op">(</span><span class="pp">r</span><span class="op">,</span><span class="pp"> v</span><span class="op">)</span><span class="pp"> write_reg_handler</span><span class="op">((</span><span class="dt">volatile</span><span class="pp"> </span><span class="dt">uint32_t</span><span class="op">*)(</span><span class="pp">r</span><span class="op">),</span><span class="pp"> </span><span class="op">(</span><span class="pp">v</span><span class="op">))</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> write_reg_handler<span class="op">(</span><span class="dt">volatile</span> <span class="dt">uint32_t</span> <span class="op">*</span>reg<span class="op">,</span> <span class="dt">const</span> <span class="dt">uint32_t</span> value<span class="op">)</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    reg<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> value<span class="op">;</span></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="pp">#define read_reg(r) read_reg_handler((volatile uint32_t*)(r))</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="pp">#define read_reg</span><span class="op">(</span><span class="pp">r</span><span class="op">)</span><span class="pp"> read_reg_handler</span><span class="op">((</span><span class="dt">volatile</span><span class="pp"> </span><span class="dt">uint32_t</span><span class="op">*)(</span><span class="pp">r</span><span class="op">))</span></span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="dt">uint32_t</span> read_reg_handler<span class="op">(</span><span class="dt">volatile</span> <span class="dt">uint32_t</span> <span class="op">*</span>reg<span class="op">)</span></span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
 <span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> reg<span class="op">[</span><span class="dv">0</span><span class="op">];</span></span>
@@ -122,35 +185,90 @@
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span></span>
 <span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="op">{</span></span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>c <span class="op">=</span> hello_world<span class="op">;</span> c<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">!=</span> <span class="ch">&#39;\0&#39;</span><span class="op">;</span> c<span class="op">++)</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">const</span> <span class="dt">char</span> <span class="op">*</span>c <span class="op">=</span> hello_world<span class="op">;</span> c<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">!=</span> <span class="ch">&#39;</span><span class="sc">\0</span><span class="ch">&#39;</span><span class="op">;</span> c<span class="op">++)</span></span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="op">{</span></span>
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        _putchar<span class="op">(</span>c<span class="op">);</span></span>
 <span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
 <span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div>
-<p>This program will write the string “Hello World!” to the serial port. Now a common question for code like this is how did I know to set all the <code>UART0</code> registers? Well the way to find this information is to look at the datasheet, programmer’s manual, or user manual for the chip you are using. In this case we are using an Allwinner D1 and we can find the user manual with all the registers on the linux-sunxi page <a href="https://linux-sunxi.org/D1">here</a>. On pages 900 to 940 we can see a description on how the serial works for this SoC. I also looked at the schematic <a href="https://dl.linux-sunxi.org/D1/D1_Nezha_development_board_schematic_diagram_20210224.pdf">here</a>, to see that the serial port we have is wired to <code>UART0</code> on the SoC. From here we are relying on uboot to boot the board which will setup the serial port for us, which means we can just write to the UART data register to start printing content to the console.</p>
-<p>We will also need need to setup a basic assembly program to setup the stack and call our main function. Below you can see my example called <code>start.S</code></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode asm"><code class="sourceCode fasm"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>.<span class="bu">section</span> <span class="op">.</span>text<span class="op">.</span>start</span>
+<p>This program will write the string “Hello World!” to the serial port.
+Now a common question for code like this is how did I know to set all
+the <code>UART0</code> registers? Well the way to find this information
+is to look at the datasheet, programmer’s manual, or user manual for the
+chip you are using. In this case we are using an Allwinner D1 and we can
+find the user manual with all the registers on the linux-sunxi page <a
+href="https://linux-sunxi.org/D1">here</a>. On pages 900 to 940 we can
+see a description on how the serial works for this SoC. I also looked at
+the schematic <a
+href="https://dl.linux-sunxi.org/D1/D1_Nezha_development_board_schematic_diagram_20210224.pdf">here</a>,
+to see that the serial port we have is wired to <code>UART0</code> on
+the SoC. From here we are relying on uboot to boot the board which will
+setup the serial port for us, which means we can just write to the UART
+data register to start printing content to the console.</p>
+<p>We will also need need to setup a basic assembly program to setup the
+stack and call our main function. Below you can see my example called
+<code>start.S</code></p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode asm"><code class="sourceCode fasm"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>.<span class="bu">section</span> <span class="op">.</span>text<span class="op">.</span>start</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    .global _start</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">_start:</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    la <span class="kw">sp</span><span class="op">,</span> __stack_start</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    j main</span></code></pre></div>
-<p>This assembly file just creates a section called <code>.text.start</code> and a global symbol for a function called <code>_start</code> which will be the first function our program executes. All this assembly file does is setup the stack pointer register <code>sp</code> to with the address (using the load address <code>la</code> pseudo instruction) to the stack we setup in the linker script, and then call the main function by jumping directly to it.</p>
+<p>This assembly file just creates a section called
+<code>.text.start</code> and a global symbol for a function called
+<code>_start</code> which will be the first function our program
+executes. All this assembly file does is setup the stack pointer
+register <code>sp</code> to with the address (using the load address
+<code>la</code> pseudo instruction) to the stack we setup in the linker
+script, and then call the main function by jumping directly to it.</p>
 <h3 id="building-the-program">Building the Program</h3>
-<p>Building the program is pretty straight forward, we need to tell gcc to build the two source files without including the c standard library, and then to link the binary using our linker script. we can do this with the following command</p>
+<p>Building the program is pretty straight forward, we need to tell gcc
+to build the two source files without including the c standard library,
+and then to link the binary using our linker script. we can do this with
+the following command</p>
 <pre><code>riscv64-unknown-elf-gcc march=rv64g --std=gnu99 -msmall-data-limit=0 -c main.c
 riscv64-unknown-elf-gcc march=rv64g --std=gnu99 -msmall-data-limit=0 -c start.S
 riscv64-unknown-elf-gcc march=rv64g -march=rv64g -ffreestanding -nostdlib -msmall-data-limit=0 -T linker.ld start.o main.o -o app.elf
 riscv64-unknown-elf-objcopy -O binary app.elf app.bin</code></pre>
-<p>This will build our source files into <code>.o</code> files first, then combine those <code>.o</code> files into a <code>.elf</code> file, finally converting the <code>.elf</code> into a raw binary file where we use the <code>.bin</code> extension. We need a raw binary file as we want to just load our program into memory and begin executing. If we load the <code>.elf</code> file it will have the elf header and other extra data that is not executable in it. In order to run a <code>.elf</code> file we would need an elf loader, which goes beyond the scope of this example.</p>
+<p>This will build our source files into <code>.o</code> files first,
+then combine those <code>.o</code> files into a <code>.elf</code> file,
+finally converting the <code>.elf</code> into a raw binary file where we
+use the <code>.bin</code> extension. We need a raw binary file as we
+want to just load our program into memory and begin executing. If we
+load the <code>.elf</code> file it will have the elf header and other
+extra data that is not executable in it. In order to run a
+<code>.elf</code> file we would need an elf loader, which goes beyond
+the scope of this example.</p>
 <h3 id="running-the-program">Running the Program</h3>
-<p>Now we have the raw binary its time to try and load it. I found that the uboot configuration that comes with the board has pretty limited support for loading binaries. So we are going to take advantage of the <code>loadx</code> command to load the binary over serial. In the uboot terminal we are going to run the command:</p>
+<p>Now we have the raw binary its time to try and load it. I found that
+the uboot configuration that comes with the board has pretty limited
+support for loading binaries. So we are going to take advantage of the
+<code>loadx</code> command to load the binary over serial. In the uboot
+terminal we are going to run the command:</p>
 <pre><code>loadx 45000000</code></pre>
-<p>Now the next steps will depend on which serial terminal you are using. We want to use the <code>XMODEM</code> protocol to load the binary. In the serial terminal I am using <code>gnu screen</code> you can execute arbitrary programs and send their output to the serial terminal. You can do this by hitting the key combination “CTRL-A + :” and then typing in <code>exec !! sx app.bin</code>. This will send the binary to the serial terminal using the XMODEM protocol. If you are not using GNU screen look up instructions for how to send an XMODEM binary. Now that the binary is loaded we can type in</p>
+<p>Now the next steps will depend on which serial terminal you are
+using. We want to use the <code>XMODEM</code> protocol to load the
+binary. In the serial terminal I am using <code>gnu screen</code> you
+can execute arbitrary programs and send their output to the serial
+terminal. You can do this by hitting the key combination “CTRL-A + :”
+and then typing in <code>exec !! sx app.bin</code>. This will send the
+binary to the serial terminal using the XMODEM protocol. If you are not
+using GNU screen look up instructions for how to send an XMODEM binary.
+Now that the binary is loaded we can type in</p>
 <pre><code>go 45000000</code></pre>
-<p>The should start to execute the program and you should see <code>Hello World!</code> printed to the console!</p>
-<p><img src="/assets/2022-06-09-baremetal-risc-v/riscv-terminal.png" /></p>
+<p>The should start to execute the program and you should see
+<code>Hello World!</code> printed to the console!</p>
+<p><img
+src="/assets/2022-06-09-baremetal-risc-v/riscv-terminal.png" /></p>
 <h2 id="whats-next">What’s Next?</h2>
-<p>Well the sky is the limit! We have a method to load and run a program that can do anything on the Nezha board now. Looking through the datasheet we can see how to access the GPIO on the board to blink an LED. If you’re really ambitious you could try getting ethernet or USB working in a baremetal environment. I am going to continue on my goal of emulating the N64 cartridge bus which will require me to get GPIO working as well as interrupts on the GPIO lines. If you want to see the current progress of my work you can check it out on github <a href="https://github.com/Hazematman/N64-Cart-Emulator">here</a>.</p>
+<p>Well the sky is the limit! We have a method to load and run a program
+that can do anything on the Nezha board now. Looking through the
+datasheet we can see how to access the GPIO on the board to blink an
+LED. If you’re really ambitious you could try getting ethernet or USB
+working in a baremetal environment. I am going to continue on my goal of
+emulating the N64 cartridge bus which will require me to get GPIO
+working as well as interrupts on the GPIO lines. If you want to see the
+current progress of my work you can check it out on github <a
+href="https://github.com/Hazematman/N64-Cart-Emulator">here</a>.</p>
     </div>
 </div>    </main>
 </body>
