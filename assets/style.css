@@ -257,6 +257,11 @@ img.rss
     margin-right: 1em;
 }
 
+.header-links a
+{
+    color: #353534;
+}
+
 a.header-link
 {
     padding-right: 1em;
