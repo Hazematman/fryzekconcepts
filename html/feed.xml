@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Fryzek Concepts</title><atom:link href="https://fryzekconcepts.com/feed.xml" rel="self" type="application/rss+xml"/><link>https://fryzekconcepts.com</link><description>Lucas is a developer working on cool things</description><lastBuildDate>Fri, 28 Apr 2023 20:57:13 -0000</lastBuildDate><item><title>Generating Video</title><link>https://fryzekconcepts.com/notes/generating-video.html</link><description>&lt;p&gt;One thing I’m very interested in is computer graphics. This could be
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Fryzek Concepts</title><atom:link href="https://fryzekconcepts.com/feed.xml" rel="self" type="application/rss+xml"/><link>https://fryzekconcepts.com</link><description>Lucas is a developer working on cool things</description><lastBuildDate>Thu, 11 May 2023 12:30:52 -0000</lastBuildDate><item><title>Generating Video</title><link>https://fryzekconcepts.com/notes/generating-video.html</link><description>&lt;p&gt;One thing I’m very interested in is computer graphics. This could be
 complex 3D graphics or simple 2D graphics. The idea of getting a
 computer to display visual data fascinates me. One fundamental part of
 showing visual data is interfacing with a computer monitor. This can be
@@ -1707,4 +1707,87 @@ MR&lt;/a&gt;.&lt;/p&gt;
 alt="Freedreno running 3d-mark" /&gt;
 &lt;figcaption aria-hidden="true"&gt;Freedreno running 3d-mark&lt;/figcaption&gt;
 &lt;/figure&gt;
-</description><pubDate>Tue, 28 Feb 2023 05:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/freedreno_journey.html</guid></item></channel></rss>
+</description><pubDate>Tue, 28 Feb 2023 05:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/freedreno_journey.html</guid></item><item><title>Igalia’s Mesa 23.1 Contributions - Behind the Scenes</title><link>https://fryzekconcepts.com/notes/mesa_23_1_contributions_behind_the_scenes.html</link><description>&lt;p&gt;It’s an exciting time for Mesa as its next major release is unveiled
+this week. Igalia has played an important role in this milestone, with
+Eric Engestrom managing the release and 11 other Igalians contributing
+over 110 merge requests. A sample of these contributions are detailed
+below.&lt;/p&gt;
+&lt;h2 id="radv-implement-vk.check_status"&gt;radv: Implement
+vk.check_status&lt;/h2&gt;
+&lt;p&gt;As part of an effort to enhance the reliability of GPU resets on
+amdgpu, Tony implemented a GPU reset notification feature in the RADV
+Vulkan driver. This new function improves the robustness of the RADV
+driver. The driver can now check if the GPU has been reset by a
+userspace application, allowing the driver to recover their contexts,
+exit, or engage in some other appropriate action.&lt;/p&gt;
+&lt;p&gt;You can read more about Tony’s changes in the link below&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/22253"&gt;https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/22253&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="turnip-kgsl-backend-rewrite"&gt;turnip: KGSL backend rewrite&lt;/h2&gt;
+&lt;p&gt;With a goal of improving feature parity of the KGSL kernel mode
+driver with its drm counterpart, Mark has been rewriting the backend for
+KGSL. These changes leverage the new, common backend Vulkan
+infrastructure inside Mesa and fix multiple bugs. In addition, they
+introduce support for importing/exporting sync FDs, pre-signalled
+fences, and timeline semaphore support.&lt;/p&gt;
+&lt;p&gt;If you’re interested in taking a deeper dive into Mark’s changes, you
+can read the following MR:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/21651"&gt;https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/21651&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="turnip-a7xx-preparation-transition-to-c"&gt;turnip: a7xx
+preparation, transition to C++&lt;/h2&gt;
+&lt;p&gt;Danylo has adopted a significant role for two major changes inside
+turnip: 1)contributing to the effort to migrate turnip to C++ and
+2)supporting the next generation a7xx Adreno GPUs from Qualcomm. A more
+detailed overview of Danylo’s changes can be found in the linked MRs
+below:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/21931"&gt;https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/21931&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/22148"&gt;https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/22148&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="v3dv3dv-various-fixes-cts-conformance"&gt;v3d/v3dv various fixes
+&amp;amp; CTS conformance&lt;/h2&gt;
+&lt;p&gt;Igalia maintains the v3d OpenGL driver and v3dv Vulkan drive for
+broadcom videocore GPUs which can be found on devices such as the
+Raspberry Pi. Iago, Alex and Juan have combined their expertise to
+implement multiple fixes for both the v3d gallium driver and the v3dv
+vulkan driver on the Raspberry Pi. These changes include CPU performance
+optimizations, support for 16-bit floating point vertex attributes, and
+raising support in the driver to OpenGL 3.1 level functionality. This
+Igalian trio has also been addressing fixes for conformance issues
+raised in the Vulkan 1.3.5 conformance test suite (CTS).&lt;/p&gt;
+&lt;p&gt;You can dive into some of their Raspberry Pi driver changes here:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/22131"&gt;https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/22131&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/21361"&gt;https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/21361&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/20787"&gt;https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/20787&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="ci-build-system-and-cleanup"&gt;ci, build system, and cleanup&lt;/h2&gt;
+&lt;p&gt;In addition to managing the 23.1 release, Eric has also implemented
+many fixes in Mesa’s infrastructure. He has assisted with addressing a
+number of CI issues within Mesa on various drivers from v3d to panfrost.
+Eric also dedicated part of his time to general clean-up of the Mesa
+code (e.g. removing duplicate functions, fixing and improving the
+meson-based build system, and removing dead code).&lt;/p&gt;
+&lt;p&gt;If you’re interested in seeing some of his work, check out some of
+the MRs below:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/22410"&gt;https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/22410&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/21504"&gt;https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/21504&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/21558"&gt;https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/21558&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/20180"&gt;https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/20180&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description><pubDate>Thu, 11 May 2023 04:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/mesa_23_1_contributions_behind_the_scenes.html</guid></item></channel></rss>
