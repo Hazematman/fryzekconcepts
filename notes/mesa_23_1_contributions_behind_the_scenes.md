@@ -4,9 +4,7 @@ title: "Igalia's Mesa 23.1 Contributions - Behind the Scenes"
 date: "2023-05-11"
 last_edit: "2023-05-11"
 status: 2
-tags: 
-  - "igalia"
-  - "mesa"
+categories: igalia graphics mesa
 cover_image: "/assets/mesa3d.svg"
 ---
 It's an exciting time for Mesa as its next major release is unveiled this week. Igalia has played an important role in this milestone, with Eric Engestrom managing the release and 11 other Igalians contributing over 110 merge requests. A sample of these contributions are detailed below.
