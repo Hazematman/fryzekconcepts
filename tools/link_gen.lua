@@ -2,7 +2,13 @@ local pipe = pandoc.pipe
 local stringify = (require 'pandoc.utils').stringify
 local meta_tools = require("tools/meta_tools")
 
-local meta = PANDOC_DOCUMENT.meta
+-- Load meta from global if available
+-- otherwise we will load it from Writer method
+local meta = nil
+if PANDOC_DOCUMENT then
+    meta = PANDOC_DOCUMENT.meta
+end
+
 local preview = ""
 local long_preview = ""
 local internal_links = {}
@@ -40,6 +46,19 @@ local function get_input_file()
     return file
 end
 
+function dump(o)
+   if type(o) == 'table' then
+      local s = '{ '
+      for k,v in pairs(o) do
+         if type(k) ~= 'number' then k = '"'..k..'"' end
+         s = s .. '['..k..'] = ' .. dump(v) .. ','
+      end
+      return s .. '} '
+   else
+      return tostring(o)
+   end
+end
+
 function Doc(body, metadata, variables)
     local input_file = get_input_file()
 
@@ -50,7 +69,7 @@ function Doc(body, metadata, variables)
 
         -- check if markdown version of the file exists
         if meta_tools.file_exists(markdown_file) then
-            links = meta_tools.read_link_file(link_file) 
+            links = meta_tools.read_link_file(link_file)
             if not item_in_table(links, input_file) then
                 table.insert(links, input_file)
             end
@@ -115,6 +134,11 @@ function Link(s, tgt, tit, attr)
         end
     end
     return ""
+end
+
+function Writer(doc, opts)
+    meta = doc.meta
+    return pandoc.write_classic(doc, opts)
 end
 
 

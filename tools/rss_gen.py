@@ -56,7 +56,6 @@ for note in notes:
             if cat in categories:
                 found = True
                 break
-                
         if not found: continue
     post_time = datetime.datetime.strptime(note["date"], "%Y-%m-%d")
     post_rfc_time = email.utils.formatdate(timeval=time.mktime(post_time.timetuple()))
