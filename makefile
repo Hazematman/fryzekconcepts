@@ -10,6 +10,8 @@ HTML_DOCS=$(patsubst $(SRC_DIR)/%,$(HTML_DIR)/notes/%,$(SOURCE_DOCS:.md=.html))
 SOURCE_FILES=$(patsubst $(SRC_DIR)/%,%,$(SOURCE_DOCS:.md=))
 PAGE_FILES=$(patsubst $(PAGE_DIR)/%,$(HTML_DIR)/%,$(PAGE_DOCS:.md=.html))
 
+export PLANTUML_LIMIT_SIZE=16384
+
 $(BUILD_DIR)/%.meta: $(SRC_DIR)/%.md
 	@mkdir -p $(BUILD_DIR)
 	pandoc --write=tools/link_gen.lua $< -o $@
@@ -20,6 +22,7 @@ $(HTML_DIR)/notes/%.html: $(BUILD_DIR)/%.meta $(META_DOCS)
 	@mkdir -p $(HTML_DIR)/notes
 	pandoc -s --template=./templates/main.html \
 		--lua-filter=./tools/note.lua \
+		--filter ./tools/pandoc-plantuml.py \
 		$(patsubst $(BUILD_DIR)/%,$(SRC_DIR)/%,$(<:.meta=.md)) \
 		--highlight-style=pygments \
 		-o $@
@@ -31,6 +34,7 @@ $(HTML_DIR)/%.html: $(PAGE_DIR)/%.md
 		--highlight-style=pygments \
 		-M main_class="html-main-page" \
 		-M main_container="main-container-page" \
+		--filter ./tools/pandoc-plantuml.py \
 		-o $@
 
 $(HTML_DIR)/feed.xml: $(META_DOCS)
