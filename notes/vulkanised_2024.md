@@ -7,7 +7,7 @@ cover_image: "/assets/vulkanised_2024/vulkanized_logo_web.jpg"
 categories: igalia graphics
 ---
 
-![Vulkanized sign at google's office](/assets/vulkanised_2024/vulkanized_logo_web.jpg)
+![Vulkanised sign at google's office](/assets/vulkanised_2024/vulkanized_logo_web.jpg)
 
 Last week I had an exciting opportunity to attend the Vulkanised 2024 conference. For those of you not familar with the event, it is ["The Premier Vulkan Developer Conference"](https://vulkan.org/events/vulkanised-2024) hosted by the Vulkan working group from Khronos. With the excitement out of the way, I decided to write about some of the interesting information that came out of the conference.
 
