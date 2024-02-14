@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Fryzek Concepts</title><atom:link href="https://fryzekconcepts.com/feed.xml" rel="self" type="application/rss+xml"/><link>https://fryzekconcepts.com</link><description>Lucas is a developer working on cool things</description><lastBuildDate>Wed, 14 Feb 2024 13:24:37 -0000</lastBuildDate><item><title>Generating Video</title><link>https://fryzekconcepts.com/notes/generating-video.html</link><description>&lt;p&gt;One thing I’m very interested in is computer graphics. This could be
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Fryzek Concepts</title><atom:link href="https://fryzekconcepts.com/feed.xml" rel="self" type="application/rss+xml"/><link>https://fryzekconcepts.com</link><description>Lucas is a developer working on cool things</description><lastBuildDate>Wed, 14 Feb 2024 13:30:36 -0000</lastBuildDate><item><title>Generating Video</title><link>https://fryzekconcepts.com/notes/generating-video.html</link><description>&lt;p&gt;One thing I’m very interested in is computer graphics. This could be
 complex 3D graphics or simple 2D graphics. The idea of getting a
 computer to display visual data fascinates me. One fundamental part of
 showing visual data is interfacing with a computer monitor. This can be
@@ -1904,8 +1904,8 @@ homogeneous space”.&lt;/p&gt;
 converting 3D transformation code to 2D.&lt;/p&gt;
 </description><pubDate>Mon, 25 Sep 2023 04:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/converting_from_3d_to_2d.html</guid></item><item><title>A Dive into Vulkanised 2024</title><link>https://fryzekconcepts.com/notes/vulkanised_2024.html</link><description>&lt;figure&gt;
 &lt;img src="/assets/vulkanised_2024/vulkanized_logo_web.jpg"
-alt="Vulkanized sign at google’s office" /&gt;
-&lt;figcaption aria-hidden="true"&gt;Vulkanized sign at google’s
+alt="Vulkanised sign at google’s office" /&gt;
+&lt;figcaption aria-hidden="true"&gt;Vulkanised sign at google’s
 office&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;p&gt;Last week I had an exciting opportunity to attend the Vulkanised 2024
