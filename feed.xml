@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Fryzek Concepts</title><atom:link href="https://fryzekconcepts.com/feed.xml" rel="self" type="application/rss+xml"/><link>https://fryzekconcepts.com</link><description>Lucas is a developer working on cool things</description><lastBuildDate>Wed, 14 Feb 2024 13:05:33 -0000</lastBuildDate><item><title>Generating Video</title><link>https://fryzekconcepts.com/notes/generating-video.html</link><description>&lt;p&gt;One thing I’m very interested in is computer graphics. This could be
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Fryzek Concepts</title><atom:link href="https://fryzekconcepts.com/feed.xml" rel="self" type="application/rss+xml"/><link>https://fryzekconcepts.com</link><description>Lucas is a developer working on cool things</description><lastBuildDate>Wed, 14 Feb 2024 13:24:37 -0000</lastBuildDate><item><title>Generating Video</title><link>https://fryzekconcepts.com/notes/generating-video.html</link><description>&lt;p&gt;One thing I’m very interested in is computer graphics. This could be
 complex 3D graphics or simple 2D graphics. The idea of getting a
 computer to display visual data fascinates me. One fundamental part of
 showing visual data is interfacing with a computer monitor. This can be
@@ -1902,4 +1902,114 @@ application when moving from a “3D homogeneous space” to a “2D
 homogeneous space”.&lt;/p&gt;
 &lt;p&gt;Hopefully this explanation helps if you are every working on
 converting 3D transformation code to 2D.&lt;/p&gt;
-</description><pubDate>Mon, 25 Sep 2023 04:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/converting_from_3d_to_2d.html</guid></item></channel></rss>
+</description><pubDate>Mon, 25 Sep 2023 04:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/converting_from_3d_to_2d.html</guid></item><item><title>A Dive into Vulkanised 2024</title><link>https://fryzekconcepts.com/notes/vulkanised_2024.html</link><description>&lt;figure&gt;
+&lt;img src="/assets/vulkanised_2024/vulkanized_logo_web.jpg"
+alt="Vulkanized sign at google’s office" /&gt;
+&lt;figcaption aria-hidden="true"&gt;Vulkanized sign at google’s
+office&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Last week I had an exciting opportunity to attend the Vulkanised 2024
+conference. For those of you not familar with the event, it is &lt;a
+href="https://vulkan.org/events/vulkanised-2024"&gt;“The Premier Vulkan
+Developer Conference”&lt;/a&gt; hosted by the Vulkan working group from
+Khronos. With the excitement out of the way, I decided to write about
+some of the interesting information that came out of the conference.&lt;/p&gt;
+&lt;h2 id="a-few-presentations"&gt;A Few Presentations&lt;/h2&gt;
+&lt;p&gt;My colleagues Iago, Stéphane, and Hyunjun each had the opportunity to
+present on some of their work into the wider Vulkan ecosystem.&lt;/p&gt;
+&lt;figure&gt;
+&lt;img src="/assets/vulkanised_2024/vulkan_video_web.jpg"
+alt="Stéphane and Hyujun presenting" /&gt;
+&lt;figcaption aria-hidden="true"&gt;Stéphane and Hyujun
+presenting&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Stéphane &amp;amp; Hyunjun presented “Implementing a Vulkan Video Encoder
+From Mesa to Streamer”. They jointly talked about the work they
+performed to implement the Vulkan video extensions in Intel’s ANV Mesa
+driver as well as in GStreamer. This was an interesting presentation
+because you got to see how the new Vulkan video extensions affected both
+driver developers implementing the extensions and application developers
+making use of the extensions for real time video decoding and encoding.
+&lt;a
+href="https://vulkan.org/user/pages/09.events/vulkanised-2024/vulkanised-2024-stephane-cerveau-ko-igalia.pdf"&gt;Their
+presentation is available on vulkan.org&lt;/a&gt;.&lt;/p&gt;
+&lt;figure&gt;
+&lt;img src="/assets/vulkanised_2024/opensource_vulkan_web.jpg"
+alt="Iago presenting" /&gt;
+&lt;figcaption aria-hidden="true"&gt;Iago presenting&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Later my colleague Iago presented jointly with Faith Ekstrand (a
+well-known Linux graphic stack contributor from Collabora) on “8 Years
+of Open Drivers, including the State of Vulkan in Mesa”. They both
+talked about the current state of Vulkan in the open source driver
+ecosystem, and some of the benefits open source drivers have been able
+to take advantage of, like the common Vulkan runtime code and a shared
+compiler stack. You can check out &lt;a
+href="https://vulkan.org/user/pages/09.events/vulkanised-2024/Vulkanised-2024-faith-ekstrand-collabora-Iago-toral-igalia.pdf"&gt;their
+presentation for all the details&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Besides Igalia’s presentations, there were several more which I found
+interesting, with topics such as Vulkan developer tools, experiences of
+using Vulkan in real work applications, and even how to teach Vulkan to
+new developers. Here are some highlights for some of them.&lt;/p&gt;
+&lt;h3 id="using-vulkan-synchronization-validation-effectively"&gt;&lt;a
+href="https://vulkan.org/user/pages/09.events/vulkanised-2024/vulkanised-2024-john-zulauf-lunarg.pdf"&gt;Using
+Vulkan Synchronization Validation Effectively&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;John Zulauf had a presentation of the Vulkan synchronization
+validation layers that he has been working on. If you are not familiar
+with these, then you should really check them out. They work by tracking
+how resources are used inside Vulkan and providing error messages with
+some hints if you use a resource in a way where it is not synchronized
+properly. It can’t catch every error, but it’s a great tool in the
+toolbelt of Vulkan developers to make their lives easier when it comes
+to debugging synchronization issues. As John said in the presentation,
+synchronization in Vulkan is hard, and nearly every application he
+tested the layers on reveled a synchronization issue, no matter how
+simple it was. He can proudly say he is a vkQuake contributor now
+because of these layers.&lt;/p&gt;
+&lt;h3 id="years-of-teaching-vulkan-with-example-for-video-extensions"&gt;&lt;a
+href="https://vulkan.org/user/pages/09.events/vulkanised-2024/vulkanised-2024-helmut-hlavacs.pdf"&gt;6
+Years of Teaching Vulkan with Example for Video Extensions&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;This was an interesting presentation from a professor at the
+university of Vienna about his experience teaching graphics as well as
+game development to students who may have little real programming
+experience. He covered the techniques he uses to make learning easier as
+well as resources that he uses. This would be a great presentation to
+check out if you’re trying to teach Vulkan to others.&lt;/p&gt;
+&lt;h3 id="vulkan-synchronization-made-easy"&gt;&lt;a
+href="https://vulkan.org/user/pages/09.events/vulkanised-2024/vulkanised-2024-grigory-dzhavadyan.pdf"&gt;Vulkan
+Synchronization Made Easy&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Another presentation focused on Vulkan sync, but instead of debugging
+it, Grigory showed how his graphics library abstracts sync away from the
+user without implementing a render graph. He presented an interesting
+technique that is similar to how the sync validation layers work when it
+comes ensuring that resources are always synchronized before use. If
+you’re building your own engine in Vulkan, this is definitely something
+worth checking out.&lt;/p&gt;
+&lt;h3 id="vulkan-video-encode-api-a-deep-dive"&gt;&lt;a
+href="https://vulkan.org/user/pages/09.events/vulkanised-2024/vulkanised-2024-tony-zlatinski-nvidia.pdf"&gt;Vulkan
+Video Encode API: A Deep Dive&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Tony at Nvidia did a deep dive into the new Vulkan Video extensions,
+explaining a bit about how video codecs work, and also including a
+roadmap for future codec support in the video extensions. Especially
+interesting for us was that he made a nice call-out to Igalia and our
+work on Vulkan Video CTS and open source driver support on slide (6)
+:)&lt;/p&gt;
+&lt;h2 id="thoughts-on-vulkanised"&gt;Thoughts on Vulkanised&lt;/h2&gt;
+&lt;p&gt;Vulkanised is an interesting conference that gives you the
+intersection of people working on Vulkan drivers, game developers using
+Vulkan for their graphics backend, visual FX tool developers using
+Vulkan-based tools in their pipeline, industrial application developers
+using Vulkan for some embedded commercial systems, and general hobbyists
+who are just interested in Vulkan. As an example of some of these
+interesting audience members, I got to talk with a member of the Blender
+foundation about his work on the Vulkan backend to Blender.&lt;/p&gt;
+&lt;p&gt;Lastly the event was held at Google’s offices in Sunnyvale. Which I’m
+always happy to travel to, not just for the better weather (coming from
+Canada), but also for the amazing restaurants and food that’s in the Bay
+Area!&lt;/p&gt;
+&lt;figure&gt;
+&lt;img src="/assets/vulkanised_2024/food_web.jpg"
+alt="Great bay area food" /&gt;
+&lt;figcaption aria-hidden="true"&gt;Great bay area food&lt;/figcaption&gt;
+&lt;/figure&gt;
+</description><pubDate>Wed, 14 Feb 2024 05:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/vulkanised_2024.html</guid></item></channel></rss>
