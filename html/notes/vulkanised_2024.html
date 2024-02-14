@@ -1,0 +1,159 @@
+<!doctype html>
+
+<html class="html-note-page" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>A Dive into Vulkanised 2024</title>
+    <meta name="dcterms.date" content="2024-02-14" />
+
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.svg">
+    <link rel="alternate" type="application/atom+xml" title="Fryzek Concepts" href="/feed.xml"> 
+</head>
+
+<body>
+    <div class="header-bar">
+        <a href="/index.html">
+            <img src="/assets/favicon.svg" alt="frycon logo">
+        </a>
+        <div class="header-links">
+                        <a href="/now.html" class="header-link">Now</a>
+            <a href="/about.html" class="header-link">About</a>
+            <a rel="me" href="https://mastodon.social/@hazematman">Social</a>
+        </div>
+    </div>
+    <main>
+<div class="page-title-header-container">
+    <h1 class="page-title-header">A Dive into Vulkanised 2024</h1>
+        <div class="page-info-container">
+                    <div class="plant-status">
+                    <img src="/assets/evergreen.svg">
+                    <div class="plant-status-text">
+                    <p>evergreen</p>
+                    </div>
+                    </div>
+                <div class="page-info-date-container">
+            <p class="page-info-date">Published: 2024-02-14</p>
+            <p class="page-info-date">Last Edited: 2024-02-14</p>
+        </div>
+    </div>
+    </div>
+<div class="note-divider"></div>
+<div class="main-container">
+    <div class="note-body">
+<figure>
+<img src="/assets/vulkanised_2024/vulkanized_logo_web.jpg"
+alt="Vulkanized sign at google’s office" />
+<figcaption aria-hidden="true">Vulkanized sign at google’s
+office</figcaption>
+</figure>
+<p>Last week I had an exciting opportunity to attend the Vulkanised 2024
+conference. For those of you not familar with the event, it is <a
+href="https://vulkan.org/events/vulkanised-2024">“The Premier Vulkan
+Developer Conference”</a> hosted by the Vulkan working group from
+Khronos. With the excitement out of the way, I decided to write about
+some of the interesting information that came out of the conference.</p>
+<h2 id="a-few-presentations">A Few Presentations</h2>
+<p>My colleagues Iago, Stéphane, and Hyunjun each had the opportunity to
+present on some of their work into the wider Vulkan ecosystem.</p>
+<figure>
+<img src="/assets/vulkanised_2024/vulkan_video_web.jpg"
+alt="Stéphane and Hyujun presenting" />
+<figcaption aria-hidden="true">Stéphane and Hyujun
+presenting</figcaption>
+</figure>
+<p>Stéphane &amp; Hyunjun presented “Implementing a Vulkan Video Encoder
+From Mesa to Streamer”. They jointly talked about the work they
+performed to implement the Vulkan video extensions in Intel’s ANV Mesa
+driver as well as in GStreamer. This was an interesting presentation
+because you got to see how the new Vulkan video extensions affected both
+driver developers implementing the extensions and application developers
+making use of the extensions for real time video decoding and encoding.
+<a
+href="https://vulkan.org/user/pages/09.events/vulkanised-2024/vulkanised-2024-stephane-cerveau-ko-igalia.pdf">Their
+presentation is available on vulkan.org</a>.</p>
+<figure>
+<img src="/assets/vulkanised_2024/opensource_vulkan_web.jpg"
+alt="Iago presenting" />
+<figcaption aria-hidden="true">Iago presenting</figcaption>
+</figure>
+<p>Later my colleague Iago presented jointly with Faith Ekstrand (a
+well-known Linux graphic stack contributor from Collabora) on “8 Years
+of Open Drivers, including the State of Vulkan in Mesa”. They both
+talked about the current state of Vulkan in the open source driver
+ecosystem, and some of the benefits open source drivers have been able
+to take advantage of, like the common Vulkan runtime code and a shared
+compiler stack. You can check out <a
+href="https://vulkan.org/user/pages/09.events/vulkanised-2024/Vulkanised-2024-faith-ekstrand-collabora-Iago-toral-igalia.pdf">their
+presentation for all the details</a>.</p>
+<p>Besides Igalia’s presentations, there were several more which I found
+interesting, with topics such as Vulkan developer tools, experiences of
+using Vulkan in real work applications, and even how to teach Vulkan to
+new developers. Here are some highlights for some of them.</p>
+<h3 id="using-vulkan-synchronization-validation-effectively"><a
+href="https://vulkan.org/user/pages/09.events/vulkanised-2024/vulkanised-2024-john-zulauf-lunarg.pdf">Using
+Vulkan Synchronization Validation Effectively</a></h3>
+<p>John Zulauf had a presentation of the Vulkan synchronization
+validation layers that he has been working on. If you are not familiar
+with these, then you should really check them out. They work by tracking
+how resources are used inside Vulkan and providing error messages with
+some hints if you use a resource in a way where it is not synchronized
+properly. It can’t catch every error, but it’s a great tool in the
+toolbelt of Vulkan developers to make their lives easier when it comes
+to debugging synchronization issues. As John said in the presentation,
+synchronization in Vulkan is hard, and nearly every application he
+tested the layers on reveled a synchronization issue, no matter how
+simple it was. He can proudly say he is a vkQuake contributor now
+because of these layers.</p>
+<h3 id="years-of-teaching-vulkan-with-example-for-video-extensions"><a
+href="https://vulkan.org/user/pages/09.events/vulkanised-2024/vulkanised-2024-helmut-hlavacs.pdf">6
+Years of Teaching Vulkan with Example for Video Extensions</a></h3>
+<p>This was an interesting presentation from a professor at the
+university of Vienna about his experience teaching graphics as well as
+game development to students who may have little real programming
+experience. He covered the techniques he uses to make learning easier as
+well as resources that he uses. This would be a great presentation to
+check out if you’re trying to teach Vulkan to others.</p>
+<h3 id="vulkan-synchronization-made-easy"><a
+href="https://vulkan.org/user/pages/09.events/vulkanised-2024/vulkanised-2024-grigory-dzhavadyan.pdf">Vulkan
+Synchronization Made Easy</a></h3>
+<p>Another presentation focused on Vulkan sync, but instead of debugging
+it, Grigory showed how his graphics library abstracts sync away from the
+user without implementing a render graph. He presented an interesting
+technique that is similar to how the sync validation layers work when it
+comes ensuring that resources are always synchronized before use. If
+you’re building your own engine in Vulkan, this is definitely something
+worth checking out.</p>
+<h3 id="vulkan-video-encode-api-a-deep-dive"><a
+href="https://vulkan.org/user/pages/09.events/vulkanised-2024/vulkanised-2024-tony-zlatinski-nvidia.pdf">Vulkan
+Video Encode API: A Deep Dive</a></h3>
+<p>Tony at Nvidia did a deep dive into the new Vulkan Video extensions,
+explaining a bit about how video codecs work, and also including a
+roadmap for future codec support in the video extensions. Especially
+interesting for us was that he made a nice call-out to Igalia and our
+work on Vulkan Video CTS and open source driver support on slide (6)
+:)</p>
+<h2 id="thoughts-on-vulkanised">Thoughts on Vulkanised</h2>
+<p>Vulkanised is an interesting conference that gives you the
+intersection of people working on Vulkan drivers, game developers using
+Vulkan for their graphics backend, visual FX tool developers using
+Vulkan-based tools in their pipeline, industrial application developers
+using Vulkan for some embedded commercial systems, and general hobbyists
+who are just interested in Vulkan. As an example of some of these
+interesting audience members, I got to talk with a member of the Blender
+foundation about his work on the Vulkan backend to Blender.</p>
+<p>Lastly the event was held at Google’s offices in Sunnyvale. Which I’m
+always happy to travel to, not just for the better weather (coming from
+Canada), but also for the amazing restaurants and food that’s in the Bay
+Area!</p>
+<figure>
+<img src="/assets/vulkanised_2024/food_web.jpg"
+alt="Great bay area food" />
+<figcaption aria-hidden="true">Great bay area food</figcaption>
+</figure>
+    </div>
+</div>    </main>
+</body>
+</html>
