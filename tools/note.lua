@@ -13,7 +13,7 @@ function Link(link)
         end
         return {pandoc.Link(text, "/notes/"..link.target..".html")}
     else
-        return link  
+        return link
     end
 end
 
@@ -26,7 +26,7 @@ function Image(image)
             return {video}
         end
     else
-        return image 
+        return image
     end
 end
 
