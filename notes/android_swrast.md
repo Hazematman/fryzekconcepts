@@ -33,14 +33,14 @@ setup our own Android OS images so after we've confirmed we can run the emulator
 building AOSP.
 
 For building our own AOSP image, we can also follow the instructions from Google [here](https://source.android.com/docs/setup/build/building).
-For the target we'll want `aosp_cf_x86_64_phone-trunk_staging-eng`. At this point its a good idea to verify that
-you can build the image, you can follow the rest of the instructions on the page for building the image. Building
-AOSP from source does take awhile though, so prepare to wait potentially an entire day for the image to build.
+For the target we'll want `aosp_cf_x86_64_phone-trunk_staging-eng`. At this point it's a good idea to verify that
+you can build the image, which you can do by following the rest of the instructions on the page. Building
+AOSP from source does take a while though, so prepare to wait potentially an entire day for the image to build.
 Also if you get errors complaining that you're out of memory, you can try to reduce the number of parallel builds.
 Google officially recommends to have 64GB of RAM, and I only had 32GB so some packages had to be built with the
 parallel builds set to 1 so I wouldn't run out of RAM.
 
-For running this custom build image on Cuttlefish, you can just copy all the `*.img` files from `out/target/product/vsoc_x86_64/`
+For running this custom-built image on Cuttlefish, you can just copy all the `*.img` files from `out/target/product/vsoc_x86_64/`
 to the root cuttlefish directory, and then launch cuttlefish. If everything worked successfully you should be
 able to see your custom built AOSP image running in the cuttlefish webui.
 
@@ -50,7 +50,7 @@ Working from the changes in MR [!29344](https://gitlab.freedesktop.org/mesa/mesa
 building llvmpipe or lavapipe targeting Android should just work™️. To get to that stage required a few
 changes. First llvmpipe actually already had some support on Android, as long as it was running on a device
 that supports a DRM display driver. In that case it could use the `dri` window system integration which already
-work on Android. I wanted to get llvmpipe (and lavapipe) running without dri, so I had to add support for
+works on Android. I wanted to get llvmpipe (and lavapipe) running without dri, so I had to add support for
 Android in the `drisw` window system integration.
 
 To support Android in `drisw`, this mainly meant adding support for importing dmabuf as framebuffers. The
@@ -62,7 +62,7 @@ The EGL android platform code also needed some changes to use the `drisw` window
 code would only work with true dri drivers, but with some small tweaks it was possible to get to have it
 initialize the drisw window system and then using it for rendering if no hardware devices are available.
 
-For lavapipe the changes we a lot simpler. The android Vulkan loader requires your driver to have
+For lavapipe the changes were a lot simpler. The android Vulkan loader requires your driver to have
 `HAL_MODULE_INFO_SYM` symbol in the binary, so that got created and populated correctly, following other vulkan
 drivers in Mesa like turnip. Then the image creation code had to be modified to support the
 `VK_ANDROID_native_buffer` extension which allows the Android vulkan loader to create images using Android native
@@ -75,7 +75,7 @@ the Android documentation for Mesa to include steps for building LLVM for Androi
 with the NDK is missing libraries that llvmpipe/lavapipe need to function. You can see the updated documentation
 [here](https://gitlab.freedesktop.org/mesa/mesa/-/blob/9705df53408777d493eab19e5a58c432c1e75acb/docs/drivers/llvmpipe.rst)
 and [here](https://gitlab.freedesktop.org/mesa/mesa/-/blob/9705df53408777d493eab19e5a58c432c1e75acb/docs/android.rst).
-After sorting out LLVM, building llvmpipe/lavapipe is the same as building any other Mesa diver for Android, we
+After sorting out LLVM, building llvmpipe/lavapipe is the same as building any other Mesa driver for Android: we
 setup a cross file to tell meson how to cross compile and then we run meson. At this point you could manual modify
 the Android image and copy these files to the vm, but I also wanted to support building a new AOSP image directly
 including the driver. In order to do that you also have to rename the driver binaries to match android's naming
