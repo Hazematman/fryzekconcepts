@@ -58,14 +58,14 @@ Android windowing system will provide us with a "gralloc" buffer which inside ha
 the framebuffer. Adding support for importing dmabufs in drisw means we can import and begin drawing to these
 frame buffers. Most the changes to support that can be found in [`drisw_allocate_textures`](https://gitlab.freedesktop.org/mesa/mesa/-/blob/9705df53408777d493eab19e5a58c432c1e75acb/src/gallium/frontends/dri/drisw.c#L405)
 and the underlying changes to llvmpipe to support importing dmabufs in MR [!27805](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/27805).
-The EGL android platform code also needed some changes to use the `drisw` window system code. Previously this
+The EGL Android platform code also needed some changes to use the `drisw` window system code. Previously this
 code would only work with true dri drivers, but with some small tweaks it was possible to get to have it
 initialize the drisw window system and then using it for rendering if no hardware devices are available.
 
-For lavapipe the changes were a lot simpler. The android Vulkan loader requires your driver to have
-`HAL_MODULE_INFO_SYM` symbol in the binary, so that got created and populated correctly, following other vulkan
+For lavapipe the changes were a lot simpler. The Android Vulkan loader requires your driver to have
+`HAL_MODULE_INFO_SYM` symbol in the binary, so that got created and populated correctly, following other Vulkan
 drivers in Mesa like turnip. Then the image creation code had to be modified to support the
-`VK_ANDROID_native_buffer` extension which allows the Android vulkan loader to create images using Android native
+`VK_ANDROID_native_buffer` extension which allows the Android Vulkan loader to create images using Android native
 buffer handles. Under the hood this means getting the dmabuf fd from the native buffer handle. Thankfully mesa
 already has some common code to handle this, so I could just use that. Some other small changes were also
 necessary to address crashes and other failures that came up during testing.
@@ -78,7 +78,7 @@ and [here](https://gitlab.freedesktop.org/mesa/mesa/-/blob/9705df53408777d493eab
 After sorting out LLVM, building llvmpipe/lavapipe is the same as building any other Mesa driver for Android: we
 setup a cross file to tell meson how to cross compile and then we run meson. At this point you could manual modify
 the Android image and copy these files to the vm, but I also wanted to support building a new AOSP image directly
-including the driver. In order to do that you also have to rename the driver binaries to match android's naming
+including the driver. In order to do that you also have to rename the driver binaries to match Android's naming
 convention, and make sure SO_NAME matches as well. If you check out [this](https://gitlab.freedesktop.org/mesa/mesa/-/blob/9705df53408777d493eab19e5a58c432c1e75acb/docs/android.rst?plain=1#L183)
 section of the documentation I wrote, it covers how to do that.
 
