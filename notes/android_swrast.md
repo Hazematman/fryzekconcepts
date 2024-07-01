@@ -86,3 +86,16 @@ If you followed all of that you should have built an version of llvmpipe and lav
 Android's cuttlefish emulator.
 
 ![Android running lavapipe](/assets/2024-06-27-android-swrast/lavapipe.png)
+
+## References
+
+- <https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/29344>
+    - Main MR with Android changes
+- <https://source.android.com/docs/devices/cuttlefish/get-started>
+    - Google's official guide for getting started with the Cuttlefish emulator
+- <https://source.android.com/docs/setup/build/building>
+    - Google's official guide for building AOSP images
+- <https://gitlab.freedesktop.org/mesa/mesa/-/blob/9705df53408777d493eab19e5a58c432c1e75acb/docs/drivers/llvmpipe.rst>
+    - My updated documentation in MR for llvmpipe
+- <https://gitlab.freedesktop.org/mesa/mesa/-/blob/9705df53408777d493eab19e5a58c432c1e75acb/docs/android.rst>
+    - My updated documentation in MR for Android integration in mesa
