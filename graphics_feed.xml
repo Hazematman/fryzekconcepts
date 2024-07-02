@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Fryzek Concepts</title><atom:link href="https://fryzekconcepts.com/feed.xml" rel="self" type="application/rss+xml"/><link>https://fryzekconcepts.com</link><description>Lucas is a developer working on cool things</description><lastBuildDate>Wed, 14 Feb 2024 13:30:37 -0000</lastBuildDate><item><title>2022 Graphics Team Contributions at Igalia</title><link>https://fryzekconcepts.com/notes/2022_igalia_graphics_team.html</link><description>&lt;p&gt;This year I started a new job working with &lt;a
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Fryzek Concepts</title><atom:link href="https://fryzekconcepts.com/feed.xml" rel="self" type="application/rss+xml"/><link>https://fryzekconcepts.com</link><description>Lucas is a developer working on cool things</description><lastBuildDate>Tue, 02 Jul 2024 07:46:55 -0000</lastBuildDate><item><title>2022 Graphics Team Contributions at Igalia</title><link>https://fryzekconcepts.com/notes/2022_igalia_graphics_team.html</link><description>&lt;p&gt;This year I started a new job working with &lt;a
 href="https://www.igalia.com/technology/graphics"&gt;Igalia’s Graphics
 Team&lt;/a&gt;. For those of you who don’t know &lt;a
 href="https://www.igalia.com/"&gt;Igalia&lt;/a&gt; they are a &lt;a
@@ -259,7 +259,7 @@ Atlantic!&lt;/a&gt;&lt;/p&gt;
 alt="Photo of A Coruña" /&gt;
 &lt;figcaption aria-hidden="true"&gt;Photo of A Coruña&lt;/figcaption&gt;
 &lt;/figure&gt;
-</description><pubDate>Thu, 02 Feb 2023 05:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/2022_igalia_graphics_team.html</guid></item><item><title>Journey Through Freedreno</title><link>https://fryzekconcepts.com/notes/freedreno_journey.html</link><description>&lt;figure&gt;
+</description><pubDate>Thu, 02 Feb 2023 00:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/2022_igalia_graphics_team.html</guid></item><item><title>Journey Through Freedreno</title><link>https://fryzekconcepts.com/notes/freedreno_journey.html</link><description>&lt;figure&gt;
 &lt;img src="/assets/freedreno/glinfo_freedreno.png"
 alt="Android running Freedreno" /&gt;
 &lt;figcaption aria-hidden="true"&gt;Android running Freedreno&lt;/figcaption&gt;
@@ -469,7 +469,7 @@ MR&lt;/a&gt;.&lt;/p&gt;
 alt="Freedreno running 3d-mark" /&gt;
 &lt;figcaption aria-hidden="true"&gt;Freedreno running 3d-mark&lt;/figcaption&gt;
 &lt;/figure&gt;
-</description><pubDate>Tue, 28 Feb 2023 05:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/freedreno_journey.html</guid></item><item><title>Igalia’s Mesa 23.1 Contributions - Behind the Scenes</title><link>https://fryzekconcepts.com/notes/mesa_23_1_contributions_behind_the_scenes.html</link><description>&lt;p&gt;It’s an exciting time for Mesa as its next major release is unveiled
+</description><pubDate>Tue, 28 Feb 2023 00:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/freedreno_journey.html</guid></item><item><title>Igalia’s Mesa 23.1 Contributions - Behind the Scenes</title><link>https://fryzekconcepts.com/notes/mesa_23_1_contributions_behind_the_scenes.html</link><description>&lt;p&gt;It’s an exciting time for Mesa as its next major release is unveiled
 this week. Igalia has played an important role in this milestone, with
 Eric Engestrom managing the release and 11 other Igalians contributing
 over 110 merge requests. A sample of these contributions are detailed
@@ -552,7 +552,7 @@ href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/21558"&gt;https:
 &lt;li&gt;&lt;a
 href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/20180"&gt;https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/20180&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description><pubDate>Thu, 11 May 2023 04:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/mesa_23_1_contributions_behind_the_scenes.html</guid></item><item><title>Converting from 3D to 2D</title><link>https://fryzekconcepts.com/notes/converting_from_3d_to_2d.html</link><description>&lt;p&gt;Recently I’ve been working on a project where I needed to convert an
+</description><pubDate>Wed, 10 May 2023 23:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/mesa_23_1_contributions_behind_the_scenes.html</guid></item><item><title>Converting from 3D to 2D</title><link>https://fryzekconcepts.com/notes/converting_from_3d_to_2d.html</link><description>&lt;p&gt;Recently I’ve been working on a project where I needed to convert an
 application written in OpenGL to a software renderer. The matrix
 transformation code in OpenGL made use of the GLM library for matrix
 math, and I needed to convert the 4x4 matrices to be 3x3 matrices to
@@ -664,7 +664,7 @@ application when moving from a “3D homogeneous space” to a “2D
 homogeneous space”.&lt;/p&gt;
 &lt;p&gt;Hopefully this explanation helps if you are every working on
 converting 3D transformation code to 2D.&lt;/p&gt;
-</description><pubDate>Mon, 25 Sep 2023 04:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/converting_from_3d_to_2d.html</guid></item><item><title>A Dive into Vulkanised 2024</title><link>https://fryzekconcepts.com/notes/vulkanised_2024.html</link><description>&lt;figure&gt;
+</description><pubDate>Sun, 24 Sep 2023 23:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/converting_from_3d_to_2d.html</guid></item><item><title>A Dive into Vulkanised 2024</title><link>https://fryzekconcepts.com/notes/vulkanised_2024.html</link><description>&lt;figure&gt;
 &lt;img src="/assets/vulkanised_2024/vulkanized_logo_web.jpg"
 alt="Vulkanised sign at google’s office" /&gt;
 &lt;figcaption aria-hidden="true"&gt;Vulkanised sign at google’s
@@ -774,4 +774,160 @@ Area!&lt;/p&gt;
 alt="Great bay area food" /&gt;
 &lt;figcaption aria-hidden="true"&gt;Great bay area food&lt;/figcaption&gt;
 &lt;/figure&gt;
-</description><pubDate>Wed, 14 Feb 2024 05:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/vulkanised_2024.html</guid></item></channel></rss>
+</description><pubDate>Wed, 14 Feb 2024 00:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/vulkanised_2024.html</guid></item><item><title>Software Rendering and Android</title><link>https://fryzekconcepts.com/notes/android_swrast.html</link><description>&lt;p&gt;My current project at Igalia has had me working on Mesa’s software
+renderers, llvmpipe and lavapipe. I’ve been working to get them running
+on Android, and I wanted to document the progress I’ve made, the
+challenges I’ve faced, and talk a little bit about the development
+process for a project like this. My work is not totally merged into
+upstream mesa yet, but you can see the MRs I made here:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/29344"&gt;MR
+!29344&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/29785"&gt;MR
+!29785&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/27805"&gt;MR
+!27805&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/28735"&gt;MR
+!28735&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="setting-up-an-android-development-environment"&gt;Setting up an
+Android development environment&lt;/h2&gt;
+&lt;p&gt;Getting system level software to build and run on Android is
+unfortunately not straightforward. Since we are doing software rendering
+we don’t need a physical device and instead we can make use of the
+Android emulator, and if you didn’t know Android has two emulators, the
+common one most people use is “goldfish” and the other lesser known is
+“cuttlefish”. For this project I did my work on the cuttlefish emulator
+as its meant for testing the Android OS itself instead of just Android
+apps and is more reflective of real hardware. The cuttlefish emulator
+takes a little bit more work to setup, and I’ve found that it only works
+properly in Debian based linux distros. I run Fedora, so I had to run
+the emulator in a debian VM.&lt;/p&gt;
+&lt;p&gt;Thankfully Google has good instructions for building and running
+cuttlefish, which you can find &lt;a
+href="https://source.android.com/docs/devices/cuttlefish/get-started"&gt;here&lt;/a&gt;.
+The instructions show you how to setup the emulator using nightly build
+images from Google. We’ll also need to setup our own Android OS images
+so after we’ve confirmed we can run the emulator, we need to start
+looking at building AOSP.&lt;/p&gt;
+&lt;p&gt;For building our own AOSP image, we can also follow the instructions
+from Google &lt;a
+href="https://source.android.com/docs/setup/build/building"&gt;here&lt;/a&gt;.
+For the target we’ll want
+&lt;code&gt;aosp_cf_x86_64_phone-trunk_staging-eng&lt;/code&gt;. At this point it’s
+a good idea to verify that you can build the image, which you can do by
+following the rest of the instructions on the page. Building AOSP from
+source does take a while though, so prepare to wait potentially an
+entire day for the image to build. Also if you get errors complaining
+that you’re out of memory, you can try to reduce the number of parallel
+builds. Google officially recommends to have 64GB of RAM, and I only had
+32GB so some packages had to be built with the parallel builds set to 1
+so I wouldn’t run out of RAM.&lt;/p&gt;
+&lt;p&gt;For running this custom-built image on Cuttlefish, you can just copy
+all the &lt;code&gt;*.img&lt;/code&gt; files from
+&lt;code&gt;out/target/product/vsoc_x86_64/&lt;/code&gt; to the root cuttlefish
+directory, and then launch cuttlefish. If everything worked successfully
+you should be able to see your custom built AOSP image running in the
+cuttlefish webui.&lt;/p&gt;
+&lt;h2 id="building-mesa-targeting-android"&gt;Building Mesa targeting
+Android&lt;/h2&gt;
+&lt;p&gt;Working from the changes in MR &lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/29344"&gt;!29344&lt;/a&gt;
+building llvmpipe or lavapipe targeting Android should just work™️. To
+get to that stage required a few changes. First llvmpipe actually
+already had some support on Android, as long as it was running on a
+device that supports a DRM display driver. In that case it could use the
+&lt;code&gt;dri&lt;/code&gt; window system integration which already works on
+Android. I wanted to get llvmpipe (and lavapipe) running without dri, so
+I had to add support for Android in the &lt;code&gt;drisw&lt;/code&gt; window system
+integration.&lt;/p&gt;
+&lt;p&gt;To support Android in &lt;code&gt;drisw&lt;/code&gt;, this mainly meant adding
+support for importing dmabuf as framebuffers. The Android windowing
+system will provide us with a “gralloc” buffer which inside has a dmabuf
+fd that represents the framebuffer. Adding support for importing dmabufs
+in drisw means we can import and begin drawing to these frame buffers.
+Most the changes to support that can be found in &lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/blob/9705df53408777d493eab19e5a58c432c1e75acb/src/gallium/frontends/dri/drisw.c#L405"&gt;&lt;code&gt;drisw_allocate_textures&lt;/code&gt;&lt;/a&gt;
+and the underlying changes to llvmpipe to support importing dmabufs in
+MR &lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/27805"&gt;!27805&lt;/a&gt;.
+The EGL Android platform code also needed some changes to use the
+&lt;code&gt;drisw&lt;/code&gt; window system code. Previously this code would only
+work with true dri drivers, but with some small tweaks it was possible
+to get to have it initialize the drisw window system and then using it
+for rendering if no hardware devices are available.&lt;/p&gt;
+&lt;p&gt;For lavapipe the changes were a lot simpler. The Android Vulkan
+loader requires your driver to have &lt;code&gt;HAL_MODULE_INFO_SYM&lt;/code&gt;
+symbol in the binary, so that got created and populated correctly,
+following other Vulkan drivers in Mesa like turnip. Then the image
+creation code had to be modified to support the
+&lt;code&gt;VK_ANDROID_native_buffer&lt;/code&gt; extension which allows the Android
+Vulkan loader to create images using Android native buffer handles.
+Under the hood this means getting the dmabuf fd from the native buffer
+handle. Thankfully mesa already has some common code to handle this, so
+I could just use that. Some other small changes were also necessary to
+address crashes and other failures that came up during testing.&lt;/p&gt;
+&lt;p&gt;With the changes out of of the way we can now start building Mesa on
+Android. For this project I had to update the Android documentation for
+Mesa to include steps for building LLVM for Android since the version
+Google ships with the NDK is missing libraries that llvmpipe/lavapipe
+need to function. You can see the updated documentation &lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/blob/9705df53408777d493eab19e5a58c432c1e75acb/docs/drivers/llvmpipe.rst"&gt;here&lt;/a&gt;
+and &lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/blob/9705df53408777d493eab19e5a58c432c1e75acb/docs/android.rst"&gt;here&lt;/a&gt;.
+After sorting out LLVM, building llvmpipe/lavapipe is the same as
+building any other Mesa driver for Android: we setup a cross file to
+tell meson how to cross compile and then we run meson. At this point you
+could manual modify the Android image and copy these files to the vm,
+but I also wanted to support building a new AOSP image directly
+including the driver. In order to do that you also have to rename the
+driver binaries to match Android’s naming convention, and make sure
+SO_NAME matches as well. If you check out &lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/blob/9705df53408777d493eab19e5a58c432c1e75acb/docs/android.rst?plain=1#L183"&gt;this&lt;/a&gt;
+section of the documentation I wrote, it covers how to do that.&lt;/p&gt;
+&lt;p&gt;If you followed all of that you should have built an version of
+llvmpipe and lavapipe that you can run on Android’s cuttlefish
+emulator.&lt;/p&gt;
+&lt;figure&gt;
+&lt;img src="/assets/2024-06-27-android-swrast/lavapipe.png"
+alt="Android running lavapipe" /&gt;
+&lt;figcaption aria-hidden="true"&gt;Android running lavapipe&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/29344"
+class="uri"&gt;https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/29344&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;Main MR with Android changes&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a
+href="https://source.android.com/docs/devices/cuttlefish/get-started"
+class="uri"&gt;https://source.android.com/docs/devices/cuttlefish/get-started&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;Google’s official guide for getting started with the Cuttlefish
+emulator&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://source.android.com/docs/setup/build/building"
+class="uri"&gt;https://source.android.com/docs/setup/build/building&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;Google’s official guide for building AOSP images&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/blob/9705df53408777d493eab19e5a58c432c1e75acb/docs/drivers/llvmpipe.rst"
+class="uri"&gt;https://gitlab.freedesktop.org/mesa/mesa/-/blob/9705df53408777d493eab19e5a58c432c1e75acb/docs/drivers/llvmpipe.rst&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;My updated documentation in MR for llvmpipe&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/blob/9705df53408777d493eab19e5a58c432c1e75acb/docs/android.rst"
+class="uri"&gt;https://gitlab.freedesktop.org/mesa/mesa/-/blob/9705df53408777d493eab19e5a58c432c1e75acb/docs/android.rst&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;My updated documentation in MR for Android integration in mesa&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description><pubDate>Wed, 26 Jun 2024 23:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/android_swrast.html</guid></item></channel></rss>
