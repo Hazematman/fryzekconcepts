@@ -12,10 +12,10 @@ been working to get them running on Android, and I wanted to document the progre
 I've faced, and talk a little bit about the development process for a project like this. My work is not
 totally merged into upstream mesa yet, but you can see the MRs I made here:
 
-- [MR !29344](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/29344)
-- [MR !29785](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/29785)
-- [MR !27805](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/27805)
-- [MR !28735](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/28735)
+- [llvmpipe: Add android platform integration](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/29344)
+- [u_gralloc/fallback: Set fd from handle directly](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/29785)
+- [llvmpipe & lavalpipe: Implement sync fd import/export extensions](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/27805)
+- [lavapipe: Implement `VK_EXT_external_memory_dma_buf`](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/28735)
 
 ## Setting up an Android development environment
 
