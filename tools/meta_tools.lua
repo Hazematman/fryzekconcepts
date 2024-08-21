@@ -33,7 +33,8 @@ function meta_tools.write_link_file(name, links)
 end
 
 function meta_tools.get_note(note_name)
-    local file = io.open(string.format("build/%s.meta", note_name), "r")
+    local build_root = PANDOC_WRITER_OPTIONS.variables["build_root"]
+    local file = io.open(string.format("%s/%s.meta", build_root, note_name), "r")
     local note = {}
 
     for line in file:lines() do

@@ -25,7 +25,8 @@ ET.SubElement(channel, "lastBuildDate").text = today
 
 notes = []
 
-build_dir = "./build"
+source_dir = sys.argv[1]
+build_dir = sys.argv[2]
 for file in os.listdir(build_dir):
     if file.endswith(".meta"):
         path = os.path.join(build_dir, file)
@@ -43,9 +44,9 @@ notes.sort(key=lambda note: datetime.datetime.strptime(note["date"], "%Y-%m-%d")
 
 limit_cat = False
 categories = []
-if len(sys.argv) >= 3:
+if len(sys.argv) >= 5:
     limit_cat = True
-    categories = sys.argv[2:]
+    categories = sys.argv[4:]
 
 for note in notes:
     if limit_cat:
@@ -64,10 +65,13 @@ for note in notes:
     ET.SubElement(item, "title").text = note["title"]
     ET.SubElement(item, "link").text = post_url
 
-
     # Generate simple text version of post
-    process = Popen(["pandoc", "--lua-filter=./tools/note.lua", "--highlight-style=pygments",
-                     "./notes/{}.md".format(note["name"])], stdout=PIPE)
+    process = Popen(["pandoc",
+                     "--lua-filter={source}/tools/note.lua".format(source=source_dir),
+                     "--highlight-style=pygments",
+                     "{source}/notes/{note}.md".format(source=source_dir, note=note["name"]),
+                     "-V", 'build_root={}'.format(build_dir)]
+                    ,stdout=PIPE)
     (output, err) = process.communicate()
     exit_code = process.wait()
     ET.SubElement(item, "description").text = output.decode()
@@ -78,4 +82,4 @@ for note in notes:
     ET.SubElement(item, "guid").text = post_url
 
 tree = ET.ElementTree(rss)
-tree.write(sys.argv[1], encoding='utf-8', xml_declaration=True)
+tree.write(sys.argv[3], encoding='utf-8', xml_declaration=True)
