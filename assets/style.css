@@ -346,6 +346,7 @@ a.header-link
     float: right;
     max-height: 300px;
     border-radius: 5px;
+    margin-left: 1rem;
 }
 
 @media (max-width: 600px)
