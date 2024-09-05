@@ -27,9 +27,15 @@ I’m interested in.
 </a>
 </li>
 <li>
-<a href="https://www.twitter.com/Hazematman">
-    <svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg>
+<a href="https://mastodon.social/@hazematman">
+    <svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#mastodon"></use></svg>
     <span>Hazematman</span>
+</a>
+</li>
+<li>
+<a href="mailto:lucas.fryzek@fryzekconcepts.com">
+    <svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#mail"></use></svg>
+    <span>lucas.fryzek@fryzekconcepts.com</span>
 </a>
 </li>
 </ul>
