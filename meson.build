@@ -4,6 +4,7 @@ src_dir = 'notes'
 page_dir = 'pages'
 
 source_docs = [
+  '2024_igalia_graphics_team.md',
   '2022_igalia_graphics_team.md',
   'android_swrast.md',
   'baremetal-risc-v.md',
