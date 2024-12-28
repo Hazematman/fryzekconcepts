@@ -1,0 +1,342 @@
+<!doctype html>
+
+<html class="html-note-page" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>2024 Graphics Team Contributions at Igalia</title>
+    <meta name="dcterms.date" content="2024-12-20" />
+
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.svg">
+    <link rel="alternate" type="application/atom+xml" title="Fryzek Concepts" href="/feed.xml"> 
+</head>
+
+<body>
+    <div class="header-bar">
+        <a href="/index.html">
+            <img src="/assets/favicon.svg" alt="frycon logo">
+        </a>
+        <div class="header-links">
+                        <a href="/now.html" class="header-link">Now</a>
+            <a href="/about.html" class="header-link">About</a>
+            <a rel="me" href="https://mastodon.social/@hazematman" class="header-link">Social</a>
+            <a href="https://git.fryzekconcepts.com" class="header-link">Code</a>
+        </div>
+    </div>
+    <main>
+<div class="page-title-header-container">
+    <h1 class="page-title-header">2024 Graphics Team Contributions at
+Igalia</h1>
+        <div class="page-info-container">
+                    <div class="plant-status">
+                    <img src="/assets/evergreen.svg">
+                    <div class="plant-status-text">
+                    <p>evergreen</p>
+                    </div>
+                    </div>
+                <div class="page-info-date-container">
+            <p class="page-info-date">Published: 2024-12-20</p>
+            <p class="page-info-date">Last Edited: 2024-12-27</p>
+        </div>
+    </div>
+    </div>
+<div class="note-divider"></div>
+<div class="main-container">
+    <div class="note-body">
+<p>2024 has been an exciting year for the <a
+href="https://www.igalia.com/technology/graphics">Igalia’s Graphics
+Team</a>. We’ve been making a lot of progress on Turnip, AMD display
+driver, the Raspberry Pi graphics stack, Vulkan video, and more.</p>
+<h2 id="vulkan-device-generated-commands">Vulkan Device Generated
+Commands</h2>
+<p>Igalia’s Ricardo Garcia has been working hard on adding support for
+the new <code>VK_EXT_device_generated_commands</code> extension in the
+Vulkan Conformance Test Suite. He wrote an excellent blog post on the
+extension and on his work that you can read <a
+href="https://rg3.name/202409270942.html">here</a>. Ricardo also
+presented the extension at XDC 2024 in Montréal, which he also <a
+href="https://rg3.name/202411181555.html">blogged about</a>. Take a look
+and see what generating Vulkan commands directly on the GPU looks
+like!</p>
+<h2 id="raspberry-pi-enhancements-performance-improvements">Raspberry Pi
+Enhancements &amp; Performance Improvements</h2>
+<p>Our very own Maíra Canal made a big contribution to improve the
+graphics performance of Raspberry Pi 4 &amp; 5 devices by introducing
+support for “Super Pages”. She wrote an excellent and detailed blog post
+on what Super Pages are, how they improve performance, and comparing
+performance of different apps and games. You can read all the juicy
+details <a
+href="https://mairacanal.github.io/unleashing-power-enabling-super-pages-on-RPi/">here</a>.</p>
+<p>She also worked on introducing CPU jobs to the Broadcom GPU kernel
+driver in Linux. These changes allow user space to implement jobs that
+get executed on the CPU in sync with the work on the GPU. She wrote a
+great blog post detailing what CPU jobs allow you to do and how they
+work that you can read <a
+href="https://mairacanal.github.io/introducing-cpu-jobs-to-the-rpi/">here</a>.</p>
+<p>Christian Gmeiner on the Graphics team has also been working on
+adding Perfetto support to Broadcom GPUs. Perfetto is a performance
+tracing tool and support for it in Broadcom drivers will allow to
+developers to gain more insight into bottlenecks of their GPU
+applications. You can check out his changes to add support in the
+following MRs: - <a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/31575">MR
+31575</a> - <a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/32277">MR
+32277</a> - <a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/31751">MR
+31751</a></p>
+<p>The Raspberry Pi team here at Igalia presented all of their work at
+XDC 2024 in Montréal. You can see a video below.</p>
+<p><div class="youtube-video"><iframe src="https://www.youtube.com/embed/tlSFHkp6ODM"></iframe></div></p>
+<h2 id="linux-kernel-6.8">Linux Kernel 6.8</h2>
+<p>A number of Igalians made several contributions to the Linux 6.8
+kernel release back in March of this year. Our colleague Maíra wrote a
+great blog post outlining these contributions that you can read <a
+href="https://mairacanal.github.io/introducing-cpu-jobs-to-the-rpi/">here</a>.
+To highlight some of these contributions:</p>
+<ul>
+<li>AMD HDR &amp; Color Management
+<ul>
+<li>Melissa Wen has been working on improving and implementing HDR
+support in AMD’s display driver as well as working on color management
+in the Linux display stack.</li>
+</ul></li>
+<li>Async Flip
+<ul>
+<li>André Almeida implemented support for asynchronous page flip in the
+atomic DRM modesetting API.</li>
+</ul></li>
+<li>V3D 7.1.x Kernel Driver
+<ul>
+<li>Iago Toral contributed a number of patches upstream to get the
+Broadcom DRM driver working with the latest Broadcom hardware used in
+the Raspberry Pi 5.</li>
+</ul></li>
+<li>GPU stats for the Raspberry Pi 4/5
+<ul>
+<li>José María “Chema” Casanova worked on adding GPU stats support to
+the latest Raspberry Pi hardware.</li>
+</ul></li>
+</ul>
+<h2 id="turnip-improvements">Turnip Improvements</h2>
+<p>Dhruv Mark Collins has been very hard at work to try and bring
+performance parity between Qualcomm’s proprietary driver and the open
+source Turnip driver. Two of his big contributions to this were
+improving the 2D buffer to image copies on A7XX devices, and
+implementing unidirectional Low Resolution Z (LRZ) on A7XX devices. You
+can see the MR for these changes <a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/31401">here</a>
+and <a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/29453">here</a>.</p>
+<p>A new member of the Igalia Graphics Team Karmjit Mahil has been
+working on different parts of the Turnip stack, but one notable
+improvement he made was to improve <code>fmulz</code> handling for
+Direct3D 9. You can check out his changes <a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/31479">here</a>
+and read more about them.</p>
+<p>Danylo Piliaiev has been hard at work adding support for the latest
+generation of Adreno GPUs. This included getting support for the <a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/26934">A750
+working</a>, and then implementing performance improvements to bring it
+up to parity with other Adreno GPUs in Turnip. He also worked on
+implementing a number of Vulkan extensions and performance improvements
+such as:</p>
+<ul>
+<li>VK_KHR_shader_atomic_int64
+<ul>
+<li><a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/27776">MR
+27776</a></li>
+</ul></li>
+<li>VK_KHR_fragment_shading_rate
+<ul>
+<li><a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/30905">MR
+30905</a></li>
+</ul></li>
+<li>VK_KHR_8bit_storage
+<ul>
+<li><a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/28254">MR
+28254</a></li>
+</ul></li>
+<li>shaderInt8 feature
+<ul>
+<li><a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/29875">MR
+29875</a></li>
+</ul></li>
+<li>VK_KHR_shader_subgroup_rotate
+<ul>
+<li><a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/31358">MR
+31358</a></li>
+</ul></li>
+<li>VK_EXT_map_memory_placed
+<ul>
+<li><a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/28928">MR
+28928</a></li>
+</ul></li>
+<li>VK_EXT_legacy_dithering
+<ul>
+<li><a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/30536">MR
+30536</a></li>
+</ul></li>
+<li>VK_EXT_depth_clamp_zero_one
+<ul>
+<li><a
+href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/29387">MR
+29387</a></li>
+</ul></li>
+</ul>
+<h2 id="display-next-hackfest-displaykms-meet-up">Display Next Hackfest
+&amp; Display/KMS Meet-up</h2>
+<p>Igalia hosted the 2024 version of the Display Next Hackfest. This
+community event is a way to get Linux display developers together to
+work on improving the Linux display stack. Our Melissa Wen wrote a blog
+post about the event and what it was like to organize it. You can read
+all about it <a
+href="https://melissawen.github.io/blog/2024/09/25/reflections-2024-display-next-hackfest">here</a>.</p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/melissawen/melissawen.github.io/refs/heads/master/img/2024-ldnh/hackfest-room-0.jpg"
+alt="Display Next Hackfest" />
+<figcaption aria-hidden="true">Display Next Hackfest</figcaption>
+</figure>
+<p>Just in-case you thought you couldn’t get enough Linux display stack,
+Melissa also helped organize a Display/KMS meet-up at XDC 2024. She
+wrote all about that meet-up and the progress the community made on her
+blog <a
+href="https://melissawen.github.io/blog/2024/11/19/summary-display-kms-meeting-xdc2024">here</a>.</p>
+<h2 id="amd-display-amdgpu">AMD Display &amp; AMDGPU</h2>
+<p>Melissa Wen has also been hard at work improving AMDGPU’s display
+driver. She made a number of changes including <a
+href="https://lore.kernel.org/amd-gfx/ea31b795-5b75-40e6-846e-51dc6696f8bc@amd.com/#t">improving
+display debug log</a> to include hardware color capabilities, <a
+href="https://lore.kernel.org/amd-gfx/20240927230600.2619844-1-superm1@kernel.org/">Migrating
+EDID handling to EDID common code</a> and various bug fixes such as:</p>
+<ul>
+<li>Fixing null-pointer dereference on edid reading
+<ul>
+<li><a
+href="https://lore.kernel.org/amd-gfx/20240216122401.216860-1-mwen@igalia.com/">https://lore.kernel.org/amd-gfx/20240216122401.216860-1-mwen@igalia.com/</a></li>
+</ul></li>
+<li>Checking dc_link before dereferencing
+<ul>
+<li><a
+href="https://lore.kernel.org/amd-gfx/20240227190828.444715-1-mwen@igalia.com/">https://lore.kernel.org/amd-gfx/20240227190828.444715-1-mwen@igalia.com/</a></li>
+</ul></li>
+<li>Using mpcc_count to log MPC state
+<ul>
+<li><a
+href="https://lore.kernel.org/amd-gfx/20240412163928.118203-1-mwen@igalia.com/">https://lore.kernel.org/amd-gfx/20240412163928.118203-1-mwen@igalia.com/</a></li>
+</ul></li>
+<li>Fixing cursor offset on rotation 180
+<ul>
+<li><a
+href="https://lore.kernel.org/amd-gfx/20240807075546.831208-22-chiahsuan.chung@amd.com/">https://lore.kernel.org/amd-gfx/20240807075546.831208-22-chiahsuan.chung@amd.com/</a></li>
+</ul></li>
+<li>Fixes for kernel crashes since cursor overlay mode
+<ul>
+<li><a
+href="https://lore.kernel.org/amd-gfx/20241217205029.39850-1-mwen@igalia.com/">https://lore.kernel.org/amd-gfx/20241217205029.39850-1-mwen@igalia.com/</a></li>
+</ul></li>
+</ul>
+<p>Tvrtko Ursulin, a recent addition to our team, has been working on
+fixing issues in AMDGPU and some of the Linux kernel’s common code. For
+example, he worked on fixing bugs in the DRM scheduler around missing
+locks, optimizing the re-lock cycle on the submit path, and cleaned up
+the code. On AMDGPU he worked on improving memory usage reporting,
+fixing out of bounds writes, and micro-optimized ring emissions. For DMA
+fence he simplified fence merging and resolved a potential memory leak.
+Lastly, on workqueue he fixed false positive sanity check warnings that
+AMDGPU &amp; DRM scheduler interactions were triggering. You can see the
+code for some of changes below: - <a
+href="https://lore.kernel.org/amd-gfx/20240906180639.12218-1-tursulin@igalia.com/">https://lore.kernel.org/amd-gfx/20240906180639.12218-1-tursulin@igalia.com/</a>
+- <a
+href="https://lore.kernel.org/amd-gfx/20241008150532.23661-1-tursulin@igalia.com/">https://lore.kernel.org/amd-gfx/20241008150532.23661-1-tursulin@igalia.com/</a>
+- <a
+href="https://lore.kernel.org/amd-gfx/20241227111938.22974-1-tursulin@igalia.com/">https://lore.kernel.org/amd-gfx/20241227111938.22974-1-tursulin@igalia.com/</a>
+- <a
+href="https://lore.kernel.org/amd-gfx/20240813135712.82611-1-tursulin@igalia.com/">https://lore.kernel.org/amd-gfx/20240813135712.82611-1-tursulin@igalia.com/</a>
+- <a
+href="https://lore.kernel.org/amd-gfx/20240712152855.45284-1-tursulin@igalia.com/">https://lore.kernel.org/amd-gfx/20240712152855.45284-1-tursulin@igalia.com/</a></p>
+<h2 id="vulkan-opengl-extensions">Vulkan &amp; OpenGL Extensions</h2>
+<ul>
+<li><code>GL_EXT_texture_offset_non_const</code>
+<ul>
+<li>Ricardo was busy working on extending OpenGL by adding <a
+href="https://github.com/KhronosGroup/GLSL/blob/main/extensions/ext/GL_EXT_texture_offset_non_const.txt">this</a>
+extension to GLSL as well as providing an implementation for it in <a
+href="https://github.com/KhronosGroup/glslang/pull/3782">glslang</a></li>
+</ul></li>
+<li><code>VK_KHR_video_encode_av1</code> &amp;
+<code>VK_KHR_video_decode_av1</code>
+<ul>
+<li>Igalia is listed as a contributor to these extensions and worked
+very hard to implement CTS support for the extensions.</li>
+</ul></li>
+</ul>
+<h2 id="etnaviv-improvements">Etnaviv Improvements</h2>
+<p>Christian Gmeiner, one of the maintainers of the Etnaviv driver for
+Vivante GPUs, has been hard at work this year to make a number of big
+improvements to Etnaviv. This includes using hwdb to detect GPU
+features, which he wrote about <a
+href="https://christian-gmeiner.info/2024-04-12-hwdb/">here</a>. Another
+big improvement was migrating Etnaviv to use isaspec for the GPU isa
+description, allowing an assembler and disassembler to be generated from
+XML. This also allowed Etnaviv to reuse some common features in Mesa for
+assemblers/disassemblers and take advantage of the python code
+generation features others in the community have been working on. He
+wrote a detailed blog about it, that you can find <a
+href="https://christian-gmeiner.info/2024-07-11-it-all-started-with-a-nop-part1/">here</a>.
+On the same vein of Etnaviv infrastructure improvements, Christian has
+also been working on a new shader compiler, written in Rust, called
+“EBC”. Christian presented this new shader compiler at XDC 2024 this
+year. You can check out his presentation below.</p>
+<p><div class="youtube-video"><iframe src="https://www.youtube.com/embed/n_fn4evXeZo"></iframe></div></p>
+<p>On the side of new features, Christian landed a big one in Mesa 24.03
+for Etnaviv: Multiple Render Target (MRT) support! This allows games and
+applications to render to multiple render targets (think framebuffers)
+in a single graphics operations. This feature is heavily used by
+deferred rendering techniques, and is a requirement for later versions
+of desktop OpenGL and OpenGL ES 3. Keep an eye on <a
+href="https://christian-gmeiner.info/">Christian’s blog</a> to see any
+of his future announcements.</p>
+<h2 id="lavapipellvmpipe-android-chromeos">Lavapipe/LLVMpipe, Android
+&amp; ChromeOS</h2>
+<p>I had a busy year working on improving Lavapipe/LLVMpipe platform
+integration. This started with adding support for DMABUF import/export,
+so that the display handles from Android Window system could be properly
+imported and mapped. Next came Android window system integration for DRI
+software rendering backend in EGL, and lastly but most importantly came
+updating the documentation in Mesa for building Android support. I wrote
+all about this effort <a href="/notes/android_swrast.html">here</a>.</p>
+<p>The latter half on the year had me working on improving lavapipe’s
+integration with ChromeOs, and having Lavapipe work as a host Vulkan
+driver for Venus. You can see some of the changes I made in
+virglrenderer <a
+href="https://gitlab.freedesktop.org/virgl/virglrenderer/-/merge_requests/1458">here</a>
+and crosvm <a
+href="https://gitlab.freedesktop.org/Hazematman/crosvm/-/commit/9ee86e72edfb3a652148dd233ffca75847949558">here</a>.
+This work is still ongoing.</p>
+<h2 id="whats-next">What’s Next?</h2>
+<p>We’re not planning to stop our 2024 momentum, and we’re hopping for
+2025 to be a great year for Igalia and the Linux graphics stack! I’m
+booked to present about <a
+href="https://www.vulkan.org/events/vulkanised-2025#agenda">Lavapipe at
+Vulkanised 2025</a>, where Ricardo will also present about
+Device-Generated Commands. Maíra &amp; Chema will be presenting together
+at FOSDEM 2025 about improving performance on Raspberry Pi GPUs, and
+Melissa will also present about kworkflow there. We’ll also be at XDC
+2025, networking and presenting about all the work we are doing on the
+Linux graphics stack. Thanks for following our work this year, and
+here’s to making 2025 an even better year for Linux graphics!</p>
+    </div>
+</div>    </main>
+</body>
+</html>
