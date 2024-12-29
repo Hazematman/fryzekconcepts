@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Fryzek Concepts</title><atom:link href="https://fryzekconcepts.com/feed.xml" rel="self" type="application/rss+xml"/><link>https://fryzekconcepts.com</link><description>Lucas is a developer working on cool things</description><lastBuildDate>Sat, 28 Dec 2024 13:41:16 -0000</lastBuildDate><item><title>Generating Video</title><link>https://fryzekconcepts.com/notes/generating-video.html</link><description>&lt;p&gt;One thing I’m very interested in is computer graphics. This could be
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Fryzek Concepts</title><atom:link href="https://fryzekconcepts.com/feed.xml" rel="self" type="application/rss+xml"/><link>https://fryzekconcepts.com</link><description>Lucas is a developer working on cool things</description><lastBuildDate>Sun, 29 Dec 2024 15:55:41 -0000</lastBuildDate><item><title>Generating Video</title><link>https://fryzekconcepts.com/notes/generating-video.html</link><description>&lt;p&gt;One thing I’m very interested in is computer graphics. This could be
 complex 3D graphics or simple 2D graphics. The idea of getting a
 computer to display visual data fascinates me. One fundamental part of
 showing visual data is interfacing with a computer monitor. This can be
@@ -2263,53 +2263,53 @@ and read more about them.&lt;/p&gt;
 generation of Adreno GPUs. This included getting support for the &lt;a
 href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/26934"&gt;A750
 working&lt;/a&gt;, and then implementing performance improvements to bring it
-up to parity with other Adreno GPUs in Turnip. He also worked on
-implementing a number of Vulkan extensions and performance improvements
-such as:&lt;/p&gt;
+up to parity with other Adreno GPUs in Turnip. All-together the turnip
+team implemented a number of Vulkan extensions and performance
+improvements such as:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;VK_KHR_shader_atomic_int64
+&lt;li&gt;VK_KHR_shader_atomic_int64 - Amber
 &lt;ul&gt;
 &lt;li&gt;&lt;a
 href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/27776"&gt;MR
 27776&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;VK_KHR_fragment_shading_rate
+&lt;li&gt;VK_KHR_fragment_shading_rate - Danylo Piliaiev
 &lt;ul&gt;
 &lt;li&gt;&lt;a
 href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/30905"&gt;MR
 30905&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;VK_KHR_8bit_storage
+&lt;li&gt;VK_KHR_8bit_storage - Žan Dobersek
 &lt;ul&gt;
 &lt;li&gt;&lt;a
 href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/28254"&gt;MR
 28254&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;shaderInt8 feature
+&lt;li&gt;shaderInt8 feature - Žan Dobersek
 &lt;ul&gt;
 &lt;li&gt;&lt;a
 href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/29875"&gt;MR
 29875&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;VK_KHR_shader_subgroup_rotate
+&lt;li&gt;VK_KHR_shader_subgroup_rotate - Job Noorman
 &lt;ul&gt;
 &lt;li&gt;&lt;a
 href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/31358"&gt;MR
 31358&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;VK_EXT_map_memory_placed
+&lt;li&gt;VK_EXT_map_memory_placed - Dhruv Mark Collins
 &lt;ul&gt;
 &lt;li&gt;&lt;a
 href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/28928"&gt;MR
 28928&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;VK_EXT_legacy_dithering
+&lt;li&gt;VK_EXT_legacy_dithering - Karmjit Mahil
 &lt;ul&gt;
 &lt;li&gt;&lt;a
 href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/30536"&gt;MR
 30536&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;VK_EXT_depth_clamp_zero_one
+&lt;li&gt;VK_EXT_depth_clamp_zero_one - Danylo Piliaiev
 &lt;ul&gt;
 &lt;li&gt;&lt;a
 href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/29387"&gt;MR

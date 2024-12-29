@@ -47,23 +47,23 @@ Dhruv Mark Collins has been very hard at work to try and bring performance parit
 
 A new member of the Igalia Graphics Team Karmjit Mahil has been working on different parts of the Turnip stack, but one notable improvement he made was to improve `fmulz` handling for Direct3D 9. You can check out his changes [here](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/31479) and read more about them.
 
-Danylo Piliaiev has been hard at work adding support for the latest generation of Adreno GPUs. This included getting support for the [A750 working](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/26934), and then implementing performance improvements to bring it up to parity with other Adreno GPUs in Turnip. He also worked on implementing a number of Vulkan extensions and performance improvements such as:
+Danylo Piliaiev has been hard at work adding support for the latest generation of Adreno GPUs. This included getting support for the [A750 working](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/26934), and then implementing performance improvements to bring it up to parity with other Adreno GPUs in Turnip. All-together the turnip team implemented a number of Vulkan extensions and performance improvements such as:
 
-- VK_KHR_shader_atomic_int64
+- VK_KHR_shader_atomic_int64 - Amber
     - [MR 27776](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/27776)
-- VK_KHR_fragment_shading_rate
+- VK_KHR_fragment_shading_rate - Danylo Piliaiev
     - [MR 30905](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/30905)
-- VK_KHR_8bit_storage
+- VK_KHR_8bit_storage - Žan Dobersek
     - [MR 28254](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/28254)
-- shaderInt8 feature
+- shaderInt8 feature - Žan Dobersek
     - [MR 29875](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/29875)
-- VK_KHR_shader_subgroup_rotate
+- VK_KHR_shader_subgroup_rotate - Job Noorman
     - [MR 31358](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/31358)
-- VK_EXT_map_memory_placed
+- VK_EXT_map_memory_placed - Dhruv Mark Collins
     - [MR 28928](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/28928)
-- VK_EXT_legacy_dithering
+- VK_EXT_legacy_dithering - Karmjit Mahil
     - [MR 30536](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/30536)
-- VK_EXT_depth_clamp_zero_one
+- VK_EXT_depth_clamp_zero_one - Danylo Piliaiev
     - [MR 29387](https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/29387)
 
 ## Display Next Hackfest & Display/KMS Meet-up
