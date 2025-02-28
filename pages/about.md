@@ -4,7 +4,7 @@ title: About
 
 <img class="page-self-image" src="/assets/me.jpg">
 
-Hello my name is Lucas Fryzek, and welcome to my website!
+Hello my name is Lucas Francisco Fryzek, and welcome to my website!
 
 I’m a software developer with specific interests in computer graphics, GPUs, embedded systems, and 
 operating systems. I'm currently working with Igalia's graphics team working on the open source
