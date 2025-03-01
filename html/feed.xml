@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Fryzek Concepts</title><atom:link href="https://fryzekconcepts.com/feed.xml" rel="self" type="application/rss+xml"/><link>https://fryzekconcepts.com</link><description>Lucas is a developer working on cool things</description><lastBuildDate>Sun, 29 Dec 2024 15:55:41 -0000</lastBuildDate><item><title>Generating Video</title><link>https://fryzekconcepts.com/notes/generating-video.html</link><description>&lt;p&gt;One thing I’m very interested in is computer graphics. This could be
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Fryzek Concepts</title><atom:link href="https://fryzekconcepts.com/feed.xml" rel="self" type="application/rss+xml"/><link>https://fryzekconcepts.com</link><description>Lucas is a developer working on cool things</description><lastBuildDate>Sat, 01 Mar 2025 09:51:45 -0000</lastBuildDate><item><title>Generating Video</title><link>https://fryzekconcepts.com/notes/generating-video.html</link><description>&lt;p&gt;One thing I’m very interested in is computer graphics. This could be
 complex 3D graphics or simple 2D graphics. The idea of getting a
 computer to display visual data fascinates me. One fundamental part of
 showing visual data is interfacing with a computer monitor. This can be
@@ -578,7 +578,7 @@ applied to any FPGA and any connector that uses a video signal like
 this. For example you could wire up a DAC with a resistor ladder to
 generate a VGA signal. The logic for the timings here would be exactly
 the same if you wanted a 640x480@60 Hz VGA signal.&lt;/p&gt;
-</description><pubDate>Tue, 07 Apr 2020 04:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/generating-video.html</guid></item><item><title>N64Brew GameJam 2021</title><link>https://fryzekconcepts.com/notes/n64brew-gamejam-2021.html</link><description>&lt;p&gt;So this year, myself and two others decided to participate together
+</description><pubDate>Mon, 06 Apr 2020 23:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/generating-video.html</guid></item><item><title>N64Brew GameJam 2021</title><link>https://fryzekconcepts.com/notes/n64brew-gamejam-2021.html</link><description>&lt;p&gt;So this year, myself and two others decided to participate together
 in the N64Brew homebrew GameJam, where we were supposed to build a
 homebrew game that would run on a real Nintendo 64. The game jam took
 place from October 8th until December 8th and was the second GameJam in
@@ -718,7 +718,7 @@ modern N64 Flashcarts for networking, allowing the N64 to have online
 multiplayer through a computer connected over USB. I feel that projects
 like this could really elevate the kind of content that is available on
 the N64 and bring it into the modern era.&lt;/p&gt;
-</description><pubDate>Fri, 10 Dec 2021 05:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/n64brew-gamejam-2021.html</guid></item><item><title>Rasterizing Triangles</title><link>https://fryzekconcepts.com/notes/rasterizing-triangles.html</link><description>&lt;p&gt;Lately I’ve been trying to implement a software renderer &lt;a
+</description><pubDate>Fri, 10 Dec 2021 00:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/n64brew-gamejam-2021.html</guid></item><item><title>Rasterizing Triangles</title><link>https://fryzekconcepts.com/notes/rasterizing-triangles.html</link><description>&lt;p&gt;Lately I’ve been trying to implement a software renderer &lt;a
 href="https://www.cs.drexel.edu/~david/Classes/Papers/comp175-06-pineda.pdf"&gt;following
 the algorithm described by Juan Pineda in “A Parallel Algorithm for
 Polygon Rasterization”&lt;/a&gt;. For those unfamiliar with the paper, it
@@ -789,7 +789,7 @@ have 2 times the area of each of the sub triangles that are defined by
 our point.&lt;/p&gt;
 &lt;figure&gt;
 &lt;img
-src="https://www.scratchapixel.com/images/ray-triangle/barycentric.png?"
+src="https://www.scratchapixel.com/images/ray-triangle/barycentric.png"
 alt="Triangle barycentric coordinates from scratchpixel tutorial" /&gt;
 &lt;figcaption aria-hidden="true"&gt;Triangle barycentric coordinates from
 scratchpixel tutorial&lt;/figcaption&gt;
@@ -887,7 +887,7 @@ point arithmetic, be careful to insure you have enough precision to
 calculate all of these values with overflow or underflow. This was an
 issue I ran into running out of precision when I did the divide by the
 area.&lt;/p&gt;
-</description><pubDate>Sun, 03 Apr 2022 04:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/rasterizing-triangles.html</guid></item><item><title>Baremetal RISC-V</title><link>https://fryzekconcepts.com/notes/baremetal-risc-v.html</link><description>&lt;p&gt;After re-watching suckerpinch’s &lt;a
+</description><pubDate>Sat, 02 Apr 2022 23:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/rasterizing-triangles.html</guid></item><item><title>Baremetal RISC-V</title><link>https://fryzekconcepts.com/notes/baremetal-risc-v.html</link><description>&lt;p&gt;After re-watching suckerpinch’s &lt;a
 href="https://www.youtube.com/watch?v=ar9WRwCiSr0"&gt;“Reverse
 Emulation”&lt;/a&gt; video I got inspired to try and replicate what he did,
 but instead do it on an N64. Now my idea here is not to preform reverse
@@ -1113,7 +1113,7 @@ emulating the N64 cartridge bus which will require me to get GPIO
 working as well as interrupts on the GPIO lines. If you want to see the
 current progress of my work you can check it out on github &lt;a
 href="https://github.com/Hazematman/N64-Cart-Emulator"&gt;here&lt;/a&gt;.&lt;/p&gt;
-</description><pubDate>Thu, 09 Jun 2022 04:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/baremetal-risc-v.html</guid></item><item><title>Digital Garden</title><link>https://fryzekconcepts.com/notes/digital_garden.html</link><description>&lt;p&gt;After reading Maggie Appleton page on &lt;a
+</description><pubDate>Wed, 08 Jun 2022 23:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/baremetal-risc-v.html</guid></item><item><title>Digital Garden</title><link>https://fryzekconcepts.com/notes/digital_garden.html</link><description>&lt;p&gt;After reading Maggie Appleton page on &lt;a
 href="https://maggieappleton.com/garden-history"&gt;digital gardens&lt;/a&gt; I
 was inspired to convert my own website into a digital garden.&lt;/p&gt;
 &lt;p&gt;I have many half baked ideas that I seem to be able to finish. Some
@@ -1134,7 +1134,7 @@ has not been totally developed yet and right now it just provides with a
 convenient way to link to other notes or pages on this site.&lt;/p&gt;
 &lt;p&gt;I hope to develop this section more and explain how I got various
 features in pandoc to work as a static site generator.&lt;/p&gt;
-</description><pubDate>Sun, 30 Oct 2022 04:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/digital_garden.html</guid></item><item><title>2022 Graphics Team Contributions at Igalia</title><link>https://fryzekconcepts.com/notes/2022_igalia_graphics_team.html</link><description>&lt;p&gt;This year I started a new job working with &lt;a
+</description><pubDate>Sat, 29 Oct 2022 23:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/digital_garden.html</guid></item><item><title>2022 Graphics Team Contributions at Igalia</title><link>https://fryzekconcepts.com/notes/2022_igalia_graphics_team.html</link><description>&lt;p&gt;This year I started a new job working with &lt;a
 href="https://www.igalia.com/technology/graphics"&gt;Igalia’s Graphics
 Team&lt;/a&gt;. For those of you who don’t know &lt;a
 href="https://www.igalia.com/"&gt;Igalia&lt;/a&gt; they are a &lt;a
@@ -1394,7 +1394,7 @@ Atlantic!&lt;/a&gt;&lt;/p&gt;
 alt="Photo of A Coruña" /&gt;
 &lt;figcaption aria-hidden="true"&gt;Photo of A Coruña&lt;/figcaption&gt;
 &lt;/figure&gt;
-</description><pubDate>Thu, 02 Feb 2023 05:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/2022_igalia_graphics_team.html</guid></item><item><title>Global Game Jam 2023 - GI Jam</title><link>https://fryzekconcepts.com/notes/global_game_jam_2023.html</link><description>&lt;p&gt;At the beginning of this month I participated in the Games
+</description><pubDate>Thu, 02 Feb 2023 00:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/2022_igalia_graphics_team.html</guid></item><item><title>Global Game Jam 2023 - GI Jam</title><link>https://fryzekconcepts.com/notes/global_game_jam_2023.html</link><description>&lt;p&gt;At the beginning of this month I participated in the Games
 Institutes’s Global Game Jam event. &lt;a
 href="https://uwaterloo.ca/games-institute/"&gt;The Games Institute&lt;/a&gt; is
 an organization at my local university (The University of Waterloo) that
@@ -1497,7 +1497,7 @@ of lack of personal motivation, poor team dynamics, and other factors,
 none of those game jams panned out. This was the first game jam in a
 while where I feel like I really connected with my team and I also feel
 like we made a super polished and fun game in the end.&lt;/p&gt;
-</description><pubDate>Sat, 11 Feb 2023 05:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/global_game_jam_2023.html</guid></item><item><title>Journey Through Freedreno</title><link>https://fryzekconcepts.com/notes/freedreno_journey.html</link><description>&lt;figure&gt;
+</description><pubDate>Sat, 11 Feb 2023 00:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/global_game_jam_2023.html</guid></item><item><title>Journey Through Freedreno</title><link>https://fryzekconcepts.com/notes/freedreno_journey.html</link><description>&lt;figure&gt;
 &lt;img src="/assets/freedreno/glinfo_freedreno.png"
 alt="Android running Freedreno" /&gt;
 &lt;figcaption aria-hidden="true"&gt;Android running Freedreno&lt;/figcaption&gt;
@@ -1707,7 +1707,7 @@ MR&lt;/a&gt;.&lt;/p&gt;
 alt="Freedreno running 3d-mark" /&gt;
 &lt;figcaption aria-hidden="true"&gt;Freedreno running 3d-mark&lt;/figcaption&gt;
 &lt;/figure&gt;
-</description><pubDate>Tue, 28 Feb 2023 05:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/freedreno_journey.html</guid></item><item><title>Igalia’s Mesa 23.1 Contributions - Behind the Scenes</title><link>https://fryzekconcepts.com/notes/mesa_23_1_contributions_behind_the_scenes.html</link><description>&lt;p&gt;It’s an exciting time for Mesa as its next major release is unveiled
+</description><pubDate>Tue, 28 Feb 2023 00:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/freedreno_journey.html</guid></item><item><title>Igalia’s Mesa 23.1 Contributions - Behind the Scenes</title><link>https://fryzekconcepts.com/notes/mesa_23_1_contributions_behind_the_scenes.html</link><description>&lt;p&gt;It’s an exciting time for Mesa as its next major release is unveiled
 this week. Igalia has played an important role in this milestone, with
 Eric Engestrom managing the release and 11 other Igalians contributing
 over 110 merge requests. A sample of these contributions are detailed
@@ -1790,7 +1790,7 @@ href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/21558"&gt;https:
 &lt;li&gt;&lt;a
 href="https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/20180"&gt;https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/20180&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description><pubDate>Thu, 11 May 2023 04:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/mesa_23_1_contributions_behind_the_scenes.html</guid></item><item><title>Converting from 3D to 2D</title><link>https://fryzekconcepts.com/notes/converting_from_3d_to_2d.html</link><description>&lt;p&gt;Recently I’ve been working on a project where I needed to convert an
+</description><pubDate>Wed, 10 May 2023 23:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/mesa_23_1_contributions_behind_the_scenes.html</guid></item><item><title>Converting from 3D to 2D</title><link>https://fryzekconcepts.com/notes/converting_from_3d_to_2d.html</link><description>&lt;p&gt;Recently I’ve been working on a project where I needed to convert an
 application written in OpenGL to a software renderer. The matrix
 transformation code in OpenGL made use of the GLM library for matrix
 math, and I needed to convert the 4x4 matrices to be 3x3 matrices to
@@ -1902,7 +1902,7 @@ application when moving from a “3D homogeneous space” to a “2D
 homogeneous space”.&lt;/p&gt;
 &lt;p&gt;Hopefully this explanation helps if you are every working on
 converting 3D transformation code to 2D.&lt;/p&gt;
-</description><pubDate>Mon, 25 Sep 2023 04:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/converting_from_3d_to_2d.html</guid></item><item><title>A Dive into Vulkanised 2024</title><link>https://fryzekconcepts.com/notes/vulkanised_2024.html</link><description>&lt;figure&gt;
+</description><pubDate>Sun, 24 Sep 2023 23:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/converting_from_3d_to_2d.html</guid></item><item><title>A Dive into Vulkanised 2024</title><link>https://fryzekconcepts.com/notes/vulkanised_2024.html</link><description>&lt;figure&gt;
 &lt;img src="/assets/vulkanised_2024/vulkanized_logo_web.jpg"
 alt="Vulkanised sign at google’s office" /&gt;
 &lt;figcaption aria-hidden="true"&gt;Vulkanised sign at google’s
@@ -2012,7 +2012,7 @@ Area!&lt;/p&gt;
 alt="Great bay area food" /&gt;
 &lt;figcaption aria-hidden="true"&gt;Great bay area food&lt;/figcaption&gt;
 &lt;/figure&gt;
-</description><pubDate>Wed, 14 Feb 2024 05:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/vulkanised_2024.html</guid></item><item><title>Software Rendering and Android</title><link>https://fryzekconcepts.com/notes/android_swrast.html</link><description>&lt;p&gt;My current project at Igalia has had me working on Mesa’s software
+</description><pubDate>Wed, 14 Feb 2024 00:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/vulkanised_2024.html</guid></item><item><title>Software Rendering and Android</title><link>https://fryzekconcepts.com/notes/android_swrast.html</link><description>&lt;p&gt;My current project at Igalia has had me working on Mesa’s software
 renderers, llvmpipe and lavapipe. I’ve been working to get them running
 on Android, and I wanted to document the progress I’ve made, the
 challenges I’ve faced, and talk a little bit about the development
@@ -2168,7 +2168,7 @@ class="uri"&gt;https://gitlab.freedesktop.org/mesa/mesa/-/blob/9705df53408777d49
 &lt;li&gt;My updated documentation in MR for Android integration in mesa&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description><pubDate>Thu, 27 Jun 2024 04:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/android_swrast.html</guid></item><item><title>2024 Graphics Team Contributions at Igalia</title><link>https://fryzekconcepts.com/notes/2024_igalia_graphics_team.html</link><description>&lt;p&gt;2024 has been an exciting year for the &lt;a
+</description><pubDate>Wed, 26 Jun 2024 23:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/android_swrast.html</guid></item><item><title>2024 Graphics Team Contributions at Igalia</title><link>https://fryzekconcepts.com/notes/2024_igalia_graphics_team.html</link><description>&lt;p&gt;2024 has been an exciting year for the &lt;a
 href="https://www.igalia.com/technology/graphics"&gt;Igalia’s Graphics
 Team&lt;/a&gt;. We’ve been making a lot of progress on Turnip, AMD display
 driver, the Raspberry Pi graphics stack, Vulkan video, and more.&lt;/p&gt;
@@ -2459,4 +2459,4 @@ Melissa will also present about kworkflow there. We’ll also be at XDC
 2025, networking and presenting about all the work we are doing on the
 Linux graphics stack. Thanks for following our work this year, and
 here’s to making 2025 an even better year for Linux graphics!&lt;/p&gt;
-</description><pubDate>Fri, 20 Dec 2024 05:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/2024_igalia_graphics_team.html</guid></item></channel></rss>
+</description><pubDate>Fri, 20 Dec 2024 00:00:00 -0000</pubDate><guid>https://fryzekconcepts.com/notes/2024_igalia_graphics_team.html</guid></item></channel></rss>
